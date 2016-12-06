@@ -16,36 +16,56 @@ var emit = function(event, data, file) {
 	return client.send(file, data);
 };
 
+var jsmediatags = window.jsmediatags;
+var audio = new Audio();
 
-/*var download = function(stream, cb) {
+client.on('stream', function(stream, meta) {
 	var parts = [];
-	stream.on('stream', function(data) {
-		console.log('1');
+	stream.on('data', function(data) {
+		//console.log('data');
 		parts.push(data);
 	});
-	stream.on('error', function(err) {
-		console.log('2');
-		cb(err);
-	});
-	stream.on('end', function() {
-		console.log('3');
-		
-		var audio = new Audio();
-		console.log('4');
-		
-		audio.src = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
-		console.log('5');
-		
-		cb(null, audio);
-	});
-};
 
-client.on('stream', function(stream) {
-	download(stream, function(err, audio) {
+	stream.on('end', function() {
+		console.log('end');
+		var blob = new Blob(parts);
+		audio.src = (window.URL || window.webkitURL).createObjectURL(blob);
+		//audio.play();
 		
+		var playPromise = audio.play();
+		if(playPromise !== undefined) {
+			playPromise.then(function() {
+				
+			}).catch(function(error) {
+				alert(error);
+			});
+		}
+				
+		//@@
+		jsmediatags.read(blob, {
+			onSuccess: function(tag) {
+				console.log(tag);
+				
+				var image = tag.tags.picture;
+				if(image) {
+					var base64String = '';
+					for(var i=0, ni=image.data.length; i<ni; i++) {
+						base64String += String.fromCharCode(image.data[i]);
+					}
+					var base64 = 'data:' + image.format + ';base64,' + window.btoa(base64String);
+					$('#info').attr('src', base64); //@@
+				}
+				
+				$('#title').text(tag.tags.title);
+				$('#album').text(tag.tags.artist + ' - ' + tag.tags.album);
+				//$('#album').text(tag.tags.artist + ' - ' + tag.tags.album + 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+				
+			},
+			onError: function(err) {
+				console.log(err);
+			}
+		});
 		
-		//var audio = new Audio();
-		//audio.src = src;
-		audio.play();
 	});
-});*/
+});
+
