@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<mata name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+	<title>Printemps</title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<!--<link rel="stylesheet" href="/css/lisa.css">-->
+</head>
+<body>
+	<header id="header">
+		<div class="header-holder">
+			<div class="header-audio" ng-controller="audioController">
+				<div class="audio-container">
+					<i class="audio-icon fa fa-backward fa-2x"></i>
+				</div>
+				<div class="audio-container">
+					<i class="audio-icon fa fa-{{status}} fa-2x" ng-click="play()"></i>
+				</div>
+				<div class="audio-container">
+					<i class="audio-icon fa fa-forward fa-2x"></i>
+				</div>
+			</div>
+			<!-- <div class="header-volume">
+				<i class="fa fa-cube"></i>
+			</div> -->
+			
+			 <div class="header-info">
+			 	<img id="info" class="img-thumbnail" src="" alt="">
+				<p id="title"></p>
+				<p id="album"></p>
+				<!--<div class="slide-left">
+					<p id="album"></p>
+				 </div>-->
+			 </div> 
+			
+		</div>
+	</header>
+	<div id="main" class="container">
+		<div>
+			<!--<img class="img-rounded" src="" alt="">-->
+			<img data-src="holder.js/140x140" class="img-rounded" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1LjUiIHk9IjcwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTQweDE0MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
+		</div>	
+		
+	</div>
+	
+	
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<!-- <script src="http://cdn.binaryjs.com/0/binary.js"></script> -->
+	<script src="js/3rd-party/binary.min.js"></script>
+	<script src="js/3rd-party/jsmediatags.min.js"></script>
+	
+	<!-- <script src="js/event.js"></script> -->
+	<script src="js/audio.js"></script>
+</body>
+</html>
