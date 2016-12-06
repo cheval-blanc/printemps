@@ -1,6 +1,6 @@
 # Printemps - Todo
 
-## Streaming
+## Audio Streaming
 1. **(O)** BinaryJS를 이용한 기본적인 오디오 파일 재생
 	- 이벤트 기반으로 재생 및 일시정지
 	- <https://www.olindata.com/blog/2014/01/file-uploading-and-streaming-binaryjs>
@@ -17,12 +17,7 @@
 	- 전송이 완료되고 audio.play()할 때 아이콘을 변경해야 하는데, 변수를 넘겨줘야하나?
 	- 다른 곳에 배치할까?
 
-1. header에서 제목이나 앨범이 길면 slide animation 넣기
-	- marquee tag가 있으나, 곧 없어진다고 함 <https://developer.mozilla.org/ko/docs/Web/HTML/Element/marquee>
-	- css animation으로 구현하는 방법이 없는지 확인 
-		- <http://www.html.am/html-codes/marquees/css-slide-in-text.cfm>
-		- <http://stackoverflow.com/questions/32520546/css-loop-an-animation>
-	- text 모두 보여질 때 까지만 이동하고 싶은데 방법이 없을까?
+
 
 1. 볼륨 변경하기
 	- slider?
@@ -56,6 +51,11 @@
 	- grid하게 화면을 가득 채우는 라이브러리가 있었는데, 써볼까? \(HTML5 + CSS3 입문\)
 
 
+## Code Versioning
+1. Github?
+	- **(O)** 왠만하면 git을 써보자
+
+
 ## Publishing
 1. Node.js 프로젝트를 publishing하는 방법 찾기
 
@@ -63,10 +63,14 @@
 	- Heroku와 같은 서비스 이용하기?
 
 
-## Code Versioning
-1. Github?
-	- 왠만하면 git을 써보자
+## Debugging
+1. 지원하지 않는 파일을 재생했을 때, 재생버튼 unable
 
-1. SVN?
-
+1. header에서 제목이나 앨범이 길면 slide animation 넣기
+	- marquee tag가 있으나, 곧 없어진다고 함 <https://developer.mozilla.org/ko/docs/Web/HTML/Element/marquee>
+	- css animation으로 구현하는 방법이 없는지 확인 
+		- <http://www.html.am/html-codes/marquees/css-slide-in-text.cfm>
+		- <http://stackoverflow.com/questions/32520546/css-loop-an-animation>
+	- text 모두 보여질 때 까지만 이동하고 싶은데 방법이 없을까?
+	- margin-left? margin-right?
 
