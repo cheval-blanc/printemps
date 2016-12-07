@@ -1,6 +1,9 @@
 # Printemps - Todo
 
 ## Audio Streaming
+1. Ajax 만으로 binary file을 전송하는게 불가능한가?
+	- res.sendFile() function으로 server에서 전송했는데, client에서 못받음
+
 1. **(O)** BinaryJS를 이용한 기본적인 오디오 파일 재생
 	- 이벤트 기반으로 재생 및 일시정지
 	- <https://www.olindata.com/blog/2014/01/file-uploading-and-streaming-binaryjs>
@@ -16,8 +19,6 @@
 		- 비동기로 데이터를 받아오는 방법이 없을까? ajax같은
 	- 전송이 완료되고 audio.play()할 때 아이콘을 변경해야 하는데, 변수를 넘겨줘야하나?
 	- 다른 곳에 배치할까?
-
-
 
 1. 볼륨 변경하기
 	- slider?
@@ -48,7 +49,7 @@
 	- 생각 보다 크다.
 	
 1. 네모네모한 UI를 사용할 예정
-	- grid하게 화면을 가득 채우는 라이브러리가 있었는데, 써볼까? \(HTML5 + CSS3 입문\)
+	- grid하게 화면을 가득 채우는 라이브러리가 있었는데, 써볼까? \(Do it! 반응형 웹 디자인\)
 
 
 ## Code Versioning

@@ -6,6 +6,9 @@ exports.route = function(app) {
 	});
 	
 	app.post('/play', function(req, res) {
-		controller.play(req, res);
+		var filepath = __dirname + "/audio_files/01 Hello.m4a";
+		res.sendFile(filepath); //@@
+	
+		//controller.play(req, res, filepath);
 	});
 };
