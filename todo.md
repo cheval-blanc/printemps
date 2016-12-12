@@ -64,6 +64,10 @@
 	- Heroku와 같은 서비스 이용하기?
 
 
+## AngularJS
+1. AngularJS 1에서 2로 porting
+
+
 ## Debugging
 1. 지원하지 않는 파일을 재생했을 때, 재생버튼 unable
 

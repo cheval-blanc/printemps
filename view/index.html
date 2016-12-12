@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="printemps">
 <head>
 	<meta charset="UTF-8">
 	<mata name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
@@ -8,35 +8,43 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/header.css">
+	<link rel="stylesheet" href="/css/main.css">
 	<!--<link rel="stylesheet" href="/css/lisa.css">-->
 </head>
-<body>
+<body ng-controller="volumeController" ng-mouseup="mUp($event)" ng-mousemove="mMove($event)">
 	<header id="header">
 		<div class="header-holder">
-			<div class="header-audio" ng-controller="playController">
-				<div class="audio-container">
+			<div class="header-play" ng-controller="playController">
+				<div class="play-container">
 					<i class="audio-icon fa fa-backward fa-2x"></i>
 				</div>
-				<div class="audio-container">
+				<div class="play-container">
 					<i class="audio-icon fa fa-{{status}} fa-2x" ng-click="play()"></i>
 				</div>
-				<div class="audio-container">
+				<div class="play-container">
 					<i class="audio-icon fa fa-forward fa-2x"></i>
 				</div>
 			</div>
-			<!-- <div class="header-volume">
-				<i class="fa fa-cube"></i>
-			</div> -->
 			
-			 <div class="header-info">
-			 	<img id="info" class="img-thumbnail" src="" alt="">
+			<div class="header-volume">
+				<span class="volume-bar"></span>
+				<div id="mute-container">
+					<i class="audio-icon fa fa-volume-{{scale}} fa-2x" ng-click="mute()"></i>
+				</div>
+				<div id="volume-container">
+					<i class="audio-icon fa fa-circle fa-2x" ng-mousedown="mDown($event)"></i>
+				</div>
+			</div>
+			
+			<div class="header-info">
+				<img id="info" class="img-thumbnail" src="" alt="">
 				<p id="title"></p>
 				<p id="album"></p>
 				<!--<div class="slide-left">
 					<p id="album"></p>
 				 </div>-->
-			 </div> 
+			</div> 
 			
 		</div>
 	</header>
@@ -62,6 +70,7 @@
 	
 	<script src="js/binaryClient.js"></script>
 	<script src="js/play.js"></script>
+	<script src="js/volume.js"></script>
 	
 </body>
 </html>

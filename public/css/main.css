@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+/* ---------- MAIN ---------- */
+#main {
+	padding-top: 100px;
+}
+.container {
+	width: 100%;
+	padding: 0px 30px 0px 30px;
+}
+.container img {
+	width: 200px;
+	height: 200px;
+	margin: 0px 20px 20px 0px;
+	
+	float: left;
+}
+

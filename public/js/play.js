@@ -1,7 +1,8 @@
-var app = angular.module('app', []);
+'use strict';
 
-app.controller('playController', function($scope, $http) {
-	
+angular.module('printemps', []);
+
+angular.module('printemps').controller('playController', function($scope) {	
 	$scope.status = 'play';
 	$scope.play = function() {
 		//$scope.status = ($scope.status==='play') ? 'pause' : 'play';
@@ -19,7 +20,6 @@ app.controller('playController', function($scope, $http) {
 			$scope.status = 'play';
 			audioCtx.pause();
 		}
-		
 	};
 	
 });
