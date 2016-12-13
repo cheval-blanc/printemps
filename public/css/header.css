@@ -9,7 +9,7 @@ body {
 /* ---------- HEADER ---------- */
 #header {
 	width: 100%;
-	height: 80px;
+	height: 88px;
 	position: fixed;
 	z-index: 100;
 	border-bottom: 1px solid #ccc;
@@ -28,6 +28,23 @@ body {
 }
 .audio-icon:hover {
 	color: #484848;
+}
+
+/* ---------- HEADER-BAR ---------- */
+#header .header-bar {
+	width: 100%;
+	height: 14px;
+	margin-top: 73px;
+	position: absolute;
+	background: rgba(255,0,0,0.3);
+}
+.header-bar > div {
+	margin-top: -3px;
+	margin-left: 5px;
+}
+.header-bar > div > span {
+	color: #484848;
+	font-size: 0.9em;
 }
 
 /* ---------- HEADER-PLAY ---------- */
@@ -51,7 +68,6 @@ body {
 	width: 140px;
 	padding-top: 26px;
 	float: left;
-	/*background: rgba(255, 0, 0, 0.3);*/
 }
 .header-volume .volume-bar {
 	width: 80px;
@@ -59,6 +75,7 @@ body {
 	margin: 10px 0px 0px 30px;
 	float: left;
 	background: #818181;
+	cursor: pointer;
 }
 .header-volume #mute-container {
 	margin-left: -105px;
@@ -79,17 +96,23 @@ body {
 .header-info {
     width: 450px;
     height: 70px;
-	padding: 3px 5px 2px 5px;
-	margin: 4px 0px 0px 0px;
+	/*padding: 3px 5px 2px 5px;
+	margin: 4px 0px 0px 0px;*/
+	margin: 5px 0px 0px 0px;
 	float: left;
-	border-radius: 7px;
-    background: #eee;
+	
+	/*border-radius: 7px;
+    background: #eee;*/
 }
 .header-info img {
 	width: 63px;
 	height: 63px;
 	float: left;
-	background: #fff;
+	
+	/*background: #fff;*/
+	/*background: rgba(0,0,0,0);
+	border: none;*/
+	display: none;
 	/*cursor: pointer;*/
 }
 .header-info p {

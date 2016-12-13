@@ -28,7 +28,9 @@ var setAudioInfo = function(blob) {
 					base64String += String.fromCharCode(image.data[i]);
 				}
 				var base64 = 'data:' + image.format + ';base64,' + window.btoa(base64String);
-				$('#info').attr('src', base64); //@@
+				$('#thumbnail').attr('src', base64);
+				//@@
+				$('#thumbnail').css('display', 'block');
 			}
 			
 			$('#title').text(tag.tags.title);

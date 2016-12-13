@@ -20,8 +20,9 @@
 	- 전송이 완료되고 audio.play()할 때 아이콘을 변경해야 하는데, 변수를 넘겨줘야하나?
 	- 다른 곳에 배치할까?
 
-1. 볼륨 변경하기
+1. **(O)** 볼륨 변경하기
 	- slider?
+	- <http://jsfiddle.net/onigetoc/r44bzmc1/>
 
 1. 재생 시간 변경하기
 	- 먼저, 총 재생 시간이 필요하다.
@@ -41,6 +42,9 @@
 
 
 ## View
+1. 반응형 웹 디자인
+	
+
 1. iTunes와 비슷한 UI로 구성하기
 	- 기본적인 바탕 색은 흰색이고, Simpson 도넛의 색과 섞고 싶다.
 	- Printemps의 이미지와 잘 어울리는 괜찮은 색 조합 찾기
@@ -66,6 +70,7 @@
 
 ## AngularJS
 1. AngularJS 1에서 2로 porting
+	- Git의 branch 기능을 사용하면 좋을 듯
 
 
 ## Debugging

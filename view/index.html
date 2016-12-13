@@ -12,8 +12,14 @@
 	<link rel="stylesheet" href="/css/main.css">
 	<!--<link rel="stylesheet" href="/css/lisa.css">-->
 </head>
-<body ng-controller="volumeController" ng-mouseup="mUp($event)" ng-mousemove="mMove($event)">
+<body ng-controller="volumeController" ng-mouseup="mUpVolume($event)" ng-mousemove="mMoveVolume($event)">
 	<header id="header">
+		<div class="header-bar">
+			<div>
+				<span>00:00</span>
+			</div>
+			
+		</div>
 		<div class="header-holder">
 			<div class="header-play" ng-controller="playController">
 				<div class="play-container">
@@ -28,23 +34,27 @@
 			</div>
 			
 			<div class="header-volume">
-				<span class="volume-bar"></span>
+				<span class="volume-bar" ng-click="clickVolumeBar($event)"></span>
 				<div id="mute-container">
 					<i class="audio-icon fa fa-volume-{{scale}} fa-2x" ng-click="mute()"></i>
 				</div>
 				<div id="volume-container">
-					<i class="audio-icon fa fa-circle fa-2x" ng-mousedown="mDown($event)"></i>
+					<i class="audio-icon fa fa-circle fa-2x" ng-mousedown="mDownVolume($event)"></i>
 				</div>
 			</div>
 			
 			<div class="header-info">
-				<img id="info" class="img-thumbnail" src="" alt="">
+				<!--<img id="thumbnail" class="img-thumbnail" src="" alt="">-->
+				<img id="thumbnail" class="" src="">
+				
 				<p id="title"></p>
 				<p id="album"></p>
 				<!--<div class="slide-left">
 					<p id="album"></p>
 				 </div>-->
-			</div> 
+			</div>
+			
+			
 			
 		</div>
 	</header>

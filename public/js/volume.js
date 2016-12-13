@@ -34,19 +34,23 @@ angular.module('printemps').controller('volumeController', function($scope) {
 		(audioCtx.muted) ? $scope.scale='off' : updateVolume(0, audioCtx.volume);
 	};
 	
-	$scope.mDown = function($event) {
+	$scope.clickVolumeBar = function($event) {
+		updateVolume($event.pageX);
+	};
+	
+	$scope.mDownVolume = function($event) {
 		volumeDrag = true;
 		updateVolume($event.pageX);
 	};
 	
-	$scope.mUp = function($event) {
+	$scope.mUpVolume = function($event) {
 		if(volumeDrag) {
 			volumeDrag = false;
 			updateVolume($event.pageX);
 		}
 	};
 	
-	$scope.mMove = function($event) {
+	$scope.mMoveVolume = function($event) {
 		if(volumeDrag) { updateVolume($event.pageX); }
 	};
 });
