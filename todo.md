@@ -33,6 +33,8 @@
 	- 2016-12-06 까지 구현한 것으로 보아, 조각 파일들을 모두 전송 받아야 재생할 수 있는 것 같다.
 	- <http://www.jingpingji.com/blog/2015/8/4/transferring-sound-data-with-binaryjs-and-buffering-for-smooth-playbac>
 
+
+## File List
 1. 오디오 파일 리스트 구성하기
 	- 모든 오디오 파일을 서버 경로에 추가해아하나?
 		- 기존의 경로와 연동할 수 있는 방법이 없을까?
@@ -40,6 +42,15 @@
 	- 만약 모든 파일들을 추가했다고 가정했을 때, 앨범 별로 어떻게 나눠서 보여주지
 		- path를 내려갈 때마다 체크한다?
 		- 매번 scan하는 것은 비효울 적이니, DB를 사용해야하나?
+		
+1. DB를 사용할 경우
+	- mongoDB
+	- title, artist, album-artist, composer, album, year, track, disc, album-art
+		- group: album-artist, album
+		- sort 1: artist, year (track 마다 year가 다른 경우도 있다.)
+		- sort 2: track, disc
+	- 주기적으로 자동으로 list update
+		- Node.js에 관련 기능이 있는지 조사 필요
 
 
 ## Responsive Web

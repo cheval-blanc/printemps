@@ -39,17 +39,16 @@ body {
 	background: rgba(255,0,0,0.3);
 }
 .header-bar div:first-child {
-	/*width: 100px;*/
+	width: 45px;
 	margin-top: -3px;
 	margin-left: 5px;
 	float: left;
 	text-align: left;
 }
 .header-bar div:first-child + div {
-	/*width: 100px;*/
+	width: 45px;
 	margin-top: -3px;
-	margin-left: 94.5%;
-	/*margin-right: 5px;*/
+	margin-left: 92.5%;
 	float: left;
 	text-align: right;
 }
@@ -70,7 +69,7 @@ body {
 	position: relative;
 	text-align: center;
 }
-.play-container > i {
+.play-container i {
 	font-size: 2.5em;
 }
 
@@ -92,14 +91,14 @@ body {
 	margin-left: -105px;
 	float: left;
 }
-.header-volume #mute-container > i {
+.header-volume #mute-container i {
 	font-size: 1.5em;
 }
 .header-volume #volume-container {
 	margin: 2px 0px 0px -7px;
 	float: left;
 }
-.header-volume #volume-container > i {
+.header-volume #volume-container i {
 	font-size: 1.2em;
 }
 
