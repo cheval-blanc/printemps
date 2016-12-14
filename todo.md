@@ -21,12 +21,13 @@
 	- 다른 곳에 배치할까?
 
 1. **(O)** 볼륨 변경하기
-	- slider?
 	- <http://jsfiddle.net/onigetoc/r44bzmc1/>
+	- volume circle의 위치를 negative margin에서 %로 바꾸는 것이 불가능
 
 1. 재생 시간 변경하기
-	- 먼저, 총 재생 시간이 필요하다.
-	- 파일 전체를 전송 받고 이동하는 것은 쉬울 것 같으나, buffering이 들어가면 어려울 듯
+	- 먼저, 총 재생 시간이 필요하다. (mediaElement의 currentTime, duration 이용)
+	- audioCtx가 재생되면 값이 변경되었다는 것을 감지해야함
+	- angularjs directive?
 
 1. Cache를 이용하여 Buffering 기능 구현
 	- 2016-12-06 까지 구현한 것으로 보아, 조각 파일들을 모두 전송 받아야 재생할 수 있는 것 같다.
@@ -41,10 +42,14 @@
 		- 매번 scan하는 것은 비효울 적이니, DB를 사용해야하나?
 
 
-## View
-1. 반응형 웹 디자인
+## Responsive Web
+1. width, padding, margin을 모두 %로 사용하는 것은 목표와 다른 것 같다.
+	- 특정 viewport 가로 길이 마다 변경하고 싶기 때문
 	
+1. flex로 구현이 가능한지는 의문이 든다.
 
+
+## View
 1. iTunes와 비슷한 UI로 구성하기
 	- 기본적인 바탕 색은 흰색이고, Simpson 도넛의 색과 섞고 싶다.
 	- Printemps의 이미지와 잘 어울리는 괜찮은 색 조합 찾기
@@ -77,7 +82,7 @@
 1. 지원하지 않는 파일을 재생했을 때, 재생버튼 unable
 
 1. header에서 제목이나 앨범이 길면 slide animation 넣기
-	- marquee tag가 있으나, 곧 없어진다고 함 <https://developer.mozilla.org/ko/docs/Web/HTML/Element/marquee>
+	- marquee tag가 있으나, 곧 deprecated. <https://developer.mozilla.org/ko/docs/Web/HTML/Element/marquee>
 	- css animation으로 구현하는 방법이 없는지 확인 
 		- <http://www.html.am/html-codes/marquees/css-slide-in-text.cfm>
 		- <http://stackoverflow.com/questions/32520546/css-loop-an-animation>

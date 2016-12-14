@@ -38,11 +38,22 @@ body {
 	position: absolute;
 	background: rgba(255,0,0,0.3);
 }
-.header-bar > div {
+.header-bar div:first-child {
+	/*width: 100px;*/
 	margin-top: -3px;
 	margin-left: 5px;
+	float: left;
+	text-align: left;
 }
-.header-bar > div > span {
+.header-bar div:first-child + div {
+	/*width: 100px;*/
+	margin-top: -3px;
+	margin-left: 94.5%;
+	/*margin-right: 5px;*/
+	float: left;
+	text-align: right;
+}
+.header-bar div span {
 	color: #484848;
 	font-size: 0.9em;
 }

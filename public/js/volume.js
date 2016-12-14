@@ -21,7 +21,7 @@ angular.module('printemps').controller('volumeController', function($scope) {
 		$('#volume-container').css('margin-left', pos + 'px');
 		
 		audioCtx.volume = ratio;
-		if(audioCtx.muted) { $scope.scale = 'off'; return; }
+		if(audioCtx.muted) { audioCtx.muted=false; }
 		$scope.scale = (ratio === 0) ? 'off' : (ratio > 0.5) ? 'up' : 'down';
 	};
 	

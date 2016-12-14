@@ -14,11 +14,13 @@
 </head>
 <body ng-controller="volumeController" ng-mouseup="mUpVolume($event)" ng-mousemove="mMoveVolume($event)">
 	<header id="header">
-		<div class="header-bar">
+		<div class="header-bar" ng-controller="barController">
 			<div>
-				<span>00:00</span>
+				<span id="">{{current}}</span>
 			</div>
-			
+			<div>
+				<span id="">{{duration}}</span>
+			</div>
 		</div>
 		<div class="header-holder">
 			<div class="header-play" ng-controller="playController">
@@ -81,6 +83,7 @@
 	<script src="js/binaryClient.js"></script>
 	<script src="js/play.js"></script>
 	<script src="js/volume.js"></script>
+	<script src="js/header-bar.js"></script>
 	
 </body>
 </html>
