@@ -12,7 +12,7 @@ angular.module('printemps').controller('playController', function($scope) {
 		var s = Math.floor(t % 3600 % 60);
 		
 		var str = (h>1) ? h + ':' : '';
-		str += m + ':' + s;
+		str += m + ':' + ('0' + s).slice(-2);
 		return str;
 	};
 	
@@ -38,4 +38,3 @@ angular.module('printemps').controller('playController', function($scope) {
 	};
 	
 });
-

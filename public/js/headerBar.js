@@ -12,4 +12,3 @@ angular.module('printemps').controller('barController', function($scope) {
 	
 
 });
-

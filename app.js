@@ -34,4 +34,3 @@ require('./binaryServer.js');
 http.createServer(app).listen(app.get('port'), function() {
 	console.log('Printemps server is listening on port ' + app.get('port'));
 });
-

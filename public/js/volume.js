@@ -10,7 +10,7 @@ angular.module('printemps').controller('volumeController', function($scope) {
 	
 	var updateVolume = function(pageX, _r) {
 		var ratio = 0;
-		if(_r) {
+		if(_r !== undefined) {
 			ratio = _r;
 		} else {
 			ratio = (pageX - barMin) / barWidth; // Normalize 0-1
@@ -40,6 +40,7 @@ angular.module('printemps').controller('volumeController', function($scope) {
 	
 	$scope.mDownVolume = function($event) {
 		volumeDrag = true;
+		$event.preventDefault();
 		updateVolume($event.pageX);
 	};
 	
@@ -54,4 +55,3 @@ angular.module('printemps').controller('volumeController', function($scope) {
 		if(volumeDrag) { updateVolume($event.pageX); }
 	};
 });
-

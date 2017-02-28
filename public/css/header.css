@@ -38,18 +38,17 @@ body {
 	position: absolute;
 	background: rgba(255,0,0,0.3);
 }
-.header-bar div:first-child {
+.header-bar div {
 	width: 45px;
 	margin-top: -3px;
-	margin-left: 5px;
 	float: left;
+}
+.header-bar div:first-child {
+	margin-left: 5px;
 	text-align: left;
 }
 .header-bar div:first-child + div {
-	width: 45px;
-	margin-top: -3px;
-	margin-left: 92.5%;
-	float: left;
+	margin-left: calc(100% - 100px); /* (45px + 5px) * 2 */
 	text-align: right;
 }
 .header-bar div span {
