@@ -26,23 +26,23 @@
 		<div class="header-holder">
 			<div class="header-play" ng-controller="playController">
 				<div class="play-container">
-					<i class="audio-icon fa fa-backward fa-2x"></i>
+					<i class="audio-icon fa fa-backward"></i>
 				</div>
 				<div class="play-container">
-					<i class="audio-icon fa fa-{{status}} fa-2x" ng-click="play()"></i>
+					<i class="audio-icon fa fa-{{status}}" ng-click="play()"></i>
 				</div>
 				<div class="play-container">
-					<i class="audio-icon fa fa-forward fa-2x"></i>
+					<i class="audio-icon fa fa-forward"></i>
 				</div>
 			</div>
 			
 			<div class="header-volume">
 				<span class="volume-bar" ng-click="clickVolumeBar($event)"></span>
 				<div id="mute-container">
-					<i class="audio-icon fa fa-volume-{{scale}} fa-2x" ng-click="mute()"></i>
+					<i class="audio-icon fa fa-volume-{{scale}}" ng-click="mute()"></i>
 				</div>
 				<div id="volume-container">
-					<i class="audio-icon fa fa-circle fa-2x" ng-mousedown="mDownVolume($event)"></i>
+					<i class="audio-icon fa fa-circle" ng-mousedown="mDownVolume($event)"></i>
 				</div>
 			</div>
 			

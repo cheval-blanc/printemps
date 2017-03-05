@@ -10,15 +10,20 @@
 
 1. 테스트 용으로 음악 샘플 몇개 추가해서 서버에서 리스트 받기
 	- **(O)** m4a file 전송 확인
+	- Transport Apple lossless file
 		- 직접 ripping한 음원은 재생이 안된다.
 		- Chrome 에서 Apple Lossless 파일을 지원 안함
+		- m4a container의 문제가 아니라 codec의 문제인듯
 	- **(O)** header에 파일 정보 표시하기
 
 1. 로딩하는 동안 재생 아이콘 변경: <http://fontawesome.io/examples/#animated>
 	- 관찰해보니 page가 멈춘다.
 		- 비동기로 데이터를 받아오는 방법이 없을까? ajax같은
-	- 전송이 완료되고 audio.play()할 때 아이콘을 변경해야 하는데, 변수를 넘겨줘야하나?
-	- 다른 곳에 배치할까?
+	- **(O)** 전송이 완료되고 audio.play()할 때 아이콘을 변경해야 하는데, 변수를 넘겨줘야하나?
+		- angularjs.$apply function 사용하여 binaryClient.js에서도 playController의 scope에 접근할 수 있었다.
+		- emit function을 호출했을 때는 "fa-spinner fa-spin" 으로 아이콘 변경
+		- playable한 파일의 경우에만 "pause"로 변경
+	- **(O)** unplayable한 경우에는 "fa-frown-o"로 변경
 
 1. 볼륨 변경하기
 	- **(O)** 기본적인 volume bar 구현
@@ -26,9 +31,14 @@
 	- volume circle의 위치를 negative margin에서 %로 바꾸는 것이 불가능
 
 1. 재생 시간 변경하기
-	- 먼저, 총 재생 시간이 필요하다. (mediaElement의 currentTime, duration 이용)
+	- **(O)** 먼저, 총 재생 시간이 필요하다. (mediaElement의 currentTime, duration 이용)
 	- audioCtx가 재생되면 값이 변경되었다는 것을 감지해야함
-	- angularjs directive?
+	- **(O)** angularjs $watch 사용
+		- secondsToHms(audioCtx.currentTime) 값이 변경되면 업데이트 함
+		- 불규칙적으로 callback function이 호출되는 문제가 있다.
+		- angularjs.$watch의 성능 이슈인지는 확실하지 않다.
+	- header-bar 색 변경
+		- 재생 시간 변경 callback function 안에서 같이 수정하면 될듯
 
 1. Cache를 이용하여 Buffering 기능 구현
 	- 2016-12-06 까지 구현한 것으로 보아, 조각 파일들을 모두 전송 받아야 재생할 수 있는 것 같다.
@@ -77,13 +87,15 @@
 ## Code Versioning
 1. Github?
 	- **(O)** 왠만하면 git을 써보자
+	- **(O)** SourceTree 사용
 
 
 ## Publishing
 1. Node.js 프로젝트를 publishing하는 방법 찾기
-
-1. 개인 서버를 사용하는게 파일 관리하기가 쉬울 것 같다.
 	- Heroku와 같은 서비스 이용하기?
+
+1. 직접 서버를 구축하는게 파일 관리하기가 쉬울 것 같다.
+	- 서버 구축에 대한 장비 구입이나 관련 지식이 필요하다. 
 
 
 ## AngularJS

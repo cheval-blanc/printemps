@@ -61,14 +61,15 @@ client.on('stream', function(stream, meta) {
 		var blob = new Blob(parts);
 		audioCtx.src = (window.URL || window.webkitURL).createObjectURL(blob);
 		
+		var scope$ = angular.element($('.header-play')).scope();
 		var playPromise = audioCtx.play();
 		if(playPromise !== undefined) {
 			playPromise.then(function() {
 				// play an audio file?
-				var scope$ = angular.element($('.header-play')).scope();
 				scope$.$apply(function() { scope$.status = 'pause'; });
 				
 			}).catch(function(e) {
+				scope$.$apply(function() { scope$.status = 'frown-o'; });
 				alert(e);
 			});
 		}
