@@ -4,14 +4,14 @@ angular.module('printemps').controller('volumeController', function($scope) {
 	$scope.scale = 'up';
 	
 	var volumeDrag = false;
-	var barMin = $('.header-volume .volume-bar').offset().left;
-	var barWidth = $('.header-volume .volume-bar').width();
-	var circleMax = parseInt($('#volume-container').css('margin-left').replace('px', ''));
+	var barMin = $('.header-volume .volume-bar').offset().left,
+		barWidth = $('.header-volume .volume-bar').width(),
+		circleMax = parseInt($('#volume-container').css('margin-left').replace('px', ''));
 	
-	var updateVolume = function(pageX, _r) {
+	var updateVolume = function(pageX, r) {
 		var ratio = 0;
-		if(_r !== undefined) {
-			ratio = _r;
+		if(r !== undefined) {
+			ratio = r;
 		} else {
 			ratio = (pageX - barMin) / barWidth; // Normalize 0-1
 			ratio = (ratio > 1) ? 1 : (ratio < 0) ? 0 : ratio;

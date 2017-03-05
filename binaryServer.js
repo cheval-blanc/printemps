@@ -27,4 +27,3 @@ binaryServer.on('connection', function(client) {
 		}
 	});
 });
-

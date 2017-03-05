@@ -9,9 +9,10 @@
 //var client = new BinaryClient('ws://localhost:9000');
 var hostname = window.location.hostname,
 	client = new BinaryClient('ws://' + hostname + ':9000');
+var audioCtx = new Audio();
 
-var jsmediatags = window.jsmediatags,
-	audioCtx = new Audio();
+var jsmediatags = window.jsmediatags;
+
 
 var emit = function(event, data, file) {
 	file = file || {}; data = data || {}; data.event = event;
@@ -33,39 +34,45 @@ var setAudioInfo = function(blob) {
 				$('#thumbnail').attr('src', base64);
 				//@@
 				$('#thumbnail').css('display', 'block');
+			} else {
+				//@@ set default image
 			}
 			
 			$('#title').text(tag.tags.title);
 			$('#album').text(tag.tags.artist + ' - ' + tag.tags.album);
 			//$('#album').text(tag.tags.artist + ' - ' + tag.tags.album + 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 		},
-		onError: function(err) {
-			console.log(err);
+		onError: function(e) {
+			console.error(e);
 		}
 	});
 };
 
 client.on('stream', function(stream, meta) {
 	var parts = [];
+	
 	stream.on('data', function(data) {
 		parts.push(data);
 	});
 
 	stream.on('end', function() {
 		console.log('end');
+		
 		var blob = new Blob(parts);
 		audioCtx.src = (window.URL || window.webkitURL).createObjectURL(blob);
 		
 		var playPromise = audioCtx.play();
 		if(playPromise !== undefined) {
 			playPromise.then(function() {
+				// play an audio file?
+				var scope$ = angular.element($('.header-play')).scope();
+				scope$.$apply(function() { scope$.status = 'pause'; });
 				
-			}).catch(function(error) {
-				alert(error);
+			}).catch(function(e) {
+				alert(e);
 			});
 		}
 		
 		setAudioInfo(blob);
 	});
 });
-

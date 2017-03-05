@@ -1,4 +1,4 @@
-# Printemps - Todo
+# Printemps
 
 ## Audio Streaming
 1. Ajax 만으로 binary file을 전송하는게 불가능한가?
@@ -11,7 +11,7 @@
 1. 테스트 용으로 음악 샘플 몇개 추가해서 서버에서 리스트 받기
 	- **(O)** m4a file 전송 확인
 		- 직접 ripping한 음원은 재생이 안된다.
-		- Browser에서 Apple Lossless 파일을 지원 안함
+		- Chrome 에서 Apple Lossless 파일을 지원 안함
 	- **(O)** header에 파일 정보 표시하기
 
 1. 로딩하는 동안 재생 아이콘 변경: <http://fontawesome.io/examples/#animated>
@@ -20,8 +20,9 @@
 	- 전송이 완료되고 audio.play()할 때 아이콘을 변경해야 하는데, 변수를 넘겨줘야하나?
 	- 다른 곳에 배치할까?
 
-1. **(O)** 볼륨 변경하기
-	- <http://jsfiddle.net/onigetoc/r44bzmc1/>
+1. 볼륨 변경하기
+	- **(O)** 기본적인 volume bar 구현
+		- <http://jsfiddle.net/onigetoc/r44bzmc1/>
 	- volume circle의 위치를 negative margin에서 %로 바꾸는 것이 불가능
 
 1. 재생 시간 변경하기
@@ -70,6 +71,7 @@
 	
 1. 네모네모한 UI를 사용할 예정
 	- grid하게 화면을 가득 채우는 라이브러리가 있었는데, 써볼까? \(Do it! 반응형 웹 디자인\)
+		- 읽어보니 그런건 없었다.
 
 
 ## Code Versioning

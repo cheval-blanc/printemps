@@ -22,9 +22,13 @@ angular.module('printemps').controller('playController', function($scope) {
 		if($scope.status === 'play') {
 			console.log('play');
 			
-			$scope.status = 'pause';
-			if(audioCtx.src !== '') { audioCtx.play(); }
-			else { emit('request', { name: 'Sam Smith' }); }
+			if(audioCtx.src !== '') { 
+				$scope.status = 'pause';
+				audioCtx.play(); 
+			} else { 
+				$scope.status = 'spinner fa-spin';
+				emit('request', { name: 'Sam Smith' });
+			}
 			
 		} else if($scope.status === 'pause') {
 			console.log('pause');

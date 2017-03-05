@@ -113,7 +113,7 @@ body {
 	/*border-radius: 7px;
     background: #eee;*/
 }
-.header-info img {
+.header-info #thumbnail {
 	width: 63px;
 	height: 63px;
 	float: left;

@@ -2,11 +2,12 @@
 
 /* ---------- MAIN ---------- */
 #main {
-	padding-top: 110px;
+	padding-top: 88px; /* #header: height */
 }
+
 .container {
 	width: 100%;
-	padding: 0px 20px 0px 20px;
+	padding: 20px 20px 0px 20px;
 }
 .container img {
 	width: 200px;
