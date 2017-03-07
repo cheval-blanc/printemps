@@ -56,7 +56,7 @@ client.on('stream', function(stream, meta) {
 	});
 
 	stream.on('end', function() {
-		console.log('end');
+		console.log('binary end');
 		
 		var blob = new Blob(parts);
 		audioCtx.src = (window.URL || window.webkitURL).createObjectURL(blob);

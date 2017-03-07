@@ -33,10 +33,13 @@
 1. 재생 시간 변경하기
 	- **(O)** 먼저, 총 재생 시간이 필요하다. (mediaElement의 currentTime, duration 이용)
 	- audioCtx가 재생되면 값이 변경되었다는 것을 감지해야함
-	- **(O)** angularjs $watch 사용
+	- ~~angularjs $watch 사용~~
 		- secondsToHms(audioCtx.currentTime) 값이 변경되면 업데이트 함
 		- 불규칙적으로 callback function이 호출되는 문제가 있다.
-		- angularjs.$watch의 성능 이슈인지는 확실하지 않다.
+		- angularjs.$watch의 성능 이슈인지는 확실하지 않다. (거의 맞는듯)
+	- **(O)** angularjs directive 사용
+		- <https://docs.angularjs.org/api/ng/service/$interval>
+		- $interval을 사용하여 500 ms 마다 update
 	- header-bar 색 변경
 		- 재생 시간 변경 callback function 안에서 같이 수정하면 될듯
 
@@ -104,8 +107,6 @@
 
 
 ## Debugging
-1. 지원하지 않는 파일을 재생했을 때, 재생버튼 unable
-
 1. header에서 제목이나 앨범이 길면 slide animation 넣기
 	- marquee tag가 있으나, 곧 deprecated. <https://developer.mozilla.org/ko/docs/Web/HTML/Element/marquee>
 	- css animation으로 구현하는 방법이 없는지 확인 

@@ -15,7 +15,7 @@
 </head>
 <body ng-controller="volumeController" ng-mouseup="mUpVolume($event)" ng-mousemove="mMoveVolume($event)">
 	<header id="header">
-		<div class="header-bar" ng-controller="barController">
+		<div class="header-bar" ng-controller="barController" play-time>
 			<div>
 				<span id="">{{current}}</span>
 			</div>
