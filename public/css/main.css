@@ -2,18 +2,18 @@
 
 /* ---------- MAIN ---------- */
 #main {
-	padding-top: 88px; /* #header: height */
+    padding-top: 88px; /* height of #header */
 }
 
 .container {
-	width: 100%;
-	padding: 20px 20px 0px 20px;
+    width: 100%;
+    padding: 20px 20px 0px 20px;
 }
 .container img {
-	width: 200px;
-	height: 200px;
-	margin: 0px 20px 20px 0px;
-	
-	float: left;
+    width: 200px;
+    height: 200px;
+    margin: 0px 20px 20px 0px;
+
+    float: left;
 }
 
