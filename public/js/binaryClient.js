@@ -14,12 +14,12 @@ var audioCtx = new Audio();
 var jsmediatags = window.jsmediatags;
 
 
-var emit = function(event, data, file) {
+function emit(event, data, file) {
     file = file || {}; data = data || {}; data.event = event;
     return client.send(file, data);
-};
+}
 
-var setAudioInfo = function(blob) {
+function setAudioInfo(blob) {
     jsmediatags.read(blob, {
         onSuccess: function(tag) {
             console.log(tag);
@@ -46,7 +46,7 @@ var setAudioInfo = function(blob) {
             console.error(e);
         }
     });
-};
+}
 
 client.on('stream', function(stream, meta) {
     var parts = [];
@@ -61,9 +61,9 @@ client.on('stream', function(stream, meta) {
         var blob = new Blob(parts);
         audioCtx.src = (window.URL || window.webkitURL).createObjectURL(blob);
 
-        var scope$ = angular.element($('.header-play')).scope();
         var playPromise = audioCtx.play();
         if(playPromise !== undefined) {
+            var scope$ = angular.element($('.header-play')).scope();
             playPromise.then(function() {
                 // play an audio file?
                 scope$.$apply(function() { scope$.status = 'pause'; });

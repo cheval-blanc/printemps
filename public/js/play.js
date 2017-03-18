@@ -9,8 +9,7 @@ angular.module('printemps').controller('playController', function($scope) {
         //$scope.status = ($scope.status==='play') ? 'pause' : 'play';
 
         if($scope.status === 'play') {
-            console.log('play');
-
+            //console.log('play');
             if(audioCtx.src !== '') {
                 $scope.status = 'pause';
                 audioCtx.play();
@@ -20,8 +19,7 @@ angular.module('printemps').controller('playController', function($scope) {
             }
 
         } else if($scope.status === 'pause') {
-            console.log('pause');
-
+            //console.log('pause');
             $scope.status = 'play';
             audioCtx.pause();
         }

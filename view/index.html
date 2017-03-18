@@ -14,14 +14,13 @@
 
 </head>
 <body ng-controller="volumeController" ng-mouseup="mUpVolume($event)" ng-mousemove="mMoveVolume($event)">
-    <header id="header">
-        <div class="header-bar" ng-controller="barController" play-time>
-            <div>
-                <span id="">{{current}}</span>
+    <header>
+        <div class="header-bar" ng-controller="barController" ng-click="move($event)">
+            <div class="bar-background" play-time>
+                <div><span>{{current}}</span></div>
+                <div><span>{{remain}}</span></div>
             </div>
-            <div>
-                <span id="">{{remain}}</span>
-            </div>
+            <div class="bar-gauge"></div>
         </div>
         <div class="header-holder">
             <div class="header-play" ng-controller="playController">
@@ -59,15 +58,24 @@
     </header>
     <div id="main">
         <div class="container">
-            <img class="img-rounded" src="http://placehold.it/200x200">
-            <img class="img-rounded" src="http://placehold.it/200x200">
-            <img class="img-rounded" src="http://placehold.it/200x200">
-            <img class="img-rounded" src="http://placehold.it/200x200">
-            <img class="img-rounded" src="http://placehold.it/200x200">
-            <img class="img-rounded" src="http://placehold.it/200x200">
-            <img class="img-rounded" src="http://placehold.it/200x200">
-            <img class="img-rounded" src="http://placehold.it/200x200">
+            <!--<div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>-->
 
+            <img class="img-rounded" src="http://placehold.it/200x200">
+            <img class="img-rounded" src="http://placehold.it/200x200">
+            <img class="img-rounded" src="http://placehold.it/200x200">
+            <img class="img-rounded" src="http://placehold.it/200x200">
+            <img class="img-rounded" src="http://placehold.it/200x200">
+            <img class="img-rounded" src="http://placehold.it/200x200">
+            <img class="img-rounded" src="http://placehold.it/200x200">
+            <img class="img-rounded" src="http://placehold.it/200x200">
         </div>
 
     </div>

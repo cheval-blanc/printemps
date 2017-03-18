@@ -6,9 +6,9 @@ angular.module('printemps').controller('volumeController', function($scope) {
     var volumeDrag = false;
     var barMin = $('.header-volume .volume-bar').offset().left,
         barWidth = $('.header-volume .volume-bar').width(),
-        circleMax = parseInt($('#volume-container').css('margin-left').replace('px', ''));
+        circleMax = parseInt($('#volume-container').css('margin-left'));
 
-    var updateVolume = function(pageX, r) {
+    function updateVolume(pageX, r) {
         var ratio = 0;
         if(r !== undefined) {
             ratio = r;
@@ -23,7 +23,7 @@ angular.module('printemps').controller('volumeController', function($scope) {
         audioCtx.volume = ratio;
         if(audioCtx.muted) { audioCtx.muted = false; }
         $scope.scale = (ratio === 0) ? 'off' : (ratio > 0.5) ? 'up' : 'down';
-    };
+    }
 
 
     $scope.mute = function() {

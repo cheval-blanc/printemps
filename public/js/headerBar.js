@@ -1,13 +1,20 @@
 'use strict';
 
 angular.module('printemps').controller('barController', function($scope) {
-
     $scope.current = $scope.remain = '0:00';
 
+    $scope.move = function($event) {
+        if(audioCtx.src === '') { return; }
+        var barWidth = parseInt($('.header-bar').css('width')),
+            ratio = $event.pageX / barWidth;
+
+        $('.bar-gauge').css('width', (ratio * 100) + '%');
+        audioCtx.currentTime = audioCtx.duration * ratio;
+    };
 
 }).directive('playTime', function($interval) {
     return function(scope, element, attrs) {
-        var secondsToHms = function(t) {
+        function secondsToHms(t) {
             t = Number(t);
             if(isNaN(t) || t === 0){ return '0:00'; }
             var h = Math.floor(t / 3600),
@@ -17,19 +24,22 @@ angular.module('printemps').controller('barController', function($scope) {
             var hms = (h>1) ? h + ':' : '';
             hms += m + ':' + ('0' + s).slice(-2);
             return hms;
-        };
+        }
 
         var stopTime = null;
-        var updateTime = function() {
-            scope.current = secondsToHms(audioCtx.currentTime);
-            scope.remain = secondsToHms(audioCtx.duration - audioCtx.currentTime);
-        };
+        function updateTime() {
+            var c = audioCtx.currentTime,
+                d = audioCtx.duration;
+            scope.current = secondsToHms(c);
+            scope.remain = secondsToHms(d - c);
+            $('.bar-gauge').css('width', (c / d * 100) + '%');
+        }
 
-        scope.$watch(function() { return audioCtx.paused; }, function(value) {
-            console.log('paused:', value);
+        scope.$watch(function() { return audioCtx.paused; }, function(paused) {
+            console.log('paused:', paused);
 
-            if(audioCtx.paused) { $interval.cancel(stopTime); }
-            else { stopTime = $interval(updateTime, 500); updateTime(); }
+            if(paused) { $interval.cancel(stopTime); }
+            else { stopTime = $interval(updateTime, 1000); updateTime(); }
         });
 
         element.on('$destroy', function() { $interval.cancel(stopTime); });
