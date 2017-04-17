@@ -8,10 +8,10 @@ angular.module('printemps').controller('volumeController', function($scope) {
         barWidth = $('.header-volume .volume-bar').width(),
         circleMax = parseInt($('#volume-container').css('margin-left'));
 
-    function updateVolume(pageX, r) {
+    function updateVolume(pageX, _ratio) {
         var ratio = 0;
-        if(r !== undefined) {
-            ratio = r;
+        if(_ratio !== undefined) {
+            ratio = _ratio;
         } else {
             ratio = (pageX - barMin) / barWidth; // Normalize 0-1
             ratio = (ratio > 1) ? 1 : (ratio < 0) ? 0 : ratio;

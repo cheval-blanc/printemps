@@ -39,7 +39,7 @@ angular.module('printemps').controller('barController', function($scope) {
             console.log('paused:', paused);
 
             if(paused) { $interval.cancel(stopTime); }
-            else { stopTime = $interval(updateTime, 1000); updateTime(); }
+            else { stopTime = $interval(updateTime, 30); updateTime(); }
         });
 
         element.on('$destroy', function() { $interval.cancel(stopTime); });

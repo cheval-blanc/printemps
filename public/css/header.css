@@ -9,7 +9,7 @@ body {
 /* ---------- HEADER ---------- */
 header {
     width: 100%;
-    height: 81px;
+    height: 77px;
     position: fixed;
     z-index: 5;
     border-bottom: 1px solid #ccc;
@@ -39,7 +39,7 @@ header .header-holder {
 /* ---------- HEADER-BAR ---------- */
 header .header-bar {
     width: 100%;
-    height: 7px;
+    height: 4px;
     position: absolute;
     margin-top: 73px;
     cursor: pointer;
@@ -51,13 +51,14 @@ header .header-bar {
     /*background: #F15DAD;*/
     /*background: #F588BF;*/
     background: #DA1C31;
-    box-shadow: 1px 0px 1px 0px rgba(0,0,0,0.2);
+    /*box-shadow: 1px 0px 1px 0px rgba(0,0,0,0.2);*/
 }
 .header-bar .bar-background {
     width: 100%;
     height: inherit;
     position: inherit;
     background: rgba(137,135,140,0.1);
+    /*background: rgba(241,93,173,0.2);*/
 }
 .bar-background div {
     width: 45px;
@@ -80,7 +81,8 @@ header .header-bar {
 /* ---------- HEADER-PLAY ---------- */
 .header-play {
     float: left;
-    width: 170px;
+    /*width: 170px;*/
+    width: 12%;
 }
 .play-container {
     width: 55px;
@@ -95,7 +97,8 @@ header .header-bar {
 
 /* ---------- HEADER-VOLUME ---------- */
 .header-volume {
-    width: 140px;
+    /*width: 140px;*/
+    width: 13%;
     padding-top: 26px;
     float: left;
 }
@@ -104,7 +107,8 @@ header .header-bar {
     height: 2px;
     margin: 10px 0px 0px 30px;
     float: left;
-    background: #818181;
+    /*background: #818181;*/
+    background: #B9B9B9;
     cursor: pointer;
 }
 .header-volume #mute-container {
@@ -124,8 +128,9 @@ header .header-bar {
 
 /* ---------- HEADER-INFO ---------- */
 .header-info {
-    width: 450px;
-    height: 70px;
+    /*width: 450px;*/
+    width: 40%;
+    height: 63px;
     /*padding: 3px 5px 2px 5px;
     margin: 4px 0px 0px 0px;*/
     margin: 5px 0px 0px 0px;
@@ -146,7 +151,8 @@ header .header-bar {
     /*cursor: pointer;*/
 }
 .header-info p {
-    width: 373px;
+    /*width: 373px;*/
+    width: calc(100% - 67px);
     margin: 0px 3px 0px 67px;
     text-align: center;
 }
@@ -179,4 +185,32 @@ header .header-bar {
     }
 }
 */
+
+/* ---------- HEADER-SEARSCH ---------- */
+.header-search {
+    /*width: 500px;*/
+    width: 35%;
+    height: auto;
+    margin-top: 27px;
+    float: left;
+}
+.header-search .search-container {
+    float: right;
+}
+/*.header-search .search-container {
+    width: 150px;
+    position: relative;
+    float: right;
+}*/
+/*.search-container i {
+    position: absolute;
+    padding: 8px;
+    pointer-events: none;
+    right: 0px;
+}*/
+.search-container input {
+    font-size: 0.9em;
+    /*height: 30px;
+    padding-right: 30px;*/
+}
 
