@@ -11,27 +11,28 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/main.css">
     <!--<link rel="stylesheet" href="/css/lisa.css">-->
-
 </head>
 <body ng-controller="volumeController" ng-mouseup="mUpVolume($event)" ng-mousemove="mMoveVolume($event)">
     <header>
-        <div class="header-bar" ng-controller="barController" ng-click="move($event)">
-            <div class="bar-background" play-time>
-                <div><span>{{current}}</span></div>
-                <div><span>{{remain}}</span></div>
-            </div>
-            <div class="bar-gauge"></div>
-        </div>
         <div class="header-holder">
-            <div class="header-play" ng-controller="playController">
-                <div class="play-container">
-                    <i class="audio-icon fa fa-backward"></i>
+            <div ng-controller="playController">
+                <div class="header-bar" ng-click="move($event)">
+                    <div class="bar-background" play-time>
+                        <div><span>{{current}}</span></div>
+                        <div><span>{{remain}}</span></div>
+                    </div>
+                    <div class="bar-gauge"></div>
                 </div>
-                <div class="play-container">
-                    <i class="audio-icon fa fa-{{status}}" ng-click="play()"></i>
-                </div>
-                <div class="play-container">
-                    <i class="audio-icon fa fa-forward"></i>
+                <div class="header-play">
+                    <div class="play-container">
+                        <i class="audio-icon fa fa-backward"></i>
+                    </div>
+                    <div class="play-container">
+                        <i class="audio-icon fa fa-{{status}}" ng-click="play()"></i>
+                    </div>
+                    <div class="play-container">
+                        <i class="audio-icon fa fa-forward"></i>
+                    </div>
                 </div>
             </div>
             <div class="header-volume">
@@ -87,13 +88,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
-    <script src="js/3rd-party/binary.min.js"></script>
-    <script src="js/3rd-party/jsmediatags.min.js"></script>
+    <script src="js/lib/binary.min.js"></script>
+    <script src="js/lib/jsmediatags.min.js"></script>
 
     <script src="js/binaryClient.js"></script>
     <script src="js/play.js"></script>
     <script src="js/volume.js"></script>
-    <script src="js/headerBar.js"></script>
 
 </body>
 </html>

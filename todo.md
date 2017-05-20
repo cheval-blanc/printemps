@@ -40,7 +40,7 @@
     - **(O)** angularjs directive 사용
         - <https://docs.angularjs.org/api/ng/service/$interval>
         - $interval을 사용하여 500 ms 마다 update
-    - header-bar 색 변경
+    - **(O)** header-bar 색 변경
         - 재생 시간 변경 callback function 안에서 같이 수정하면 될듯
 
 1. Cache를 이용하여 Buffering 기능 구현

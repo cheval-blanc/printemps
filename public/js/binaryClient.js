@@ -7,8 +7,7 @@
 
 //var client = new BinaryClient(url('binary-endpoint'));
 //var client = new BinaryClient('ws://localhost:9000');
-var hostname = window.location.hostname,
-    client = new BinaryClient('ws://' + hostname + ':9000');
+var client = new BinaryClient('ws://' + window.location.hostname + ':9000');
 var audioCtx = new Audio();
 
 var jsmediatags = window.jsmediatags;
@@ -27,9 +26,8 @@ function setAudioInfo(blob) {
             var image = tag.tags.picture;
             if(image) {
                 var base64String = '';
-                for(var i=0, ni=image.data.length; i<ni; i++) {
-                    base64String += String.fromCharCode(image.data[i]);
-                }
+                for(var i=0, ni=image.data.length; i<ni; i++) { base64String += String.fromCharCode(image.data[i]); }
+
                 var base64 = 'data:' + image.format + ';base64,' + window.btoa(base64String);
                 $('#thumbnail').attr('src', base64);
                 //@@
@@ -77,3 +75,16 @@ client.on('stream', function(stream, meta) {
         setAudioInfo(blob);
     });
 });
+
+
+function secondsToHms(t) {
+    t = Number(t);
+    if(isNaN(t) || t === 0){ return '0:00'; }
+    var h = Math.floor(t / 3600),
+        m = Math.floor(t % 3600 / 60),
+        s = Math.floor(t % 3600 % 60);
+
+    var hms = (h>1) ? h + ':' : '';
+    hms += m + ':' + ('0' + s).slice(-2);
+    return hms;
+}

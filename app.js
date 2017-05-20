@@ -11,12 +11,12 @@ var session = require('express-session'),
     favicon = require('serve-favicon');
 
 var app = express();
- 
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('view', path.join(__dirname, '/view'));
 app.set('view engine', 'html');
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
+app.use(favicon(__dirname + '/public/image/favicon.ico'));
 app.use(logger('dev'));
 app.use(methodOverride());
 app.use(session({ secret: 'uwotm8', resave: true, saveUninitialized: true }));
