@@ -1,17 +1,9 @@
 'use strict';
 
-/*function url(s) {
-    var l = window.location;
-    return ((l.protocol === "https:") ? "wss://" : "ws://") + l.hostname + (((l.port != 80) && (l.port != 443)) ? ":" + l.port : "") + l.pathname + s;
-}*/
-
-//var client = new BinaryClient(url('binary-endpoint'));
-//var client = new BinaryClient('ws://localhost:9000');
 var client = new BinaryClient('ws://' + window.location.hostname + ':9000');
+
 var audioCtx = new Audio();
-
 var jsmediatags = window.jsmediatags;
-
 
 function emit(event, data, file) {
     file = file || {}; data = data || {}; data.event = event;
@@ -75,7 +67,6 @@ client.on('stream', function(stream, meta) {
         setAudioInfo(blob);
     });
 });
-
 
 function secondsToHms(t) {
     t = Number(t);

@@ -173,7 +173,6 @@ header .header-bar {
 
 /* ---------- HEADER-SEARSCH ---------- */
 .header-search {
-    /*width: 500px;*/
     width: calc(35% - 60px);
     height: auto;
     float: left;
