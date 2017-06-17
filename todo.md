@@ -59,12 +59,15 @@
 
 1. DB를 사용할 경우
     - mongoDB
-    - title, artist, album-artist, composer, album, year, track, disc, album-art
-        - group: album-artist, album
+    - title, artist, album_artist, composer, album, year, track, disc, album_art
+        - group: album_artist, album
         - sort 1: artist, year (track 마다 year가 다른 경우도 있다.)
         - sort 2: track, disc
     - 주기적으로 자동으로 list update
-        - Node.js에 관련 기능이 있는지 조사 필요
+        - Node.js에 scheduling 관련 기능이 있는지 조사 필요
+        - node-schedule module 이용??
+        - <http://avilos.codes/server/nodejs/node-js-scheduler-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/>
+        - <https://www.npmjs.com/package/node-schedule>
 
 
 ## Responsive Web

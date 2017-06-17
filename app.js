@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express'),
     http = require('http'),
     path = require('path');
@@ -29,6 +31,7 @@ if('development' === app.get('env')) {
 }
 
 require('./router.js').route(app);
+require('./db.js').connect();
 require('./binaryServer.js');
 
 http.createServer(app).listen(app.get('port'), function() {
