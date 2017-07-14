@@ -25,6 +25,7 @@ angular.module('printemps').controller('playController', function($scope) {
                 audioCtx.play();
             } else {
                 $scope.status = 'spinner fa-spin';
+                //@@
                 emit('request', { name: 'Sam Smith' });
             }
         } else if($scope.status === 'pause') {

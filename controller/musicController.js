@@ -8,3 +8,13 @@ exports.list = function(req, res) {
         res.json(musics);
     });
 };
+
+exports.import = function(tag) {
+    var query = { album: tag.album, artist: tag.artist, title: tag.title },
+        options = { upsert: true };
+
+    Music.update(query, { $setOnInsert: tag }, options, function(err, raw) {
+        if(err) { console.error(err); }
+    });
+
+};

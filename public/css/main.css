@@ -2,8 +2,22 @@
 
 /* ---------- MAIN ---------- */
 main {
-    padding-top: 77px; /* height of header */
+    width: 100%;
+    /* height of header */
+    padding: 20px;
+    padding-top: 97px;
+
+    /*padding: 30px;
+    padding-top: 107px;*/
 }
+main .no-pointer {
+    cursor: default;
+}
+main .music-title {
+    cursor: pointer;
+    user-select: none;
+}
+
 
 /*
 .container {
@@ -34,19 +48,3 @@ main {
 }
 */
 
-
-main .container {
-    width: 100%;
-    padding: 20px 20px 0px 20px;
-}
-main .container img {
-    width: 200px;
-    height: 200px;
-    margin: 0px 20px 20px 0px;
-
-    float: left;
-
-    /*-webkit-box-shadow: inset 0px 0px 25px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: inset 0px 0px 25px 0px rgba(0,0,0,0.75);
-    box-shadow: inset 0px 0px 25px 0px rgba(0,0,0,0.75);*/
-}
