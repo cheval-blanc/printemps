@@ -1,39 +1,12 @@
 'use strict';
 
 var client = new BinaryClient('ws://' + window.location.hostname + ':9000');
-var jsmediatags = window.jsmediatags;
-
 var audioCtx = new Audio();
 
 function emit(event, data, file) {
     file = file || {}; data = data || {}; data.event = event;
+    console.time('binary');
     return client.send(file, data);
-}
-
-function setAudioInfo(blob) {
-    jsmediatags.read(blob, {
-        onSuccess: function(tag) {
-            console.log(tag);
-
-            var image = tag.tags.picture;
-            if(image) {
-                var base64String = '';
-                for(let i=0, ni=image.data.length; i<ni; i++) { base64String += String.fromCharCode(image.data[i]); }
-
-                var base64 = 'data:' + image.format + ';base64,' + window.btoa(base64String);
-                $('#thumbnail').attr('src', base64);
-                //@@
-                $('#thumbnail').css('display', 'block');
-            } else {
-                //@@ set default image
-            }
-
-            $('#title').text(tag.tags.title);
-            $('#album').text(tag.tags.artist + ' - ' + tag.tags.album);
-            //$('#album').text(tag.tags.artist + ' - ' + tag.tags.album + 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-        },
-        onError: function(e) { console.log(e); }
-    });
 }
 
 client.on('stream', function(stream, meta) {
@@ -44,7 +17,7 @@ client.on('stream', function(stream, meta) {
     });
 
     stream.on('end', function() {
-        console.log('binary end');
+        console.timeEnd('binary');
 
         var blob = new Blob(parts);
         audioCtx.src = (window.URL || window.webkitURL).createObjectURL(blob);
@@ -55,13 +28,11 @@ client.on('stream', function(stream, meta) {
             playPromise.then(function() {
                 //@@ play an audio file?
                 scope$.$apply(function() { scope$.status = 'pause'; });
-
             }).catch(function(e) {
                 scope$.$apply(function() { scope$.status = 'frown-o'; });
                 alert(e);
             });
         }
 
-        setAudioInfo(blob);
     });
 });

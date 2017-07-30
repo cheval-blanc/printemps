@@ -61,12 +61,12 @@
     </header>
     <main ng-controller="mainController">
 
-        <div class="six stackable ui cards">
-            <!--<div ng-repeat="(key, album) in albums" class="card">
+        <!--<div class="six stackable ui cards">
+            <div ng-repeat="(ka, a) in albums" class="ui link card">
                 <div class="image">
                     <img data-ng-src="{{a.image}}">
                 </div>
-                <div class="content">
+                <div class="content no-pointer">
                     <div class="header">{{a.album}}</div>
                     <div class="meta">
                         <span class="date">{{a.year}}</span>
@@ -75,34 +75,35 @@
                 </div>
             </div>-->
 
-            <div ng-repeat="(ka, a) in albums" class="ui shape" id="{{a.artist}}@{{a.album}}">
+        <div class="ui cards">
+            <div ng-repeat="a in albums" class="ui shape" id="{{a.artist}}@{{a.title}}">
             <div class="sides">
                 <div class="side active">
                     <div class="ui link card">
-                        <div class="image" ng-click="showMusics(a.artist, a.album)">
+                        <div class="image" ng-click="showMusics(a.artist, a.title)">
                             <img data-ng-src="{{a.image}}">
                         </div>
                         <div class="content no-pointer">
-                            <div class="header">{{a.album}}</div>
+                            <div class="header no-overflow">{{a.title}}</div>
                             <div class="meta">
                                 <span class="date">{{a.year}}</span>
                             </div>
-                            <div class="description">{{a.artist}}</div>
+                            <div class="description no-overflow">{{a.artist}}</div>
                         </div>
                     </div>
                 </div>
                 <div class="side">
                     <div class="ui link card">
-                        <div class="content" ng-click="showAlbum(a.artist, a.album)">
+                        <div class="content" ng-click="showAlbum(a.artist, a.title)">
                             <div class="right floated meta">{{a.artist}}</div>
-                            <img class="ui avatar image" data-ng-src="{{a.image}}">{{a.album}}
+                            <img class="ui avatar image" data-ng-src="{{a.image}}">{{a.title}}
                         </div>
-                        <div class="content no-pointer">
+                        <div class="content no-pointer card-back">
                             <div class="meta">
                                 <div class="ui middle aligned ordered divided list">
-                                    <div ng-repeat="(km, m) in a.musics" class="item">
+                                    <div ng-repeat="m in a.musics" class="item">
                                         <div class="content">
-                                            <div class="header music-title" ng-click="playMusic(a.artist, a.album, m.title)">{{m.title}}</div>
+                                            <div class="header music-title" ng-dblclick="playMusic(a, m)">{{m.title}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +124,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
     <script src="js/lib/binary.min.js"></script>
-    <script src="js/lib/jsmediatags.min.js"></script>
 
     <script src="js/util.js"></script>
     <script src="js/binaryClient.js"></script>

@@ -28,73 +28,73 @@ exports.connect = function() {
 };
 
 
-var jsmediatags = require("jsmediatags");
-var musicCtrl = require('./controller/musicController.js');
+var fs = require('fs'),
+    path = require('path'),
+    jsmediatags = require("jsmediatags");
+
+var albumCtrl = require('./controller/albumController.js');
 
 function updateFileList() {
-    const root = __dirname + '/audio_files/';
+    console.time('albumCtrl.import');
+    var root = __dirname + '/audio_files/',
+        albums = {};
 
-    console.time('update');
-//    var results = [];
-    walk(root, function(err, res) {
-//        results = results.concat(res);
-//        console.log('fileCount:', results.length);
-//
-//        for(let i=0, ni=results.length; i<ni; i++) {
-//            musicCtrl.import(results[i]);
-//        }
-        console.timeEnd('update');
+    walkDirectory(root, albums, (err) => {
+        if(err) { throw err; }
+        albumCtrl.import(albums);
+
+        console.timeEnd('albumCtrl.import');
     });
 }
 
+function getMediaTags(file, callback) {
+    var tags = ['title', 'artist', 'album', 'year', 'track', 'genre', 'picture'];
+    new jsmediatags.Reader(file).setTagsToRead(tags).read({
+        onSuccess: callback,
+        onError: function(err) {
+            throw err;
+        }
+    });
+}
 
-var fs = require('fs'),
-    path = require('path');
-
-function walk(dir, done) {
-    var results = [];
+// https://stackoverflow.com/questions/5827612/node-js-fs-readdir-recursive-directory-search
+function walkDirectory(dir, albums, done) {
     fs.readdir(dir, (err, list) => {
-        if(err) { return done(err); }
-
+        if(err) { throw err; }
         var pending = list.length;
-        if(!pending) { return done(null, results); }
+        if(!pending) { return done(null); }
 
-        list.forEach((file) => {
-            file = path.resolve(dir, file);
+        for(let i=0, ni=list.length; i<ni; i++) {
+            let file = path.resolve(dir, list[i]);
             fs.stat(file, (err, stat) => {
                 if(stat && stat.isDirectory()) {
-                    walk(file, (err, res) => {
-                        results = results.concat(res);
-                        if(!--pending) { done(null, results); }
+                    walkDirectory(file, albums, (err) => {
+                        if(!--pending) { done(null); }
                     });
                 } else {
-                    //results.push(file);
-                    //if(!--pending) { done(null, results); }
+                    getMediaTags(file, tag => {
+                        let _t = tag.tags,
+                            key = _t.artist+'@'+_t.album;
 
-                    let tags = ['title', 'artist', 'album', 'year', 'track', 'genre', 'picture'];
-                    new jsmediatags.Reader(file).setTagsToRead(tags).read({
-                        onSuccess: function(tag) {
-                            let t = tag.tags;
-                            let music = {
-                                title:  t.title,
-                                artist: t.artist,
-                                album:  t.album,
-                                year:   t.year,
-                                track:  t.track,
-                                format: t.picture.format,
-                                image:  t.picture.data
-                            };
-                            musicCtrl.import(music);
+                        albums[key] = albums[key] || {
+                            artist: _t.artist,
+                            title: _t.album,
+                            format: _t.picture.format,
+                            image: _t.picture.data,
+                            musics: []
+                        };
 
-                            //results.push(music);
-                            if(!--pending) { done(null, results); }
-                        },
-                        onError: function(error) {
-                            console.log(':(', error.type, error.info);
-                        }
+                        albums[key].musics.push({
+                            file: file.replace(/^.*[\\\/]/, ''),
+                            title: _t.title,
+                            year: _t.year,
+                            track: _t.track
+                        });
+
+                        if(!--pending) { done(null); }
                     });
                 }
             });
-        });
+        }
     });
 }

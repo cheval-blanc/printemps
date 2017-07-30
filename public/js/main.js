@@ -2,10 +2,10 @@
 
 angular.module('printemps').controller('mainController', function($scope, $http) {
 
-    const ALBUM_ID = '{0}@{1}';
-    var selectedAlbum = null;
+    $scope.albums = [];
 
-    $scope.albums = {};
+    var selectedAlbum = null;
+    var scope$ = angular.element($('.header-play')).scope();
 
     (function() {
         listMusics();
@@ -21,43 +21,45 @@ angular.module('printemps').controller('mainController', function($scope, $http)
 
     function listMusics() {
         $http.post('/', null).then(function(res) {
-            console.log(res.data.length);
+            console.log('albumCount:', res.data.length);
 
-            $scope.albums = {};
-            res.data.forEach(e => {
-                let key = ALBUM_ID.format(e.artist, e.album);
-                if(!$scope.albums[key]) {
-                    $scope.albums[key] = {};
-                    $scope.albums[key].image = getImage(e.format, e.image);
-                    $scope.albums[key].artist = e.artist;
-                    $scope.albums[key].album = e.album;
-                    $scope.albums[key].year = e.year.substr(0, 4);
-                    $scope.albums[key].musics = [];
-                }
-                $scope.albums[key].musics.push({ title: e.title, track: e.track });
+            $scope.albums = [];
+            res.data.forEach((e, i) => {
+                $scope.albums[i] = {
+                    artist: e.artist,
+                    title: e.title,
+                    year: e.musics[0].year.substr(0, 4),//@@
+                    image: getImage(e.format, e.image),
+                    musics: e.musics.sort((m, _m) => { return m.track - _m.track; })
+                };
             });
         });
     }
 
     function flipShape(selected, behavior) {
-        var id = ALBUM_ID.format(selected[0], selected[1]);
-        $("[id='{0}']".format(id)).shape(behavior);
+        var query = '[id="{0}@{1}"]'.format(selected[0], selected[1]);
+        $(query).shape(behavior);
     }
 
-    $scope.showMusics = function(artist, album) {
+    $scope.showMusics = function(artist, title) {
         if(selectedAlbum !== null){ flipShape(selectedAlbum, 'flip back'); }
-        selectedAlbum = [artist, album];
+        selectedAlbum = [artist, title];
         flipShape(selectedAlbum, 'flip over');
     }
 
-    $scope.showAlbum = function(artist, album) {
+    $scope.showAlbum = function(artist, title) {
         flipShape(selectedAlbum, 'flip back');
         selectedAlbum = null;
     }
 
-    $scope.playMusic = function(artist, album, title) {
-        var msg = '{0}/{1}/{2}'.format(artist, album, title);
-        console.log(msg);
+    $scope.playMusic = function(album, music) {
+        var filePath = [album.artist, album.title, music.file].join('/');
+        scope$.play(filePath);
+
+        $('#thumbnail').css('display', 'block');
+        $('#thumbnail').attr('src', album.image);
+        $('#title').text(music.title);
+        $('#album').text(album.artist+' - '+album.title);
     };
 
 });

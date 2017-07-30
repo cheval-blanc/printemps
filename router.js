@@ -1,11 +1,11 @@
 'use strict';
 
-var musicCtrl = require('./controller/musicController.js');
+var albumCtrl = require('./controller/albumController.js');
 
 exports.route = function(app) {
     app.get('/', function(req, res) {
         res.sendFile(__dirname + '/view/index.html');
     });
 
-    app.post('/', musicCtrl.list);
+    app.post('/', albumCtrl.list);
 };

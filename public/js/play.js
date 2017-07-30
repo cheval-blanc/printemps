@@ -18,16 +18,15 @@ angular.module('printemps').controller('playController', function($scope) {
         $scope.remain = secondsToHms(audioCtx.duration - audioCtx.currentTime);
     };
 
-    $scope.play = function() {
-        if($scope.status === 'play') {
-            if(audioCtx.src !== '') {
-                $scope.status = 'pause';
-                audioCtx.play();
-            } else {
-                $scope.status = 'spinner fa-spin';
-                //@@
-                emit('request', { name: 'Sam Smith' });
-            }
+    $scope.play = function(filePath) {
+        if(filePath) {
+            $scope.status = 'spinner fa-spin';
+            console.log(filePath);
+            emit('request', { filePath: filePath });
+        } else if($scope.status === 'play' && audioCtx.src !== '') {
+            //@@ play randomly when there is no downloaded music?
+            $scope.status = 'pause';
+            audioCtx.play();
         } else if($scope.status === 'pause') {
             $scope.status = 'play';
             audioCtx.pause();
@@ -45,7 +44,7 @@ angular.module('printemps').controller('playController', function($scope) {
         }
 
         scope.$watch(function() { return audioCtx.paused; }, function(paused) {
-            console.log('paused:', paused);
+            //console.log('paused:', paused);
 
             if(paused) { $interval.cancel(stopTime); scope.status = 'play'; }
             else { stopTime = $interval(updateTime, 30); updateTime(); }

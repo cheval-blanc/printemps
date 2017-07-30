@@ -73,12 +73,14 @@
     - audio_files 폴더 하위에 있는 오디오 파일 읽어서 mongoDB에 저장하는 기능 구현 완료
     - 처음 생각했던 collection 디자인과 조금 다름 (title, artist, album, year, track, format, image)
     - 더 생각해야할 점
-        1. DB에서 읽어오는 시간이 너무 많이 걸림
+        1. **(O)** DB에서 읽어오는 시간이 너무 많이 걸림
             - image size를 줄이는 방법이 필요함
             - collection 디자인을 audio 단위에서 album 단위로 수정하면 나아질 것 같다.
+            - <http://mongoosejs.com/docs/populate.html>
         1. DB에 넣는 시간도 오래걸리는데, 이 문제는 promise를 사용하면 나아질 수도 있을 것 같다.
+            - find().sort().exec()도 deprecated 됨
             - <http://mongoosejs.com/docs/promises.html>
-        1. 새로 추가하는 document 마다 DB query를 날림
+        1. **(O)** 새로 추가하는 document 마다 DB query를 날림
             - Array로 만든 것을 한 번에 save 하는 방법 조사 필요
             - Bulk로 save 하는 기능이 mongoose에 없음
             - <https://stackoverflow.com/questions/10266512/how-can-i-save-multiple-documents-concurrently-in-mongoose-node-js>
@@ -86,10 +88,23 @@
         1. audio_files를 탐색하는 코드가 너무 지저분함
             - 불필요한 results를 가지고 다니는 점
             - function을 parameter로 굳이 넘겨야하는지
-        1. Semantic UI의 card를 사용할 것인지
+        1. **(O)** Semantic UI의 card를 사용할 것인지
             - dimmer가 angularjs에서 작동하지 않음
             - stackable cards에 sides를 적용하면 card 사이의 margin이 없어짐
-        1. mainController에서 playController의 play 호출을 어떻게 할지
+        1. **(O)** mainController에서 playController의 play 호출을 어떻게 할지
+
+1. 2017-07-30
+    - album.js 로 변경
+        - collection 내부에 collection을 가지도록 변경
+        - 변경 후, DB에 import 시간과 view에서 list 가져오는 시간도 줄어듬
+    - view에서 music title을 더블클릭하면 음악 재생되도록 구현: angular.element().scope() 사용
+    - 더 생각해야할 점
+        1. 음악을 재생하면 재생 리스트를 생성하기
+            - Circular queue를 이용하면 좋을 듯
+            - 재생이 끝나면 queue의 맨 뒤로 다시 붙는 방법
+        1. DB import 코드를 수정하긴 했지만 여전히 지저분 함
+            - tab 수가 많은데, 줄일 수 있는 방법 생각해보기
+        1. mongoose promise 적용하기
 
 
 ## Responsive Web

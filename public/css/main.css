@@ -3,12 +3,10 @@
 /* ---------- MAIN ---------- */
 main {
     width: 100%;
-    /* height of header */
     padding: 20px;
-    padding-top: 97px;
-
+    padding-top: 103px; /*26px + height of header*/
     /*padding: 30px;
-    padding-top: 107px;*/
+    padding-top: 107px;*/ /*30px + height of header*/
 }
 main .no-pointer {
     cursor: default;
@@ -18,6 +16,16 @@ main .music-title {
     user-select: none;
 }
 
+main .card-back {
+    height: 326.95px; /*290 + 92.95 - 56px*/
+    overflow-y: auto;
+}
+
+main .no-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 /*
 .container {

@@ -141,17 +141,17 @@ header .header-bar {
     margin: 0px 3px 0px 67px;
     text-align: center;
     cursor: default;
-}
-.header-info #title {
-    margin-top: 10px;
-    font-size: 1.2em;
-}
-.header-info #album {
+
     font-size: 0.9em;
     /*@@*/
     overflow: hidden;
     white-space: nowrap;
 }
+.header-info #title {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
 /*
 .header-info .slide-left {
     width: 370px;
