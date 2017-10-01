@@ -1,7 +1,7 @@
 'use strict';
 
-var client = new BinaryClient('ws://' + window.location.hostname + ':9000');
-var audioCtx = new Audio();
+var client = new BinaryClient('ws://' + window.location.hostname + ':9000'),
+    audioCtx = new Audio();
 
 function emit(event, data, file) {
     file = file || {}; data = data || {}; data.event = event;

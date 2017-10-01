@@ -47,9 +47,7 @@
                 <img id="thumbnail" class="" src="">
                 <p id="title"></p>
                 <p id="album"></p>
-                <!--<div class="slide-left">
-                    <p id="album"></p>
-                 </div>-->
+                <!--<div class="slide-left"><p id="album"></p></div>-->
             </div>
             <div class="header-search">
                 <div class="search-container ui transparent icon input">
@@ -103,7 +101,7 @@
                                 <div class="ui middle aligned ordered divided list">
                                     <div ng-repeat="m in a.musics" class="item">
                                         <div class="content">
-                                            <div class="header music-title" ng-dblclick="playMusic(a, m)">{{m.title}}</div>
+                                            <div class="header music-title" ng-dblclick="playMusic(a, m, $index)">{{m.title}}</div>
                                         </div>
                                     </div>
                                 </div>

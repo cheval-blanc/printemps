@@ -21,7 +21,7 @@ angular.module('printemps').controller('playController', function($scope) {
     $scope.play = function(filePath) {
         if(filePath) {
             $scope.status = 'spinner fa-spin';
-            console.log(filePath);
+            //console.log('filePath:', filePath);
             emit('request', { filePath: filePath });
         } else if($scope.status === 'play' && audioCtx.src !== '') {
             //@@ play randomly when there is no downloaded music?
@@ -32,6 +32,12 @@ angular.module('printemps').controller('playController', function($scope) {
             audioCtx.pause();
         }
     };
+
+    $scope.queue = null;
+    $scope.playNext = function() {
+        
+    };
+
 }).directive('playTime', function($interval) {
     return function(scope, element, attrs) {
         var stopTime = null;
@@ -45,7 +51,6 @@ angular.module('printemps').controller('playController', function($scope) {
 
         scope.$watch(function() { return audioCtx.paused; }, function(paused) {
             //console.log('paused:', paused);
-
             if(paused) { $interval.cancel(stopTime); scope.status = 'play'; }
             else { stopTime = $interval(updateTime, 30); updateTime(); }
         });

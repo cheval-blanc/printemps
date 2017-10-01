@@ -1,6 +1,7 @@
 # Printemps
 
-## Audio Streaming
+## Implementation
+### Audio Streaming
 1. Ajax 만으로 binary file을 전송하는게 불가능한가?
     - res.sendFile() function으로 server에서 전송했는데, client에서 못받음
 
@@ -47,8 +48,7 @@
     - 2016-12-06 까지 구현한 것으로 보아, 조각 파일들을 모두 전송 받아야 재생할 수 있는 것 같다.
     - <http://www.jingpingji.com/blog/2015/8/4/transferring-sound-data-with-binaryjs-and-buffering-for-smooth-playbac>
 
-
-## File List
+### File List
 1. 오디오 파일 리스트 구성하기
     - 모든 오디오 파일을 서버 경로에 추가해아하나?
         - 기존의 경로와 연동할 수 있는 방법이 없을까?
@@ -104,17 +104,13 @@
             - 재생이 끝나면 queue의 맨 뒤로 다시 붙는 방법
         1. DB import 코드를 수정하긴 했지만 여전히 지저분 함
             - tab 수가 많은데, 줄일 수 있는 방법 생각해보기
+            - ES6의 promise를 적용해보기
+            - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise>
+            - <http://programmingsummaries.tistory.com/325>
         1. mongoose promise 적용하기
 
 
-## Responsive Web
-1. width, padding, margin을 모두 %로 사용하는 것은 목표와 다른 것 같다.
-    - 특정 viewport 가로 길이 마다 변경하고 싶기 때문
-
-1. flex로 구현이 가능한지는 의문이 든다.
-
-
-## View
+## Design
 1. iTunes와 비슷한 UI로 구성하기
     - 기본적인 바탕 색은 흰색이고, Simpson 도넛의 색과 섞고 싶다.
     - Printemps의 이미지와 잘 어울리는 괜찮은 색 조합 찾기
@@ -126,27 +122,13 @@
     - grid하게 화면을 가득 채우는 라이브러리가 있었는데, 써볼까? \(Do it! 반응형 웹 디자인\)
         - 읽어보니 그런건 없었다.
 
+### Responsive Web
+1. width, padding, margin을 모두 %로 사용하는 것은 목표와 다른 것 같다.
+    - 특정 viewport 가로 길이 마다 변경하고 싶기 때문
 
-## Code Versioning
-1. Github?
-    - **(O)** 왠만하면 git을 써보자
-    - **(O)** SourceTree 사용
+1. flex로 구현이 가능한지는 의문이 든다.
 
-
-## Publishing
-1. Node.js 프로젝트를 publishing하는 방법 찾기
-    - Heroku와 같은 서비스 이용하기?
-
-1. 직접 서버를 구축하는게 파일 관리하기가 쉬울 것 같다.
-    - 서버 구축에 대한 장비 구입이나 관련 지식이 필요하다.
-
-
-## AngularJS
-1. AngularJS 1에서 2로 porting
-    - Git의 branch 기능을 사용하면 좋을 듯
-
-
-## Debugging
+### Debugging
 1. header에서 제목이나 앨범이 길면 slide animation 넣기
     - marquee tag가 있으나, 곧 deprecated. <https://developer.mozilla.org/ko/docs/Web/HTML/Element/marquee>
     - css animation으로 구현하는 방법이 없는지 확인 
@@ -155,3 +137,22 @@
     - text 모두 보여질 때 까지만 이동하고 싶은데 방법이 없을까?
     - margin-left? margin-right?
 
+
+## Environment
+### Code Versioning
+1. Github?
+    - **(O)** 왠만하면 git을 써보자
+    - **(O)** SourceTree 사용
+
+### Publishing
+1. Node.js 프로젝트를 publishing하는 방법 찾기
+    - Heroku와 같은 서비스 이용하기?
+
+1. 직접 서버를 구축하는게 파일 관리하기가 쉬울 것 같다.
+    - 서버 구축에 대한 장비 구입이나 관련 지식이 필요하다.
+
+### Front-end Javascript Framework
+1. AngularJS 1에서 2로 porting
+    - Git의 branch 기능을 사용하면 좋을 듯
+
+1. vue.js? or React.js?

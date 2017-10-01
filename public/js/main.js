@@ -4,8 +4,8 @@ angular.module('printemps').controller('mainController', function($scope, $http)
 
     $scope.albums = [];
 
-    var selectedAlbum = null;
-    var scope$ = angular.element($('.header-play')).scope();
+    var selectedAlbum = null,
+        scope$ = angular.element($('.header-play')).scope();
 
     (function() {
         listMusics();
@@ -21,8 +21,7 @@ angular.module('printemps').controller('mainController', function($scope, $http)
 
     function listMusics() {
         $http.post('/', null).then(function(res) {
-            console.log('albumCount:', res.data.length);
-
+            //console.log('albumCount:', res.data.length);
             $scope.albums = [];
             res.data.forEach((e, i) => {
                 $scope.albums[i] = {
@@ -52,9 +51,11 @@ angular.module('printemps').controller('mainController', function($scope, $http)
         selectedAlbum = null;
     }
 
-    $scope.playMusic = function(album, music) {
+    $scope.playMusic = function(album, music, index) {
         var filePath = [album.artist, album.title, music.file].join('/');
         scope$.play(filePath);
+
+        //console.log(album.musics, index);
 
         $('#thumbnail').css('display', 'block');
         $('#thumbnail').attr('src', album.image);
