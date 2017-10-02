@@ -9,14 +9,14 @@ function emit(event, data, file) {
     return client.send(file, data);
 }
 
-client.on('stream', function(stream, meta) {
+client.on('stream', (stream, meta) => {
     var parts = [];
 
-    stream.on('data', function(data) {
+    stream.on('data', data => {
         parts.push(data);
     });
 
-    stream.on('end', function() {
+    stream.on('end', () => {
         console.timeEnd('binary');
 
         var blob = new Blob(parts);
@@ -25,11 +25,11 @@ client.on('stream', function(stream, meta) {
         var playPromise = audioCtx.play();
         if(playPromise !== undefined) {
             var scope$ = angular.element($('.header-play')).scope();
-            playPromise.then(function() {
+            playPromise.then(() => {
                 //@@ play an audio file?
-                scope$.$apply(function() { scope$.status = 'pause'; });
-            }).catch(function(e) {
-                scope$.$apply(function() { scope$.status = 'frown-o'; });
+                scope$.$apply(() => { scope$.status = 'pause'; });
+            }).catch(e => {
+                scope$.$apply(() => { scope$.status = 'frown-o'; });
                 alert(e);
             });
         }

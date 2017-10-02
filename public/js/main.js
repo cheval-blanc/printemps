@@ -14,13 +14,12 @@ angular.module('printemps').controller('mainController', function($scope, $http)
 
     function getImage(format, data) {
         var base64String = '';
-        for(let i=0, ni=data.length; i<ni; i++) { base64String += String.fromCharCode(data[i]); }
-        var base64 = 'data:' + format + ';base64,' + window.btoa(base64String);
-        return base64;
+        for(let i=0, ni=data.length; i<ni; i+=1) { base64String += String.fromCharCode(data[i]); }
+        return 'data:{0};base64,{1}'.format(format, window.btoa(base64String));
     }
 
     function listMusics() {
-        $http.post('/', null).then(function(res) {
+        $http.post('/', null).then(res => {
             //console.log('albumCount:', res.data.length);
             $scope.albums = [];
             res.data.forEach((e, i) => {
@@ -44,12 +43,12 @@ angular.module('printemps').controller('mainController', function($scope, $http)
         if(selectedAlbum !== null){ flipShape(selectedAlbum, 'flip back'); }
         selectedAlbum = [artist, title];
         flipShape(selectedAlbum, 'flip over');
-    }
+    };
 
     $scope.showAlbum = function(artist, title) {
         flipShape(selectedAlbum, 'flip back');
         selectedAlbum = null;
-    }
+    };
 
     $scope.playMusic = function(album, music, index) {
         var filePath = [album.artist, album.title, music.file].join('/');

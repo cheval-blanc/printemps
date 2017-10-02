@@ -34,6 +34,6 @@ require('./router.js').route(app);
 require('./db.js').connect();
 require('./binaryServer.js');
 
-http.createServer(app).listen(app.get('port'), function() {
+http.createServer(app).listen(app.get('port'), () => {
     console.log('Printemps server is listening on port ' + app.get('port'));
 });

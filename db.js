@@ -6,21 +6,21 @@ var mongoose = require('mongoose');
 exports.connect = function() {
     mongoose.connect(DB_URI);
 
-    mongoose.connection.on('connected', function() {
+    mongoose.connection.on('connected', () => {
         console.info('Succeed to get connection pool in mongoose, DB_URI is ' + DB_URI);
         updateFileList();
     });
 
-    mongoose.connection.on('error', function(err) {
+    mongoose.connection.on('error', err => {
         console.error('Failed to get connection in mongoose, err is ' + err);
     });
 
-    mongoose.connection.on('disconnected', function() {
+    mongoose.connection.on('disconnected', () => {
         console.error('Database connection has disconnected.');
     });
 
-    process.on('SIGINT', function() {
-        mongoose.connection.close(function() {
+    process.on('SIGINT', () => {
+        mongoose.connection.close(() => {
             console.warn('Application process is going down, disconnect database connection...');
             process.exit(0);
         });
@@ -51,9 +51,7 @@ function getMediaTags(file, callback) {
     var tags = ['title', 'artist', 'album', 'year', 'track', 'genre', 'picture'];
     new jsmediatags.Reader(file).setTagsToRead(tags).read({
         onSuccess: callback,
-        onError: function(err) {
-            throw err;
-        }
+        onError: err => { throw err; }
     });
 }
 

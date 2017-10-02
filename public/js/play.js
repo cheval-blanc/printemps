@@ -49,7 +49,7 @@ angular.module('printemps').controller('playController', function($scope) {
             $('.bar-gauge').css('width', (c / d * 100) + '%');
         }
 
-        scope.$watch(function() { return audioCtx.paused; }, function(paused) {
+        scope.$watch(() => { return audioCtx.paused; }, paused => {
             //console.log('paused:', paused);
             if(paused) { $interval.cancel(stopTime); scope.status = 'play'; }
             else { stopTime = $interval(updateTime, 30); updateTime(); }
