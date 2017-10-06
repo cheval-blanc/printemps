@@ -1,11 +1,10 @@
 'use strict';
 
-angular.module('printemps').controller('mainController', function($scope, $http) {
-
-    $scope.albums = [];
-
+angular.module('printemps').controller('albumController', function($scope, $http) {    
     var selectedAlbum = null,
         scope$ = angular.element($('.header-play')).scope();
+
+    $scope.albums = [];
 
     (function() {
         listMusics();
@@ -19,9 +18,9 @@ angular.module('printemps').controller('mainController', function($scope, $http)
     }
 
     function listMusics() {
+        $scope.albums = [];
         $http.post('/', null).then(res => {
             //console.log('albumCount:', res.data.length);
-            $scope.albums = [];
             res.data.forEach((e, i) => {
                 $scope.albums[i] = {
                     artist: e.artist,
@@ -51,15 +50,8 @@ angular.module('printemps').controller('mainController', function($scope, $http)
     };
 
     $scope.playMusic = function(album, music, index) {
-        var filePath = [album.artist, album.title, music.file].join('/');
-        scope$.play(filePath);
-
-        //console.log(album.musics, index);
-
-        $('#thumbnail').css('display', 'block');
-        $('#thumbnail').attr('src', album.image);
-        $('#title').text(music.title);
-        $('#album').text(album.artist+' - '+album.title);
+        // console.log(album.musics, index);
+        scope$.play(album, index);
     };
 
 });

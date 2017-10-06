@@ -32,13 +32,13 @@ var fs = require('fs'),
     path = require('path'),
     jsmediatags = require("jsmediatags");
 
-var albumCtrl = require('./controller/albumController.js');
+var albumCtrl = require('./controller/albumController.js'),
+    root = __dirname + '\\audio_files\\';
 
 function updateFileList() {
     console.time('albumCtrl.import');
-    var root = __dirname + '/audio_files/',
-        albums = {};
 
+    var albums = {};
     walkDirectory(root, albums, (err) => {
         if(err) { throw err; }
         albumCtrl.import(albums);
@@ -83,7 +83,7 @@ function walkDirectory(dir, albums, done) {
                         };
 
                         albums[key].musics.push({
-                            file: file.replace(/^.*[\\\/]/, ''),
+                            file: file.replace(root, ''),//file.replace(/^.*[\\\/]/, ''),
                             title: _t.title,
                             year: _t.year,
                             track: _t.track

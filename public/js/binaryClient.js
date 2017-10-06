@@ -1,15 +1,19 @@
 'use strict';
 
-var client = new BinaryClient('ws://' + window.location.hostname + ':9000'),
+var binaryClient = new BinaryClient('ws://' + window.location.hostname + ':9000'),
     audioCtx = new Audio();
 
 function emit(event, data, file) {
     file = file || {}; data = data || {}; data.event = event;
     console.time('binary');
-    return client.send(file, data);
+    return binaryClient.send(file, data);
 }
 
-client.on('stream', (stream, meta) => {
+function requestMusic(filePath) {
+    emit('request', { filePath: filePath });
+}
+
+binaryClient.on('stream', (stream, meta) => {
     var parts = [];
 
     stream.on('data', data => {
@@ -24,7 +28,7 @@ client.on('stream', (stream, meta) => {
 
         var playPromise = audioCtx.play();
         if(playPromise !== undefined) {
-            var scope$ = angular.element($('.header-play')).scope();
+            let scope$ = angular.element($('.header-play')).scope();
             playPromise.then(() => {
                 //@@ play an audio file?
                 scope$.$apply(() => { scope$.status = 'pause'; });

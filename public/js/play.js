@@ -18,11 +18,28 @@ angular.module('printemps').controller('playController', function($scope) {
         $scope.remain = secondsToHms(audioCtx.duration - audioCtx.currentTime);
     };
 
-    $scope.play = function(filePath) {
-        if(filePath) {
+    $scope.title = $scope.artist = $scope.album = '';
+
+    function setAlbumInfo(album, music) {
+        $('#thumbnail, .header-info i').css('display', 'inline');
+        $('#thumbnail').attr('src', album.image);
+        $scope.title = music.title;
+        $scope.artist = album.artist;
+        $scope.album = album.title;
+    }
+
+    var queue = null,
+        currentIndex = -1;
+
+    $scope.play = function(album, index) {
+        if(album !== undefined) {
             $scope.status = 'spinner fa-spin';
-            //console.log('filePath:', filePath);
-            emit('request', { filePath: filePath });
+            queue = album.musics;
+            currentIndex = index;
+
+            let music = queue[index];
+            setAlbumInfo(album, music);
+            requestMusic(music.file);
         } else if($scope.status === 'play' && audioCtx.src !== '') {
             //@@ play randomly when there is no downloaded music?
             $scope.status = 'pause';
@@ -33,28 +50,47 @@ angular.module('printemps').controller('playController', function($scope) {
         }
     };
 
-    $scope.queue = null;
-    $scope.playNext = function() {
-        
-    };
+    function moveQueue(flag) {
+        if(queue === null) { console.error('NO QUEUE'); return; }
+
+        $scope.status = 'spinner fa-spin';
+
+        var ql = queue.length,
+            index = currentIndex + flag;
+        currentIndex = (index===ql) ? index-ql : (index===-1) ? index+ql : index;
+
+        var music = queue[currentIndex];
+        $scope.title = music.title;
+        requestMusic(music.file);
+    }
+
+    $scope.playNext = function() { moveQueue(1); };
+
+    $scope.playPrevious = function() { moveQueue(-1); };
 
 }).directive('playTime', function($interval) {
-    return function(scope, element, attrs) {
-        var stopTime = null;
+    return function(scope$, element, attrs) {
         function updateTime() {
             var c = audioCtx.currentTime,
                 d = audioCtx.duration;
-            scope.current = secondsToHms(c);
-            scope.remain = secondsToHms(d - c);
+            scope$.current = secondsToHms(c);
+            scope$.remain = secondsToHms(d - c);
             $('.bar-gauge').css('width', (c / d * 100) + '%');
         }
 
-        scope.$watch(() => { return audioCtx.paused; }, paused => {
+        var stopTime = null;
+        scope$.$watch(() => { return audioCtx.paused; }, paused => {
             //console.log('paused:', paused);
-            if(paused) { $interval.cancel(stopTime); scope.status = 'play'; }
-            else { stopTime = $interval(updateTime, 30); updateTime(); }
+            if(paused) {
+                $interval.cancel(stopTime);
+                scope$.status = 'play';
+                if(audioCtx.ended) { scope$.playNext(); }
+            } else {
+                stopTime = $interval(updateTime, 30);
+                updateTime();
+            }
         });
 
-        element.on('$destroy', function() { $interval.cancel(stopTime); });
+        element.on('$destroy', () => { $interval.cancel(stopTime); });
     };
 });

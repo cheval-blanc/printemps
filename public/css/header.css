@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 body {
@@ -63,6 +63,8 @@ header .header-bar {
     width: 45px;
     margin-top: -17px;
     float: left;
+    color: #484848;
+    font-size: 0.9em;
 }
 .bar-background div:first-child {
     margin-left: 3px;
@@ -71,10 +73,6 @@ header .header-bar {
 .bar-background div:last-child {
     margin-left: calc(100% - 96px); /* (45px + 3px) * 2 */
     text-align: right;
-}
-.bar-background div span {
-    color: #484848;
-    font-size: 0.9em;
 }
 
 /* ---------- HEADER-PLAY ---------- */
@@ -136,21 +134,32 @@ header .header-bar {
     float: left;
     display: none;
 }
-.header-info p {
+.header-info div {
     width: calc(100% - 67px);
-    margin: 0px 3px 0px 67px;
-    text-align: center;
+    height: 20px;
+    float: right;
     cursor: default;
-
+    text-align: center;
     font-size: 0.9em;
-    /*@@*/
+
     overflow: hidden;
     white-space: nowrap;
 }
 .header-info #title {
     margin-top: 10px;
+    margin-bottom: 3px;
     font-size: 1.2em;
 }
+.header-info i {
+    display: none;
+    margin: 0px 2px 0px 5px;
+    font-size: 0.9em;
+    color: #484848;
+}
+.header-info i:first-child {
+    margin-left: 0px;
+}
+
 
 /*
 .header-info .slide-left {
