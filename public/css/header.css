@@ -12,7 +12,7 @@ header {
     height: 77px;
     position: fixed;
     z-index: 5;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #CCC;
     background: rgba(250,250,250,0.8);
     box-sizing: border-box;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
@@ -146,14 +146,14 @@ header .header-bar {
     white-space: nowrap;
 }
 .header-info #title {
-    margin-top: 10px;
-    margin-bottom: 3px;
-    font-size: 1.2em;
+    height: 22px;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-size: 1.3em;
 }
 .header-info i {
     display: none;
     margin: 0px 2px 0px 5px;
-    font-size: 0.9em;
     color: #484848;
 }
 .header-info i:first-child {

@@ -94,20 +94,22 @@
         1. **(O)** mainController에서 playController의 play 호출을 어떻게 할지
 
 1. 2017-07-30
-    - album.js 로 변경
+    - model/album.js 로 변경
         - collection 내부에 collection을 가지도록 변경
         - 변경 후, DB에 import 시간과 view에서 list 가져오는 시간도 줄어듬
     - view에서 music title을 더블클릭하면 음악 재생되도록 구현: angular.element().scope() 사용
     - 더 생각해야할 점
-        1. 음악을 재생하면 재생 리스트를 생성하기
-            - Circular queue를 이용하면 좋을 듯
-            - 재생이 끝나면 queue의 맨 뒤로 다시 붙는 방법
+        1. **(O)** 음악을 재생하면 재생 리스트를 생성하기
+            - ~~Circular queue를 이용하면 좋을 듯~~
+            - ~~재생이 끝나면 queue의 맨 뒤로 다시 붙는 방법~~
+            - Circular queue랑 비슷하게 마지막 index를 재생한 후에는 처음 index를 재생하도록 구현
+            - 그러나 하나의 album list만 queue로 만드는 것은 추후 해결해야할 문제
         1. DB import 코드를 수정하긴 했지만 여전히 지저분 함
             - tab 수가 많은데, 줄일 수 있는 방법 생각해보기
             - ES6의 promise를 적용해보기
             - <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise>
             - <http://programmingsummaries.tistory.com/325>
-        1. mongoose promise 적용하기
+        1. **(O)** mongoose promise 적용하기
 
 
 ## Design
@@ -115,12 +117,17 @@
     - 기본적인 바탕 색은 흰색이고, Simpson 도넛의 색과 섞고 싶다.
     - Printemps의 이미지와 잘 어울리는 괜찮은 색 조합 찾기
 
-1. Lisa를 header에 넣고 싶음
-    - 생각 보다 크다.
+1. Vinyl에서 영감을 받아보자!
+    - Vinyl의 기본 정사각형 디자인을 앨범 기본 형태로 사용
+    - 뒷면은 index, title, runningTime 으로 넣자
+    - 재생 중인 앨범은 약간 disk가 나온 형태로 하고 싶음
 
-1. 네모네모한 UI를 사용할 예정
+1. ~~네모네모한 UI를 사용할 예정~~
     - grid하게 화면을 가득 채우는 라이브러리가 있었는데, 써볼까? \(Do it! 반응형 웹 디자인\)
         - 읽어보니 그런건 없었다.
+
+1. ~~Lisa를 header에 넣고 싶음~~
+    - 생각 보다 크다.
 
 ### Responsive Web
 1. width, padding, margin을 모두 %로 사용하는 것은 목표와 다른 것 같다.

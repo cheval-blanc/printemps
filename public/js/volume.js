@@ -3,10 +3,11 @@
 angular.module('printemps').controller('volumeController', function($scope) {
     $scope.scale = 'up';
 
-    var volumeDrag = false;
     var barMin = $('.header-volume .volume-bar').offset().left,
         barWidth = $('.header-volume .volume-bar').width(),
         circleMax = parseInt($('#volume-container').css('margin-left'));
+
+    var volumeDrag = false;
 
     function updateVolume(pageX, _ratio) {
         var ratio = 0;
@@ -24,7 +25,6 @@ angular.module('printemps').controller('volumeController', function($scope) {
         if(audioCtx.muted) { audioCtx.muted = false; }
         $scope.scale = (ratio === 0) ? 'off' : (ratio > 0.5) ? 'up' : 'down';
     }
-
 
     $scope.mute = function() {
         audioCtx.muted = !audioCtx.muted;

@@ -6,11 +6,11 @@ angular.module('printemps').controller('playController', function($scope) {
     $scope.status = 'play';
     $scope.current = $scope.remain = '0:00';
 
-    $scope.move = function($event) {
+    var barWidth = parseInt($('.header-bar').css('width'));
+    $scope.move = function($event, _ratio) {
         if(audioCtx.src === '') { return; }
-        var barWidth = parseInt($('.header-bar').css('width')),
-            ratio = $event.pageX / barWidth;
 
+        var ratio = (_ratio !== undefined) ? _ratio : $event.pageX / barWidth;
         $('.bar-gauge').css('width', (ratio * 100) + '%');
         audioCtx.currentTime = audioCtx.duration * ratio;
 
@@ -30,7 +30,6 @@ angular.module('printemps').controller('playController', function($scope) {
 
     var queue = null,
         currentIndex = -1;
-
     $scope.play = function(album, index) {
         if(album !== undefined) {
             $scope.status = 'spinner fa-spin';
@@ -53,20 +52,21 @@ angular.module('printemps').controller('playController', function($scope) {
     function moveQueue(flag) {
         if(queue === null) { console.error('NO QUEUE'); return; }
 
-        $scope.status = 'spinner fa-spin';
-
         var ql = queue.length,
             index = currentIndex + flag;
         currentIndex = (index===ql) ? index-ql : (index===-1) ? index+ql : index;
 
         var music = queue[currentIndex];
+        $scope.status = 'spinner fa-spin';
         $scope.title = music.title;
         requestMusic(music.file);
     }
 
     $scope.playNext = function() { moveQueue(1); };
 
-    $scope.playPrevious = function() { moveQueue(-1); };
+    $scope.playPrevious = function() {
+        (audioCtx.currentTime > 10) ? $scope.move(null, 0) : moveQueue(-1);
+    };
 
 }).directive('playTime', function($interval) {
     return function(scope$, element, attrs) {
