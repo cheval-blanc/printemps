@@ -1,3 +1,10 @@
-.vscode
+# Node.js library
+/node_modules
+
+# Visual Studio Code configuration
+/.vscode
+
+# Audio files
+/audio_files
 *.m4a
 *.mp3
