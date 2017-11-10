@@ -8,20 +8,20 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/header.min.css">
+    <link rel="stylesheet" href="/css/main.min.css">
 </head>
 <body ng-controller="volumeController" ng-mouseup="mUpVolume($event)" ng-mousemove="mMoveVolume($event)">
     <header>
-        <div class="header-holder" ng-controller="playController">
-            <div class="header-bar" ng-click="move($event)">
+        <div id="header-holder" ng-controller="playController">
+            <div id="header-bar" ng-click="move($event)">
                 <div class="bar-background" play-time>
                     <div>{{current}}</div>
                     <div>{{remain}}</div>
                 </div>
                 <div class="bar-gauge"></div>
             </div>
-            <div class="header-play">
+            <div id="header-play">
                 <div class="play-container">
                     <i class="audio-icon fa fa-backward" ng-click="playPrevious()"></i>
                 </div>
@@ -32,7 +32,7 @@
                     <i class="audio-icon fa fa-forward" ng-click="playNext()"></i>
                 </div>
             </div>
-            <div class="header-volume">
+            <div id="header-volume">
                 <span class="volume-bar" ng-click="clickVolumeBar($event)"></span>
                 <div id="mute-container">
                     <i class="audio-icon fa fa-volume-{{scale}}" ng-click="mute()"></i>
@@ -41,7 +41,7 @@
                     <i class="audio-icon fa fa-circle" ng-mousedown="mDownVolume($event)"></i>
                 </div>
             </div>
-            <div class="header-info">
+            <div id="header-info">
                 <img id="thumbnail" class="" src="">
                 <div id="title">{{title}}</div>
                 <div>
@@ -49,7 +49,7 @@
                     <i class="fa fa-hashtag"></i>{{album}}
                 </div>
             </div>
-            <div class="header-search">
+            <div id="header-search">
                 <div class="search-container ui transparent icon input">
                     <input type="text" placeholder="Search">
                     <i class="search icon"></i>
@@ -59,19 +59,6 @@
     </header>
     <main ng-controller="albumController">
 
-        <!--<div class="six stackable ui cards">
-            <div ng-repeat="(ka, a) in albums" class="ui link card">
-                <div class="image">
-                    <img data-ng-src="{{a.image}}">
-                </div>
-                <div class="content no-pointer">
-                    <div class="header">{{a.album}}</div>
-                    <div class="meta">
-                        <span class="date">{{a.year}}</span>
-                    </div>
-                    <div class="description">{{a.artist}}</div>
-                </div>
-            </div>-->
 
         <div class="ui cards">
             <div ng-repeat="a in albums" class="ui shape" id="{{a.artist}}@{{a.title}}">
@@ -113,6 +100,20 @@
             </div>
 
         </div>
+
+        <!--<div class="six stackable ui cards">
+            <div ng-repeat="(ka, a) in albums" class="ui link card">
+                <div class="image">
+                    <img data-ng-src="{{a.image}}">
+                </div>
+                <div class="content no-pointer">
+                    <div class="header">{{a.album}}</div>
+                    <div class="meta">
+                        <span class="date">{{a.year}}</span>
+                    </div>
+                    <div class="description">{{a.artist}}</div>
+                </div>
+            </div>-->
 
     </main>
 

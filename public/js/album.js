@@ -2,7 +2,7 @@
 
 angular.module('printemps').controller('albumController', function($scope, $http) {    
     var selectedAlbum = null,
-        scope$ = angular.element($('.header-play')).scope();
+        scope$ = angular.element($('#header-play')).scope();
 
     $scope.albums = [];
 

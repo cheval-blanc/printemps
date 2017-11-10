@@ -28,7 +28,7 @@ binaryClient.on('stream', (stream, meta) => {
 
         var playPromise = audioCtx.play();
         if(playPromise !== undefined) {
-            let scope$ = angular.element($('.header-play')).scope();
+            let scope$ = angular.element($('#header-play')).scope();
             playPromise.then(() => {
                 //@@ play an audio file?
                 scope$.$apply(() => { scope$.status = 'pause'; });

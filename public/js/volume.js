@@ -3,8 +3,8 @@
 angular.module('printemps').controller('volumeController', function($scope) {
     $scope.scale = 'up';
 
-    var barMin = $('.header-volume .volume-bar').offset().left,
-        barWidth = $('.header-volume .volume-bar').width(),
+    var barMin = $('#header-volume .volume-bar').offset().left,
+        barWidth = $('#header-volume .volume-bar').width(),
         circleMax = parseInt($('#volume-container').css('margin-left'));
 
     var volumeDrag = false;

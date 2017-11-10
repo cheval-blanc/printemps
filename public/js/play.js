@@ -6,7 +6,7 @@ angular.module('printemps').controller('playController', function($scope) {
     $scope.status = 'play';
     $scope.current = $scope.remain = '0:00';
 
-    var barWidth = parseInt($('.header-bar').css('width'));
+    var barWidth = parseInt($('#header-bar').css('width'));
     $scope.move = function($event, _ratio) {
         if(audioCtx.src === '') { return; }
 
@@ -21,7 +21,7 @@ angular.module('printemps').controller('playController', function($scope) {
     $scope.title = $scope.artist = $scope.album = '';
 
     function setAlbumInfo(album, music) {
-        $('#thumbnail, .header-info i').css('display', 'inline');
+        $('#thumbnail, #header-info i').css('display', 'inline');
         $('#thumbnail').attr('src', album.image);
         $scope.title = music.title;
         $scope.artist = album.artist;
