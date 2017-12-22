@@ -2,28 +2,28 @@
 
 // ---------- MAIN ----------
 main {
-    $header-height: 77px;
+  $header-height: 77px;
 
-    width: 100%;
-    padding: 20px;
-    padding-top: $header-height + 26px; // 26px + height of header
-    // padding: 30px;
-    // padding-top: 107px; // 30px + height of header
+  width: 100%;
+  padding: 20px;
+  padding-top: $header-height + 26px; // 26px + height of header
+  // padding: 30px;
+  // padding-top: 107px; // 30px + height of header
 
-    .no-pointer { cursor: default; }
-    .music-title {
-        cursor: pointer;
-        user-select: none;
-    }
-    .card-back {
-        height: 290px + 92.95px - 56px;
-        overflow-y: auto;
-    }
-    .no-overflow {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+  .no-pointer { cursor: default; }
+  .music-title {
+    cursor: pointer;
+    user-select: none;
+  }
+  .card-back {
+    height: 290px + 92.95px - 56px;
+    overflow-y: auto;
+  }
+  .no-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 

@@ -14,7 +14,7 @@ angular.module('printemps').controller('albumController', function($scope, $http
     function getImage(format, data) {
         var base64String = '';
         for(let i=0, ni=data.length; i<ni; i+=1) { base64String += String.fromCharCode(data[i]); }
-        return 'data:{0};base64,{1}'.format(format, window.btoa(base64String));
+        return `data:${format};base64,${window.btoa(base64String)}`;
     }
 
     function listMusics() {

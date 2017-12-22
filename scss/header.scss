@@ -3,161 +3,161 @@
 @import url('https://fonts.googleapis.com/css?family=Lora');
 
 body {
-    // font-family: 'Open Sans', sans-serif;
-    font-family: 'Lora', serif;
-    margin: 0;
-    padding: 0;
+  // font-family: 'Open Sans', sans-serif;
+  font-family: 'Lora', serif;
+  margin: 0;
+  padding: 0;
 }
 
 .audio-icon {
-    color: #818181;
-    cursor: pointer;
-    &:hover, &:active { color: #484848; }
+  color: #818181;
+  cursor: pointer;
+  &:hover, &:active { color: #484848; }
 }
 .fa-spinner, .fa-frown-o {
-    user-select: none;
+  user-select: none;
 }
 
 // ---------- HEADER ----------
 header {
-    width: 100%;
-    height: 77px;
-    position: fixed;
-    z-index: 5;
-    border-bottom: 1px solid #CCC;
-    background: rgba(250,250,250,0.8);
-    box-sizing: border-box;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  width: 100%;
+  height: 77px;
+  position: fixed;
+  z-index: 5;
+  border-bottom: 1px solid #CCC;
+  background: rgba(250,250,250,0.8);
+  box-sizing: border-box;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
 
 #header-holder {
-    width: 100%;
-    position: relative;
+  width: 100%;
+  position: relative;
 }
 
 // ---------- HEADER-BAR ----------
 #header-bar {
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  margin-top: 73px;
+  cursor: pointer;
+
+  .bar-gauge {
+    width: 0%;
+    height: inherit;
+    position: inherit;
+    // background: #F15DAD;
+    // background: #F588BF;
+    background: #DA1C31;
+    // box-shadow: 1px 0px 1px 0px rgba(0,0,0,0.2);
+  }
+  .bar-background {
     width: 100%;
-    height: 4px;
-    position: absolute;
-    margin-top: 73px;
-    cursor: pointer;
+    height: inherit;
+    position: inherit;
+    background: rgba(137,135,140,0.1);
+    // background: rgba(241,93,173,0.2);
 
-    .bar-gauge {
-        width: 0%;
-        height: inherit;
-        position: inherit;
-        // background: #F15DAD;
-        // background: #F588BF;
-        background: #DA1C31;
-        // box-shadow: 1px 0px 1px 0px rgba(0,0,0,0.2);
+    div {
+      width: 45px;
+      margin-top: -17px;
+      float: left;
+      color: #484848;
+      font-size: 0.9em;
+
+      &:first-child {
+        margin-left: 3px;
+        text-align: left;
+      }
+      &:last-child {
+        margin-left: calc(100% - 96px); // (45px + 3px) * 2
+        text-align: right;
+      }
     }
-    .bar-background {
-        width: 100%;
-        height: inherit;
-        position: inherit;
-        background: rgba(137,135,140,0.1);
-        // background: rgba(241,93,173,0.2);
-
-        div {
-            width: 45px;
-            margin-top: -17px;
-            float: left;
-            color: #484848;
-            font-size: 0.9em;
-
-            &:first-child {
-                margin-left: 3px;
-                text-align: left;
-            }
-            &:last-child {
-                margin-left: calc(100% - 96px); // (45px + 3px) * 2
-                text-align: right;
-            }
-        }
-    }
+  }
 }
 
 // ---------- HEADER-PLAY ----------
 #header-play {
+  float: left;
+  width: 12%;
+  margin-left: 30px;
+
+  .play-container {
+    width: 55px;
+    padding-top: 20px;
     float: left;
-    width: 12%;
-    margin-left: 30px;
+    position: relative;
+    text-align: center;
 
-    .play-container {
-        width: 55px;
-        padding-top: 20px;
-        float: left;
-        position: relative;
-        text-align: center;
-
-        i { font-size: 2.5em; }
-    }
+    i { font-size: 2.5em; }
+  }
 }
 
 // ---------- HEADER-VOLUME ----------
 #header-volume {
-    width: 13%;
-    padding-top: 26px;
-    float: left;
-    & > * { float: left; }
+  width: 13%;
+  padding-top: 26px;
+  float: left;
+  & > * { float: left; }
 
-    .volume-bar {
-        width: 80px;
-        height: 2px;
-        margin: 10px 0px 0px 30px;
-        background: #B9B9B9;
-        cursor: pointer;
-    }
-    #mute-container {
-        margin-left: -105px;
-        i { font-size: 1.5em; }
-    }
-    #volume-container {
-        margin: 2px 0px 0px -7px;
-        i { font-size: 1.2em; }
-    }
+  .volume-bar {
+    width: 80px;
+    height: 2px;
+    margin: 10px 0px 0px 30px;
+    background: #B9B9B9;
+    cursor: pointer;
+  }
+  #mute-container {
+    margin-left: -105px;
+    i { font-size: 1.5em; }
+  }
+  #volume-container {
+    margin: 2px 0px 0px -7px;
+    i { font-size: 1.2em; }
+  }
 }
 
 // ---------- HEADER-INFO ----------
 #header-info {
-    $header-info-height: 63px;
+  $header-info-height: 63px;
 
-    width: 40%;
+  width: 40%;
+  height: $header-info-height;
+  margin-top: 5px;
+  float: left;
+
+  #thumbnail {
+    width: $header-info-height;
     height: $header-info-height;
-    margin-top: 5px;
+    border-radius: 2px;
     float: left;
+    display: none;
+  }
+  div {
+    width: calc(100% - 67px);
+    height: 20px;
+    float: right;
+    cursor: default;
+    text-align: center;
+    font-size: 0.9em;
 
-    #thumbnail {
-        width: $header-info-height;
-        height: $header-info-height;
-        border-radius: 2px;
-        float: left;
-        display: none;
-    }
-    div {
-        width: calc(100% - 67px);
-        height: 20px;
-        float: right;
-        cursor: default;
-        text-align: center;
-        font-size: 0.9em;
-
-        overflow: hidden;
-        white-space: nowrap;
-    }
-    #title {
-        height: 22px;
-        margin-top: 12px;
-        margin-bottom: 5px;
-        font-size: 1.3em;
-    }
-    .fa-hashtag {
-        display: none;
-        margin: 0px 2px 0px 5px;
-        color: #484848;
-        &:first-child { margin-left: 0px; }
-    }
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  #title {
+    height: 22px;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-size: 1.3em;
+  }
+  .fa-hashtag {
+    display: none;
+    margin: 0px 2px 0px 5px;
+    color: #484848;
+    &:first-child { margin-left: 0px; }
+  }
 }
 
 
@@ -181,12 +181,12 @@ header {
 
 // ---------- HEADER-SEARSCH ----------
 #header-search {
-    width: calc(35% - 60px);
-    height: auto;
-    float: left;
-    margin-top: 27px;
-    margin-right: 30px;
+  width: calc(35% - 60px);
+  height: auto;
+  float: left;
+  margin-top: 27px;
+  margin-right: 30px;
 
-    .search-container { float: right; }
-    input { font-size: 0.9em; }
+  .search-container { float: right; }
+  input { font-size: 0.9em; }
 }

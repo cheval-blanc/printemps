@@ -1,16 +1,16 @@
 'use strict';
 
 var express = require('express'),
-    http = require('http'),
-    path = require('path');
+  http = require('http'),
+  path = require('path');
 
 var session = require('express-session'),
-    methodOverride = require('method-override'),
-    bodyParser = require('body-parser'),
-    logger = require('morgan'),
-    multer = require('multer'),
-    errorHandler = require('errorhandler'),
-    favicon = require('serve-favicon');
+  methodOverride = require('method-override'),
+  bodyParser = require('body-parser'),
+  logger = require('morgan'),
+  multer = require('multer'),
+  errorHandler = require('errorhandler'),
+  favicon = require('serve-favicon');
 
 var app = express();
 
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 app.use(express.static(path.join(__dirname, 'public')));
 if('development' === app.get('env')) {
-    app.use(errorHandler());
+  app.use(errorHandler());
 }
 
 require('./router.js').route(app);
@@ -35,5 +35,5 @@ require('./db.js').connect();
 require('./binaryServer.js');
 
 http.createServer(app).listen(app.get('port'), () => {
-    console.log('Printemps server is listening on port ' + app.get('port'));
+  console.log('Printemps server is listening on port ' + app.get('port'));
 });
