@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="printemps">
+<html>
 <head>
   <meta charset="UTF-8">
   <mata name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
@@ -7,48 +7,53 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/header.min.css">
   <link rel="stylesheet" href="/css/main.min.css">
 </head>
-<body ng-controller="volumeController" ng-mouseup="mUpVolume($event)" ng-mousemove="mMoveVolume($event)">
+<body>
+
+<div id="app" @mousemove="mMoveVolume($event)" @mouseup="mUpVolume($event)">
   <header>
-    <div id="header-holder" ng-controller="playController">
-      <div id="header-bar" ng-click="move($event)">
-        <div class="bar-background" play-time>
-          <div>{{current}}</div>
-          <div>{{remain}}</div>
-        </div>
-        <div class="bar-gauge"></div>
+    <div id="header-bar" ref="guageBar" @click="move($event)">
+      <div class="bar-background">
+        <div class="play-time">{{ current }}</div>
+        <div class="play-time">{{ remain }}</div>
       </div>
+      <div class="bar-gauge" :style="{ width: timeGauge+'%' }"></div>
+    </div>
+
+    <div id="header-holder">
       <div id="header-play">
         <div class="play-container">
-          <i class="audio-icon fa fa-backward" ng-click="playPrevious()"></i>
+          <i class="backward large icon" @click="playPrevious()"></i>
         </div>
         <div class="play-container">
-          <i class="audio-icon fa fa-{{status}}" ng-click="play()"></i>
+          <i class="large icon" :class="playStatus" @click="playOrPause()"></i>
         </div>
         <div class="play-container">
-          <i class="audio-icon fa fa-forward" ng-click="playNext()"></i>
+          <i class="forward large icon" @click="playNext()"></i>
         </div>
       </div>
+
       <div id="header-volume">
-        <span class="volume-bar" ng-click="clickVolumeBar($event)"></span>
         <div id="mute-container">
-          <i class="audio-icon fa fa-volume-{{scale}}" ng-click="mute()"></i>
+          <i class="volume icon" :class="volumeScale" @click="mute()"></i>
         </div>
-        <div id="volume-container">
-          <i class="audio-icon fa fa-circle" ng-mousedown="mDownVolume($event)"></i>
+        <span class="volume-bar" ref="volumeBar" @click="clickVolumeBar($event)"></span>
+        <div id="volume-container" :style="{ marginLeft: circlePos+'px' }">
+          <i class="circle icon" ref="circle" @mousedown.stop="mDownVolume($event)"></i>
         </div>
       </div>
+
       <div id="header-info">
-        <img id="thumbnail" class="" src="">
-        <div id="title">{{title}}</div>
-        <div>
-          <i class="fa fa-hashtag"></i>{{artist}}
-          <i class="fa fa-hashtag"></i>{{album}}
+        <img id="thumbnail" v-if="albumArt.length !== 0" :src="albumArt">
+        <div id="title">{{ title }}</div>
+        <div v-if="title.length !== 0">
+          <i class="hashtag icon"></i>{{ artist }}
+          <i class="hashtag icon"></i>{{ album }}
         </div>
       </div>
+
       <div id="header-search">
         <div class="search-container ui transparent icon input">
           <input type="text" placeholder="Search">
@@ -57,78 +62,57 @@
       </div>
     </div>
   </header>
-  <main ng-controller="albumController">
 
+  <main>
+    <div class="card-container" v-for="al in albums">
+      <div class="flipper">
 
-    <div class="ui cards">
-      <div ng-repeat="a in albums" class="ui shape" id="{{a.artist}}@{{a.title}}">
-      <div class="sides">
-        <div class="side active">
-          <div class="ui link card">
-            <div class="image" ng-click="showMusics(a.artist, a.title)">
-              <img data-ng-src="{{a.image}}">
-            </div>
-            <div class="content no-pointer">
-              <div class="header no-overflow">{{a.title}}</div>
-              <div class="meta">
-                <span class="date">{{a.year}}</span>
-              </div>
-              <div class="description no-overflow">{{a.artist}}</div>
-            </div>
+        <div class="card front">
+          <div class="album-art">
+            <img :src="al.image">
+          </div>
+          <div class="album-desc">
+            <p class="title">{{ al.title }}</p>
+            <p class="year">{{ al.year }}</p>
+            <p class="artist">{{ al.artist }}</p>
           </div>
         </div>
-        <div class="side">
-          <div class="ui link card">
-            <div class="content" ng-click="showAlbum(a.artist, a.title)">
-              <div class="right floated meta">{{a.artist}}</div>
-              <img class="ui avatar image" data-ng-src="{{a.image}}">{{a.title}}
+
+        <div class="card back">
+          <div class="album-info">
+            <div class="profile">
+              <img :src="al.image">
             </div>
-            <div class="content no-pointer card-back">
-              <div class="meta">
-                <div class="ui middle aligned ordered divided list">
-                  <div ng-repeat="m in a.musics" class="item">
-                    <div class="content">
-                      <div class="header music-title" ng-dblclick="playMusic(a, m, $index)">{{m.title}}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="album-summary">
+              <p class="title">{{ al.title }}</p>
+              <p class="artist">{{ al.artist }}</p>
             </div>
           </div>
+          <ul class="tracks">
+            <li v-for="(m, index) in al.musics" @dblclick="playMusic(al, m, index)">
+              <div class="track-number">{{ m.track }}</div>{{ m.title }}
+            </li>
+          </ul>
         </div>
-      </div>
-      </div>
 
+      </div>
     </div>
-
-    <!--<div class="six stackable ui cards">
-      <div ng-repeat="(ka, a) in albums" class="ui link card">
-        <div class="image">
-          <img data-ng-src="{{a.image}}">
-        </div>
-        <div class="content no-pointer">
-          <div class="header">{{a.album}}</div>
-          <div class="meta">
-            <span class="date">{{a.year}}</span>
-          </div>
-          <div class="description">{{a.artist}}</div>
-        </div>
-      </div>-->
-
   </main>
+</div>
 
 
   <!-- JAVASCRIPT -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="js/lib/binary.min.js"></script>
 
   <script src="js/util.js"></script>
   <script src="js/binaryClient.js"></script>
+
   <script src="js/play.js"></script>
   <script src="js/volume.js"></script>
   <script src="js/album.js"></script>
+  <script src="js/app.js"></script>
 
 </body>
 </html>

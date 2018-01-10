@@ -1,57 +1,50 @@
 'use strict';
 
-angular.module('printemps').controller('albumController', function($scope, $http) {    
-  var selectedAlbum = null,
-    scope$ = angular.element($('#header-play')).scope();
+function getImage(format, data) {
+  var base64String = '';
+  for(let i=0, ni=data.length; i<ni; i+=1) { base64String += String.fromCharCode(data[i]); }
+  return `data:${format};base64,${window.btoa(base64String)}`;
+}
 
-  $scope.albums = [];
+function listMusics(that) {
+  that.albums = [];
 
-  (function() {
-    listMusics();
-    $('.shape').shape();
-  }());
+  axios.post('/', null).then(res => {
+    let data = res.data;
+    for(let i=0, ni=data.length; i<ni; i+=1) {
+      let datum = data[i],
+        musics = datum.musics;
 
-  function getImage(format, data) {
-    var base64String = '';
-    for(let i=0, ni=data.length; i<ni; i+=1) { base64String += String.fromCharCode(data[i]); }
-    return `data:${format};base64,${window.btoa(base64String)}`;
-  }
-
-  function listMusics() {
-    $scope.albums = [];
-    $http.post('/', null).then(res => {
-      //console.log('albumCount:', res.data.length);
-      res.data.forEach((e, i) => {
-        $scope.albums[i] = {
-          artist: e.artist,
-          title: e.title,
-          year: e.musics[0].year.substr(0, 4),//@@
-          image: getImage(e.format, e.image),
-          musics: e.musics.sort((m, _m) => { return m.track - _m.track; })
-        };
+      that.albums.push({
+        artist: datum.artist,
+        title: datum.title,
+        year: musics[0].year.substr(0, 4),
+        image: getImage(datum.format, datum.image),
+        musics: musics.sort((m, m0) => { return m.track - m0.track; }),
       });
-    });
+    }
+  }).catch(err => {
+    console.error(err);
+  });
+}
+
+var albumCtrl = {
+  mounted() {
+    listMusics(this);
+  },
+  data: {
+    albums: [],
+  },
+  methods: {
+    playMusic(album, music, index) {
+      requestMusic(music.file, this);
+      this.title = music.title;
+      this.artist = album.artist;
+      this.album = album.title;
+      this.albumArt = album.image;
+
+      this.queue = album.musics;
+      this.currentTrack = index;
+    },
   }
-
-  function flipShape(selected, behavior) {
-    var query = '[id="{0}@{1}"]'.format(selected[0], selected[1]);
-    $(query).shape(behavior);
-  }
-
-  $scope.showMusics = function(artist, title) {
-    if(selectedAlbum !== null){ flipShape(selectedAlbum, 'flip back'); }
-    selectedAlbum = [artist, title];
-    flipShape(selectedAlbum, 'flip over');
-  };
-
-  $scope.showAlbum = function(artist, title) {
-    flipShape(selectedAlbum, 'flip back');
-    selectedAlbum = null;
-  };
-
-  $scope.playMusic = function(album, music, index) {
-    // console.log(album.musics, index);
-    scope$.play(album, index);
-  };
-
-});
+};

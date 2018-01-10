@@ -1,96 +1,101 @@
 'use strict';
 
-angular.module('printemps', []);
+const PLAY_STATUS = 'play';
+const PAUSE_STATUS = 'pause';
+const LOADING_STATUS = 'loading spinner';
+const ERROR_STATUS = 'frown';
 
-angular.module('printemps').controller('playController', function($scope) {
-  $scope.status = 'play';
-  $scope.current = $scope.remain = '0:00';
+function moveQueue(that, flag) {
+  if(that.queue === null) { console.error('NO QUEUE'); return; }
+  var queue = that.queue;
 
-  var barWidth = parseInt($('#header-bar').css('width'));
-  $scope.move = function($event, _ratio) {
-    if(audioCtx.src === '') { return; }
+  var ql = queue.length,
+    index = that.currentTrack + flag;
+  that.currentTrack = (index===ql) ? index-ql : (index===-1) ? index+ql : index;
 
-    var ratio = (_ratio !== undefined) ? _ratio : $event.pageX / barWidth;
-    $('.bar-gauge').css('width', (ratio * 100) + '%');
-    audioCtx.currentTime = audioCtx.duration * ratio;
+  var music = queue[that.currentTrack];
+  that.title = music.title;
+  requestMusic(music.file, that);
+}
 
-    $scope.current = secondsToHms(audioCtx.currentTime);
-    $scope.remain = secondsToHms(audioCtx.duration - audioCtx.currentTime);
-  };
+function updatePlayTime(that) {
+  var current = that.audioCtx.currentTime,
+    duration = that.audioCtx.duration;
 
-  $scope.title = $scope.artist = $scope.album = '';
+  that.current = secondsToHms(current);
+  that.remain = secondsToHms(duration - current);
+  that.timeGauge = current / duration * 100;
+}
 
-  function setAlbumInfo(album, music) {
-    $('#thumbnail, #header-info i').css('display', 'inline');
-    $('#thumbnail').attr('src', album.image);
-    $scope.title = music.title;
-    $scope.artist = album.artist;
-    $scope.album = album.title;
+const statusHandler = {
+  play: that => {
+    that.audioCtx.play();
+    that.playStatus = PAUSE_STATUS;
+  },
+  pause: that => {
+    that.audioCtx.pause();
+    that.playStatus = PLAY_STATUS;
   }
+};
 
-  var queue = null,
-    currentIndex = -1;
-  $scope.play = function(album, index) {
-    if(album !== undefined) {
-      $scope.status = 'spinner fa-spin';
-      queue = album.musics;
-      currentIndex = index;
+var interval = null;
+var guageBarWidth = null;
 
-      let music = queue[index];
-      setAlbumInfo(album, music);
-      requestMusic(music.file);
-    } else if($scope.status === 'play' && audioCtx.src !== '') {
-      //@@ play randomly when there is no downloaded music?
-      $scope.status = 'pause';
-      audioCtx.play();
-    } else if($scope.status === 'pause') {
-      $scope.status = 'play';
-      audioCtx.pause();
-    }
-  };
+var playCtrl = {
+  mounted() {
+    guageBarWidth = this.$refs.guageBar.clientWidth;
+  },
+  data: {
+    playStatus: PLAY_STATUS,
+    current: secondsToHms(0),
+    remain: secondsToHms(0),
+    timeGauge: 0,
 
-  function moveQueue(flag) {
-    if(queue === null) { console.error('NO QUEUE'); return; }
+    albumArt: '',
+    title: '',
+    artist: '',
+    album: '',
 
-    var ql = queue.length,
-      index = currentIndex + flag;
-    currentIndex = (index===ql) ? index-ql : (index===-1) ? index+ql : index;
-
-    var music = queue[currentIndex];
-    $scope.status = 'spinner fa-spin';
-    $scope.title = music.title;
-    requestMusic(music.file);
-  }
-
-  $scope.playNext = function() { moveQueue(1); };
-
-  $scope.playPrevious = function() {
-    (audioCtx.currentTime > 10) ? $scope.move(null, 0) : moveQueue(-1);
-  };
-
-}).directive('playTime', function($interval) {
-  return function(scope$, element, attrs) {
-    function updateTime() {
-      var c = audioCtx.currentTime,
-        d = audioCtx.duration;
-      scope$.current = secondsToHms(c);
-      scope$.remain = secondsToHms(d - c);
-      $('.bar-gauge').css('width', (c / d * 100) + '%');
-    }
-
-    var stopTime = null;
-    scope$.$watch(() => { return audioCtx.paused; }, paused => {
-      //console.log('paused:', paused);
-      if(paused) {
-        $interval.cancel(stopTime);
-        scope$.status = 'play';
-        if(audioCtx.ended) { scope$.playNext(); }
+    queue: null,
+    currentTrack: -1,
+  },
+  watch: {
+    playStatus(newStatus) {
+      if(this.audioCtx.paused) {
+        clearInterval(interval);
       } else {
-        stopTime = $interval(updateTime, 30);
-        updateTime();
+        interval = setInterval(() => {
+          if(this.audioCtx.ended && newStatus !== LOADING_STATUS) {
+            clearInterval(interval);
+            this.playNext();
+          } else {
+            updatePlayTime(this);
+          }
+        }, 30);
       }
-    });
+    },
+  },
+  methods: {
+    move($event) {
+      if(this.audioCtx.src === '') { return; }
 
-    element.on('$destroy', () => { $interval.cancel(stopTime); });
-  };
-});
+      this.audioCtx.currentTime = this.audioCtx.duration * ($event.pageX / guageBarWidth);
+      updatePlayTime(this);
+    },
+    playOrPause() {
+      let handler = statusHandler[this.playStatus];
+      if(handler !== undefined && this.audioCtx.src !== '') { handler(this); }
+    },
+    playPrevious() {
+      if(this.audioCtx.currentTime > 10) {
+        this.audioCtx.currentTime = 0;
+        updatePlayTime(this);
+      } else {
+        moveQueue(this, -1);
+      }
+    },
+    playNext() {
+      moveQueue(this, 1);
+    },
+  }
+};

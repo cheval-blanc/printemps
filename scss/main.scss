@@ -1,58 +1,147 @@
-@charset "UTF-8";
+@charset 'UTF-8';
+@import 'common';
 
-// ---------- MAIN ----------
+$large-padding: 12px;
+$small-padding: 8px;
+
 main {
-  $header-height: 77px;
-
   width: 100%;
-  padding: 20px;
-  padding-top: $header-height + 26px; // 26px + height of header
-  // padding: 30px;
-  // padding-top: 107px; // 30px + height of header
+  padding: $small-padding;
+  padding-top: $header-height + $small-padding;
+}
 
-  .no-pointer { cursor: default; }
-  .music-title {
-    cursor: pointer;
-    user-select: none;
+$card-width: 300px;
+$card-height: 390px;
+
+@mixin card-text($default-font-size: 1.0em) {
+  margin: 0;
+  padding: 0;
+  font-size: $default-font-size;
+  font-weight: 400;
+  color: $bold-color;
+}
+
+
+.card-container {
+  perspective: 1000px;
+  display: inline-block;
+  width: $card-width;
+  height: $card-height;
+  margin: $small-padding;
+}
+.flipper {
+  @include transition(1.0s);
+  @include transform-style(preserve-3d);
+  position: relative;
+
+  &:hover { @include transform(rotateY(180deg)); }
+
+  .front, .back {
+    backface-visibility: hidden;
+    position: absolute;
   }
-  .card-back {
-    height: 290px + 92.95px - 56px;
-    overflow-y: auto;
+  .front {
+    // z-index: 2;
+    @include transform(rotateY(0deg));
   }
-  .no-overflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .back {
+    @include transform(rotateY(180deg));
   }
 }
 
 
+.card {
+  & > * { user-select: none; }
+  $border-radius: 5px;
 
-// .container {
-//     display: -webkit-flex;
-//     display: flex;
-//     flex-flow: row wrap;
+  display: inline-block;
+  width: $card-width;
+  height: $card-height;
+  border-radius: $border-radius;
 
-//     width: 100%;
-//     height: 500px;
-//     margin: 0;
-//     padding: 0;
-// }
-// .container div {
-//     width: 14.28571428571429%;
-//     background: #eee;
-// }
-// .container div:first-child {
-//     background: #eb4a24;
-// }
-// .container div:nth-child(3) {
-//     background: #1488c8;
-// }
-// .container div:nth-child(5) {
-//     background: #333;
-// }
-// .container div:last-child {
-//     background: #f7e041;
-// }
+  @include box-shadow(1px 1px 3px 1px rgba(0,0,0,0.2));
+  // &:hover {
+  //   @include box-shadow(1px 1px 5px 2px rgba(0,0,0,0.3));
+  // }
+
+  .album-art {
+    width: $card-width;
+    height: $card-width;
+
+    img {
+      height: 100%;
+      border-radius: $border-radius $border-radius 0 0;
+    }
+  }
+
+  .album-desc {
+    padding: $small-padding $large-padding;
+
+    p { @include card-text(); }
+    .title {
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .year {
+      margin-bottom: 10px;
+      font-size: 0.8em;
+      color: $primary-color;
+    }
+    .artist { font-size: 0.9em; }
+  }
 
 
+  $profile-width: 45px;
+  .album-info {
+    & > * { float: left; }
+
+    height: $profile-width + $small-padding * 2;
+    padding: $small-padding;
+
+    .profile {
+      margin-right: 8px;
+      width: $profile-width;
+      height: $profile-width;
+      img {
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+    .album-summary {
+      padding-top: 4px;
+
+      p { @include card-text(0.9em); }
+      .title {
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+    }
+  }
+
+  .tracks {
+    height: calc(100% - (#{$profile-width} + #{$small-padding} * 2));
+
+    margin: 0;
+    padding: $small-padding $large-padding;
+    padding-top: 0;
+    list-style: none;
+    overflow-y: auto;
+
+    li {
+      height: 20px;
+      cursor: pointer;
+      font-size: 1.0em;
+      color: $bold-color;
+    }
+    .track-number {
+      display: inline-block;
+      width: 16px;
+      margin-top: 2px;
+      margin-right: 4px;
+      text-align: center;
+      font-size: 0.8em;
+      color: $primary-color;
+    }
+  }
+
+}
