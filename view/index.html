@@ -64,33 +64,33 @@
   </header>
 
   <main>
-    <div class="card-container" v-for="al in albums">
-      <div class="flipper">
+    <div class="card-container" v-for="(_a, ai) in albums">
+      <div class="flipper" :class="{ flip: _a.isFlipped }">
 
         <div class="card front">
-          <div class="album-art">
-            <img :src="al.image">
+          <div class="album-art" @click="flipOver(_a, ai)">
+            <img :src="_a.image">
           </div>
           <div class="album-desc">
-            <p class="title">{{ al.title }}</p>
-            <p class="year">{{ al.year }}</p>
-            <p class="artist">{{ al.artist }}</p>
+            <p class="title">{{ _a.title }}</p>
+            <p class="year">{{ _a.year }}</p>
+            <p class="artist">{{ _a.artist }}</p>
           </div>
         </div>
 
         <div class="card back">
           <div class="album-info">
-            <div class="profile">
-              <img :src="al.image">
+            <div class="profile" @click="flipBack(_a)">
+              <img :src="_a.image">
             </div>
             <div class="album-summary">
-              <p class="title">{{ al.title }}</p>
-              <p class="artist">{{ al.artist }}</p>
+              <p class="title">{{ _a.title }}</p>
+              <p class="artist">{{ _a.artist }}</p>
             </div>
           </div>
           <ul class="tracks">
-            <li v-for="(m, index) in al.musics" @dblclick="playMusic(al, m, index)">
-              <div class="track-number">{{ m.track }}</div>{{ m.title }}
+            <li v-for="(_m, mi) in _a.musics" @dblclick="reqAndSetMusic(_a, _m, mi)">
+              <div class="track-number">{{ _m.track }}</div>{{ _m.title }}
             </li>
           </ul>
         </div>

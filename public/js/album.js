@@ -16,6 +16,7 @@ function listMusics(that) {
         musics = datum.musics;
 
       that.albums.push({
+        isFlipped: false,
         artist: datum.artist,
         title: datum.title,
         year: musics[0].year.substr(0, 4),
@@ -34,9 +35,20 @@ var albumCtrl = {
   },
   data: {
     albums: [],
+    flippedIndex: -1,
   },
   methods: {
-    playMusic(album, music, index) {
+    onFlip(album) { album.isFlipped = !album.isFlipped; },
+    flipOver(album, albumIndex) {
+      if(this.flippedIndex !== -1) { this.albums[this.flippedIndex].isFlipped = false; }
+      this.flippedIndex = albumIndex;
+      this.onFlip(album);
+    },
+    flipBack(album) {
+      this.flippedIndex = -1;
+      this.onFlip(album);
+    },
+    reqAndSetMusic(album, music, musicIndex) {
       requestMusic(music.file, this);
       this.title = music.title;
       this.artist = album.artist;
@@ -44,7 +56,7 @@ var albumCtrl = {
       this.albumArt = album.image;
 
       this.queue = album.musics;
-      this.currentTrack = index;
+      this.currentTrack = musicIndex;
     },
   }
 };
