@@ -90,7 +90,8 @@
           </div>
           <ul class="tracks">
             <li v-for="(_m, mi) in _a.musics" @dblclick="reqAndSetMusic(_a, _m, mi)">
-              <div class="track-number">{{ _m.track }}</div>{{ _m.title }}
+              <div class="track-number">{{ _m.track }}</div>
+              <div class="music-title">{{ _m.title }}</div>
             </li>
           </ul>
         </div>
