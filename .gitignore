@@ -1,6 +1,5 @@
 # Node.js library
 /node_modules
-package-lock.json
 
 # Visual Studio Code configuration
 /.vscode
