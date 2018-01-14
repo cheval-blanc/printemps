@@ -68,8 +68,8 @@
       <div class="flipper" :class="{ flip: _a.isFlipped }">
 
         <div class="card front">
-          <div class="album-art" @click="flipOver(_a, ai)">
-            <img :src="_a.image">
+          <div class="album-art">
+            <img :src="_a.image" @click="flipOver(_a, ai)">
           </div>
           <div class="album-desc">
             <p class="title">{{ _a.title }}</p>
@@ -80,8 +80,8 @@
 
         <div class="card back">
           <div class="album-info">
-            <div class="profile" @click="flipBack(_a)">
-              <img :src="_a.image">
+            <div class="profile">
+              <img :src="_a.image" @click="flipBack(_a)">
             </div>
             <div class="album-summary">
               <p class="title">{{ _a.title }}</p>

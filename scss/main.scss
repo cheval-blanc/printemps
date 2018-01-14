@@ -67,9 +67,9 @@ $card-height: 390px;
   .album-art {
     width: $card-width;
     height: $card-width;
-    cursor: pointer;
 
     img {
+      cursor: pointer;
       height: 100%;
       border-radius: $border-radius $border-radius 0 0;
     }
@@ -102,9 +102,9 @@ $card-height: 390px;
       margin-right: 8px;
       width: $profile-width;
       height: $profile-width;
-      cursor: pointer;
 
       img {
+        cursor: pointer;
         height: 100%;
         border-radius: 50%;
       }
