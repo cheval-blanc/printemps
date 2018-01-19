@@ -4,7 +4,7 @@ const DB_URI = 'mongodb://127.0.0.1/printemps';
 var mongoose = require('mongoose');
 
 exports.connect = function() {
-  mongoose.connect(DB_URI);
+  mongoose.connect(DB_URI, { useMongoClient: true });
 
   mongoose.connection.on('connected', () => {
     console.info('Succeed to get connection pool in mongoose, DB_URI is ' + DB_URI);
