@@ -6,21 +6,22 @@ var mongoose = require('mongoose');
 exports.connect = function() {
   mongoose.connect(DB_URI, { useMongoClient: true });
 
-  mongoose.connection.on('connected', () => {
-    console.info('Succeed to get connection pool in mongoose, DB_URI is ' + DB_URI);
+  var db = mongoose.connection;
+  db.on('connected', () => {
+    console.info(`Succeed to get connection pool in mongoose, DB_URI is ${DB_URI}`);
     updateFileList();
   });
 
-  mongoose.connection.on('error', err => {
-    console.error('Failed to get connection in mongoose, err is ' + err);
+  db.on('error', err => {
+    console.error(`Failed to get connection in mongoose, err is ${err}`);
   });
 
-  mongoose.connection.on('disconnected', () => {
+  db.on('disconnected', () => {
     console.error('Database connection has disconnected.');
   });
 
   process.on('SIGINT', () => {
-    mongoose.connection.close(() => {
+    db.close(() => {
       console.warn('Application process is going down, disconnect database connection...');
       process.exit(0);
     });
@@ -33,7 +34,7 @@ var fs = require('fs'),
   jsmediatags = require("jsmediatags");
 
 var albumCtrl = require('./controller/albumController.js'),
-  root = __dirname + '\\audio_files\\';
+  root = `${__dirname}\\audio_files\\`;
 
 function updateFileList() {
   console.time('albumCtrl.import');
