@@ -38,10 +38,17 @@ $bold-color: #484848;
   cursor: pointer;
   @include transition(all .2s ease-in-out);
 
-  &:hover {
+  &:hover, &:active {
     color: $bold-color;
     @include transform(scale(1.2));
   }
+}
+
+@mixin text-ellipsis($max-width: 100%) {
+  width: $max-width;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #app {
