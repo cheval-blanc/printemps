@@ -7,7 +7,7 @@ var barWidth = null,
 function setVolumeData(bar, circle) {
   barWidth = bar.clientWidth;
   barMin = bar.offsetLeft;
-  circleRadius = circle.clientWidth / 2;
+  circleRadius = circle.clientWidth * 1.2 / 2;
 }
 
 var volumeDragging = false;
