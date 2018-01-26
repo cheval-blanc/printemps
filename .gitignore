@@ -8,3 +8,6 @@
 /audio_files
 *.m4a
 *.mp3
+
+# For debugging
+/public/js/lib/vue.js
