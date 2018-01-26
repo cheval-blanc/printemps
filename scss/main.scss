@@ -6,16 +6,53 @@ $small-padding: 8px;
 
 main {
   width: 100%;
-  $padding-top: $small-padding + $header-height;
+  $padding-top: $small-padding * 2 + $header-height;
   $padding-bottom: $small-padding + 25px;
-  padding: $padding-top $small-padding $padding-bottom;
+  padding: $padding-top $small-padding * 2 $padding-bottom;
 
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: $small-padding * 2;
+  justify-items: center;
+  align-items: center;
 }
 
-$card-width: 300px;
-$card-height: 390px;
+@media (max-width : 480px) {
+  main {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (min-width : 481px) and (max-width : 767px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width : 768px) and (max-width : 1023px) {
+  main {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width : 1024px) and (max-width : 1279px) {
+  main {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width : 1280px) and (max-width : 1679px) {
+  main {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (min-width : 1680px) and (max-width : 1919px) {
+  main {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+@media print and (min-width : 1920px) {
+  main {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
 
 @mixin card-text($font-size: 1.0em) {
   margin: 0;
@@ -25,52 +62,31 @@ $card-height: 390px;
   color: $bold-color;
 }
 
-// https://stackoverflow.com/questions/23274338/how-to-keep-wrapped-flex-items-the-same-width-as-the-elements-on-the-previous-ro
-@mixin flex-wrap-fix($flex-basis, $max-viewport-width: 2000px) {
-  flex-grow: 1;
-  flex-basis: $flex-basis;
-  max-width: 100%;
-
-  $multiplier: 1;
-  $current-width: 0px;
-
-  @while($current-width < $max-viewport-width) {
-    $current-width: $current-width + $flex-basis;
-    $multiplier: $multiplier + 1;
-
-    @media(min-width: $flex-basis * $multiplier) {
-      max-width: percentage(1 / $multiplier);
-    }
-  }
-}
-
-
 // https://davidwalsh.name/css-flip
 .card-container {
   perspective: 1000px;
   display: inline-block;
+  width: 100%;
+  height: 100%;
 
-  // width: $card-width;
-  // height: $card-height;
-  // margin: $small-padding;
-
-  min-width: $card-width - 20px;
-  @include flex-wrap-fix($card-width);
+  // http://www.mademyday.de/css-height-equals-width-with-pure-css.html
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 130%;
+  }
 
   .flip { @include transform(rotateY(180deg)); }
 }
 .flipper {
   @include transition(1.0s);
   @include transform-style(preserve-3d);
-  position: relative;
 
-  // width: 100%;
-  // height: 100%;
-
-  $margin-width: calc(100% - #{$small-padding} * 2);
-  width: $margin-width;
-  height: $card-height - ($small-padding * 2);
-  margin: $small-padding;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 
   .front, .back {
     backface-visibility: hidden;
@@ -93,8 +109,6 @@ $card-height: 390px;
   $border-radius: 5px;
 
   display: inline-block;
-  // width: $card-width;
-  // height: $card-height;
   width: 100%;
   height: 100%;
 
@@ -102,13 +116,10 @@ $card-height: 390px;
   @include box-shadow(1px 1px 3px 1px rgba(0,0,0,0.2));
 
   .album-art {
-    // width: $card-width;
-    // height: $card-width;
     width: 100%;
 
     img {
       cursor: pointer;
-      // height: 100%;
       width: inherit;
       border-radius: $border-radius $border-radius 0 0;
     }
@@ -134,16 +145,16 @@ $card-height: 390px;
   }
 
 
-  $profile-width: 45px;
+  $profile-size: 45px;
   .album-info {
-    height: $profile-width + $small-padding * 2;
+    height: $profile-size + $small-padding * 2;
     padding: $small-padding;
 
     & > * { float: left; }
     .profile {
       margin-right: 8px;
-      width: $profile-width;
-      height: $profile-width;
+      width: $profile-size;
+      height: $profile-size;
 
       img {
         cursor: pointer;
@@ -166,7 +177,7 @@ $card-height: 390px;
   }
 
   .tracks {
-    height: calc(100% - (#{$profile-width} + #{$small-padding} * 2));
+    height: calc(100% - (#{$profile-size} + #{$small-padding} * 2));
 
     margin: 0;
     padding: 0 $large-padding $small-padding;
