@@ -1,25 +1,13 @@
 @charset 'UTF-8';
 @import 'common';
 
-
-// .audio-icon {
-//   color: #818181;
-//   cursor: pointer;
-//   transition: all .2s ease-in-out;
-//   &:hover, &:active {
-//     transform: scale(1.2);
-//     color: #484848;
-//   }
-//   // &:hover, &:active { color: #484848; }
-// }
-
-// .spinner, .warning {
-//   &:hover {
-//     color: $primary-color;
-//     @include transform(none);
-//   }
-// }
-
+#app {
+  font-family: 'Lora', serif;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
 
 header {
   width: 100%;

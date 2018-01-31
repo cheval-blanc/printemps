@@ -26,6 +26,13 @@
           transform-style: $transform-style;
 }
 
+@mixin text-ellipsis($max-width: 100%) {
+  width: $max-width;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 
 $header-height: 77px;
 
@@ -42,19 +49,4 @@ $bold-color: #484848;
     color: $bold-color;
     @include transform(scale(1.2));
   }
-}
-
-@mixin text-ellipsis($max-width: 100%) {
-  width: $max-width;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-#app {
-  font-family: 'Lora', serif;
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
 }
