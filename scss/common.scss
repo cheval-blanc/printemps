@@ -1,6 +1,7 @@
 @charset 'UTF-8';
-// @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 @import url('https://fonts.googleapis.com/css?family=Lora');
+@import url('http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css');
 
 @mixin box-shadow($box-shadow) {
   -webkit-box-shadow: $box-shadow;
