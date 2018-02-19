@@ -3,7 +3,17 @@
 const DB_URI = 'mongodb://127.0.0.1/printemps';
 var mongoose = require('mongoose');
 
-exports.connect = function() {
+var fs = require('fs'),
+  path = require('path'),
+  jsmediatags = require("jsmediatags");
+
+// var albumCtrl = require('./controller/albumController.js'),
+//   root = `${__dirname}\\audio_files\\`;
+var albumCtrl = require('./albumController.js'),
+  root = null;//path.join(__dirname, '/audio_files');//`${__dirname}\\audio_files\\`;
+
+exports.connect = function(audioPath) {
+  root = audioPath;
   mongoose.connect(DB_URI, { useMongoClient: true });
 
   var db = mongoose.connection;
@@ -28,19 +38,11 @@ exports.connect = function() {
   });
 };
 
-
-var fs = require('fs'),
-  path = require('path'),
-  jsmediatags = require("jsmediatags");
-
-var albumCtrl = require('./controller/albumController.js'),
-  root = `${__dirname}\\audio_files\\`;
-
 function updateFileList() {
   console.time('albumCtrl.import');
 
   var albums = {};
-  walkDirectory(root, albums, (err) => {
+  walkDirectory(root, albums, err => {
     if(err) { throw err; }
     albumCtrl.import(albums);
 

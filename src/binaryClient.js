@@ -1,17 +1,12 @@
 'use strict';
 
+// import { BinaryClient } from 'binaryjs';
+import { BinaryClient } from './lib/binary.min';
+
+import { PAUSE_STATUS, ERROR_STATUS, LOADING_STATUS } from './common';
+import { vueApp } from './main.js';
+
 var binaryClient = new BinaryClient(`ws://${window.location.hostname}:9000`);
-
-function emit(event, data, file) {
-  file = file || {}; data = data || {}; data.event = event;
-  console.time('binary');
-  return binaryClient.send(file, data);
-}
-
-function requestMusic(filePath, that) {
-  that.playStatus = LOADING_STATUS;
-  emit('request', { filePath: filePath });
-}
 
 binaryClient.on('stream', (stream, meta) => {
   var parts = [];
@@ -35,3 +30,14 @@ binaryClient.on('stream', (stream, meta) => {
 
   });
 });
+
+function emit(event, data, file) {
+  file = file || {}; data = data || {}; data.event = event;
+  console.time('binary');
+  return binaryClient.send(file, data);
+}
+
+export default function requestMusic(filePath, that) {
+  that.playStatus = LOADING_STATUS;
+  emit('request', { filePath: filePath });
+}

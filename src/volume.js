@@ -12,7 +12,7 @@ function setVolumeData(bar, circle) {
 
 var volumeDragging = false;
 
-var volumeCtrl = {
+export var volumeCtrl = {
   mounted() {
     let refs = this.$refs;
     setVolumeData(refs.volumeBar, refs.circle);

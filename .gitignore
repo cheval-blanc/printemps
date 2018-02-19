@@ -1,14 +1,5 @@
-# Node.js library
-/node_modules
-
-# Visual Studio Code configuration
-/.vscode
-
-# Audio files
-/audio_files
-*.m4a
-*.mp3
-
-# Other
-/public/js/lib/vue.js
+node_modules
+dist
+.vscode
+audio_files
 TODOs.md

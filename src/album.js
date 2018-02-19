@@ -1,5 +1,8 @@
 'use strict';
 
+import axios from 'axios';
+import requestMusic from './binaryClient';
+
 function getImage(format, data) {
   var base64String = '';
   for(let i=0, ni=data.length; i<ni; i+=1) { base64String += String.fromCharCode(data[i]); }
@@ -9,7 +12,9 @@ function getImage(format, data) {
 function listMusics(that) {
   that.albums = [];
 
-  axios.post('/', null).then(res => {
+  console.time('axios-webpack');
+  axios.post('/list', null).then(res => {
+    console.timeEnd('axios-webpack');
     let data = res.data;
     for(let i=0, ni=data.length; i<ni; i+=1) {
       let datum = data[i],
@@ -29,7 +34,7 @@ function listMusics(that) {
   });
 }
 
-var albumCtrl = {
+export var albumCtrl = {
   mounted() {
     listMusics(this);
   },
