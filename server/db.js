@@ -1,16 +1,14 @@
 'use strict';
 
 const DB_URI = 'mongodb://127.0.0.1/printemps';
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var fs = require('fs'),
+const fs = require('fs'),
   path = require('path'),
   jsmediatags = require("jsmediatags");
 
-// var albumCtrl = require('./controller/albumController.js'),
-//   root = `${__dirname}\\audio_files\\`;
-var albumCtrl = require('./albumController.js'),
-  root = null;//path.join(__dirname, '/audio_files');//`${__dirname}\\audio_files\\`;
+const albumCtrl = require('./albumController.js');
+var root = null;
 
 exports.connect = function(audioPath) {
   root = audioPath;

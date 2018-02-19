@@ -17,12 +17,9 @@ const app = express();
 const ROOT_PATH = __dirname;
 const AUDIO_PATH = path.join(ROOT_PATH, 'audio_files');
 
-// all environments
+// All environments for Express
 app.set('port', process.env.PORT || 3000);
-// app.set('view', path.join(__dirname, '/view'));
 app.set('view engine', 'html');
-// app.use(favicon(__dirname + '/public/image/favicon.ico'));
-// app.use(favicon(__dirname + '/src/assets/favicon.ico'));
 app.use(favicon(path.join(ROOT_PATH, 'src/assets/favicon.ico')));
 app.use(logger('dev'));
 app.use(methodOverride());
@@ -30,7 +27,6 @@ app.use(session({ secret: 'uwotm8', resave: true, saveUninitialized: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(ROOT_PATH, 'dist')));
 if('development' === app.get('env')) {
   app.use(errorHandler());

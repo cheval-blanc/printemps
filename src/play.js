@@ -1,10 +1,5 @@
 'use strict';
 
-// const PLAY_STATUS = 'play';
-// const PAUSE_STATUS = 'pause';
-// const LOADING_STATUS = 'loading spinner';
-// const ERROR_STATUS = 'frown';
-
 import { PLAY_STATUS, PAUSE_STATUS, LOADING_STATUS, secondsToHms } from './common';
 import requestMusic from './binaryClient';
 

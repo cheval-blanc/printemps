@@ -1,6 +1,5 @@
 'use strict';
 
-// import { BinaryClient } from 'binaryjs';
 import { BinaryClient } from './lib/binary.min';
 
 import { PAUSE_STATUS, ERROR_STATUS, LOADING_STATUS } from './common';

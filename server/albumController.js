@@ -1,7 +1,6 @@
 'use strict';
 
-// var Album = require('../model/album.js');
-var Album = require('./album.js');
+const Album = require('./album.js');
 
 exports.list = function(req, res) {
   Album.find().sort({ artist: 1, title: 1 }).exec((err, albums) => {
