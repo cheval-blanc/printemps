@@ -34,7 +34,7 @@ function listMusics(that) {
   });
 }
 
-export var albumCtrl = {
+export var albumListCtrl = {
   mounted() {
     listMusics(this);
   },

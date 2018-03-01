@@ -8,12 +8,14 @@ import './scss/main.scss';
 
 import { volumeCtrl } from './volume';
 import { playCtrl } from './play';
-import { albumCtrl } from './album';
+import { albumListCtrl } from './albumList';
+
+Vue.config.productionTip = false;
 
 export var vueApp = new Vue({
   el: '#app',
   data: {
     audioCtx: new Audio(),
   },
-  mixins: [volumeCtrl, playCtrl, albumCtrl],
+  mixins: [volumeCtrl, playCtrl, albumListCtrl],
 });
