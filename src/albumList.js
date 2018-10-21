@@ -4,7 +4,7 @@ import axios from 'axios';
 import requestMusic from './binaryClient';
 
 function getImage(format, data) {
-  var base64String = '';
+  let base64String = '';
   for(let i=0, ni=data.length; i<ni; i+=1) { base64String += String.fromCharCode(data[i]); }
   return `data:${format};base64,${window.btoa(base64String)}`;
 }
@@ -34,7 +34,7 @@ function listMusics(that) {
   });
 }
 
-export var albumListCtrl = {
+export let albumListCtrl = {
   mounted() {
     listMusics(this);
   },

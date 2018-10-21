@@ -12,7 +12,7 @@ import { albumListCtrl } from './albumList';
 
 Vue.config.productionTip = false;
 
-export var vueApp = new Vue({
+export let vueApp = new Vue({
   el: '#app',
   data: {
     audioCtx: new Audio(),

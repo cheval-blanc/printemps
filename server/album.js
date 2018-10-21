@@ -4,14 +4,14 @@ const mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 
-var musicSchema = new Schema({
+const musicSchema = new Schema({
   file:   String,
   title:  String,
   year:   String,
   track:  String
 });
 
-var albumSchema = new Schema({
+const albumSchema = new Schema({
   artist: String,
   title:  String,
   format: String,

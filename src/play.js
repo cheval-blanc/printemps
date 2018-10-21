@@ -1,27 +1,27 @@
 'use strict';
 
-import { PLAY_STATUS, PAUSE_STATUS, LOADING_STATUS, secondsToHms } from './common';
+import { PLAY_STATUS, PAUSE_STATUS, LOADING_STATUS, sec2Hms } from './common';
 import requestMusic from './binaryClient';
 
 function moveQueue(that, flag) {
   if(that.queue === null) { console.error('NO QUEUE'); return; }
-  var queue = that.queue;
+  let queue = that.queue;
 
-  var ql = queue.length,
+  let ql = queue.length,
     index = that.currentTrack + flag;
   that.currentTrack = (index===ql) ? index-ql : (index===-1) ? index+ql : index;
 
-  var music = queue[that.currentTrack];
+  let music = queue[that.currentTrack];
   that.title = music.title;
   requestMusic(music.file, that);
 }
 
 function updatePlayTime(that) {
-  var current = that.audioCtx.currentTime,
+  let current = that.audioCtx.currentTime,
     duration = that.audioCtx.duration;
 
-  that.current = secondsToHms(current);
-  that.remain = secondsToHms(duration - current);
+  that.current = sec2Hms(current);
+  that.remain = sec2Hms(duration - current);
   that.timeGauge = current / duration * 100;
 }
 
@@ -36,17 +36,17 @@ const statusHandler = {
   }
 };
 
-var interval = null;
-var guageBarWidth = null;
+let interval = null;
+let guageBarWidth = null;
 
-export var playCtrl = {
+export let playCtrl = {
   mounted() {
     guageBarWidth = this.$refs.guageBar.clientWidth;
   },
   data: {
     playStatus: PLAY_STATUS,
-    current: secondsToHms(0),
-    remain: secondsToHms(0),
+    current: sec2Hms(),
+    remain: sec2Hms(),
     timeGauge: 0,
 
     albumArt: '',

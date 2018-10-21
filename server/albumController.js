@@ -10,7 +10,7 @@ exports.list = function(req, res) {
 };
 
 exports.import = function(albums) {
-  for(var key in albums) {
+  for(let key in albums) {
     let album = albums[key],
       query = { artist: album.artist, title: album.title };
 

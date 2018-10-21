@@ -1,6 +1,6 @@
 'use strict';
 
-var barWidth = null,
+let barWidth = null,
   barMin = null,
   circleRadius = null;
 
@@ -10,9 +10,9 @@ function setVolumeData(bar, circle) {
   circleRadius = circle.clientWidth * 1.2 / 2;
 }
 
-var volumeDragging = false;
+let volumeDragging = false;
 
-export var volumeCtrl = {
+export let volumeCtrl = {
   mounted() {
     let refs = this.$refs;
     setVolumeData(refs.volumeBar, refs.circle);
@@ -24,7 +24,7 @@ export var volumeCtrl = {
   },
   methods: {
     updateVolume(pageX, _ratio) {
-      var ratio = 0;
+      let ratio = 0;
       if(_ratio !== undefined) {
         ratio = _ratio;
       } else {
@@ -32,7 +32,7 @@ export var volumeCtrl = {
         ratio = (ratio > 1) ? 1 : (ratio < 0) ? 0 : ratio;
       }
 
-      var pos = ratio * barWidth - (barWidth + circleRadius);
+      let pos = ratio * barWidth - (barWidth + circleRadius);
       this.circlePos = pos;
 
       this.audioCtx.volume = ratio;

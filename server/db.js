@@ -8,13 +8,13 @@ const fs = require('fs'),
   jsmediatags = require("jsmediatags");
 
 const albumCtrl = require('./albumController.js');
-var root = null;
+let root = null;
 
 exports.connect = function(audioPath) {
   root = audioPath;
   mongoose.connect(DB_URI, { useMongoClient: true });
 
-  var db = mongoose.connection;
+  let db = mongoose.connection;
   db.on('connected', () => {
     console.info(`Succeed to get connection pool in mongoose, DB_URI is ${DB_URI}`);
     updateFileList();
@@ -39,7 +39,7 @@ exports.connect = function(audioPath) {
 function updateFileList() {
   console.time('albumCtrl.import');
 
-  var albums = {};
+  let albums = {};
   walkDirectory(root, albums, err => {
     if(err) { throw err; }
     albumCtrl.import(albums);
@@ -49,7 +49,7 @@ function updateFileList() {
 }
 
 function getMediaTags(file, callback) {
-  var tags = ['title', 'artist', 'album', 'year', 'track', 'genre', 'picture'];
+  let tags = ['title', 'artist', 'album', 'year', 'track', 'genre', 'picture'];
   new jsmediatags.Reader(file).setTagsToRead(tags).read({
     onSuccess: callback,
     onError: err => { throw err; }
@@ -60,7 +60,7 @@ function getMediaTags(file, callback) {
 function walkDirectory(dir, albums, done) {
   fs.readdir(dir, (err, list) => {
     if(err) { throw err; }
-    var pending = list.length;
+    let pending = list.length;
     if(!pending) { return done(null); }
 
     for(let i=0, ni=list.length; i<ni; i++) {
