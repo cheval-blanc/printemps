@@ -4,8 +4,7 @@ import axios from 'axios';
 import requestMusic from './binaryClient';
 
 function getImage(format, data) {
-  let base64String = '';
-  for(let i=0, ni=data.length; i<ni; i+=1) { base64String += String.fromCharCode(data[i]); }
+  const base64String = data.reduce((str, datum) => str += String.fromCharCode(datum), '');
   return `data:${format};base64,${window.btoa(base64String)}`;
 }
 
@@ -13,22 +12,19 @@ function listMusics(that) {
   that.albums = [];
 
   console.time('axios-webpack');
-  axios.post('/list', null).then(res => {
+  axios.post('/list', null).then(({ data }) => {
     console.timeEnd('axios-webpack');
-    let data = res.data;
-    for(let i=0, ni=data.length; i<ni; i+=1) {
-      let datum = data[i],
-        musics = datum.musics;
 
-      that.albums.push({
+    that.albums = data.map(({ artist, title, format, image, musics }) => {
+      return {
         isFlipped: false,
-        artist: datum.artist,
-        title: datum.title,
+        artist,
+        title,
         year: musics[0].year.substr(0, 4),
-        image: getImage(datum.format, datum.image),
-        musics: musics.sort((m, m0) => { return m.track - m0.track; }),
-      });
-    }
+        image: getImage(format, image),
+        musics: musics.sort((m, m0) => m.track - m0.track),
+      };
+    });
   }).catch(err => {
     console.error(err);
   });

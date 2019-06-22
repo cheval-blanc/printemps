@@ -36,7 +36,7 @@ const statusHandler = {
   }
 };
 
-let interval = null;
+let gaugeUpdater = null;
 let guageBarWidth = null;
 
 export let playCtrl = {
@@ -60,17 +60,18 @@ export let playCtrl = {
   watch: {
     playStatus(newStatus) {
       if(this.audioCtx.paused) {
-        clearInterval(interval);
-      } else {
-        interval = setInterval(() => {
-          if(this.audioCtx.ended && newStatus !== LOADING_STATUS) {
-            clearInterval(interval);
-            this.playNext();
-          } else {
-            updatePlayTime(this);
-          }
-        }, 30);
+        clearInterval(gaugeUpdater);
+        return;
       }
+
+      gaugeUpdater = setInterval(() => {
+        if(this.audioCtx.ended && newStatus !== LOADING_STATUS) {
+          clearInterval(gaugeUpdater);
+          this.playNext();
+        } else {
+          updatePlayTime(this);
+        }
+      }, 30);
     },
   },
   methods: {

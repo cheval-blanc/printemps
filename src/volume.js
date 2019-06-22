@@ -10,6 +10,10 @@ function setVolumeData(bar, circle) {
   circleRadius = circle.clientWidth * 1.2 / 2;
 }
 
+const VOLUME_OFF = 'off';
+const VOLUME_DOWN = 'down';
+const VOLUME_UP = 'up';
+
 let volumeDragging = false;
 
 export let volumeCtrl = {
@@ -20,7 +24,7 @@ export let volumeCtrl = {
   },
   data: {
     circlePos: 0,
-    volumeScale: 'up',
+    volumeScale: VOLUME_UP,
   },
   methods: {
     updateVolume(pageX, _ratio) {
@@ -37,12 +41,12 @@ export let volumeCtrl = {
 
       this.audioCtx.volume = ratio;
       if(this.audioCtx.muted) { this.audioCtx.muted = false; }
-      this.volumeScale = (ratio === 0) ? 'off' : (ratio > 0.5) ? 'up' : 'down';
+      this.volumeScale = (ratio === 0) ? VOLUME_OFF : (ratio > 0.5) ? VOLUME_UP : VOLUME_DOWN;
     },
 
     mute() {
       this.audioCtx.muted = !this.audioCtx.muted;
-      if(this.audioCtx.muted) { this.volumeScale = 'off'; }
+      if(this.audioCtx.muted) { this.volumeScale = VOLUME_OFF; }
       else { this.updateVolume(0, this.audioCtx.volume); }
     },
     clickVolumeBar($event) {

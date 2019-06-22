@@ -30,13 +30,15 @@ binaryClient.on('stream', (stream, meta) => {
   });
 });
 
-function emit(event, data, file) {
-  file = file || {}; data = data || {}; data.event = event;
+function emit(event, data = {}, file = {}) {
+  data.event = event;
   console.time('binary');
   return binaryClient.send(file, data);
 }
 
 export default function requestMusic(filePath, that) {
   that.playStatus = LOADING_STATUS;
-  emit('request', { filePath: filePath });
+  emit('request', {
+    filePath,
+  });
 }
