@@ -1,99 +1,12 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <mata name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Printemps</title>
 </head>
 <body>
-<div id="app" @mousemove="mMoveVolume($event)" @mouseup="mUpVolume($event)">
-  <header>
-    <div id="header-bar" ref="guageBar" @click="move($event)">
-      <div class="bar-background">
-        <div class="play-time">{{ current }}</div>
-        <div class="play-time">{{ remain }}</div>
-      </div>
-      <div class="bar-gauge" :style="{ width: timeGauge+'%' }"></div>
-    </div>
-
-    <div id="header-holder">
-      <div id="header-play">
-        <div class="play-container">
-          <i class="backward large icon" @click="playPrevious()"></i>
-        </div>
-        <div class="play-container">
-          <i class="large icon" :class="playStatus" @click="playOrPause()"></i>
-        </div>
-        <div class="play-container">
-          <i class="forward large icon" @click="playNext()"></i>
-        </div>
-      </div>
-
-      <div id="header-volume">
-        <div id="mute-container">
-          <i class="volume icon" :class="volumeScale" @click="mute()"></i>
-        </div>
-        <span class="volume-bar" ref="volumeBar" @click="clickVolumeBar($event)"></span>
-        <div id="volume-container" :style="{ marginLeft: circlePos+'px' }">
-          <i class="circle icon" ref="circle" @mousedown.stop="mDownVolume($event)"></i>
-        </div>
-      </div>
-
-      <div id="header-info">
-        <img id="thumbnail" v-if="albumArt.length !== 0" :src="albumArt">
-        <div id="title">{{ title }}</div>
-        <div v-if="title.length !== 0">
-          <i class="hashtag icon"></i>{{ artist }}
-          <i class="hashtag icon"></i>{{ album }}
-        </div>
-      </div>
-
-      <div id="header-search">
-        <div class="search-container ui transparent icon input">
-          <input type="text" placeholder="Search">
-          <i class="search icon"></i>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="card-container" v-for="(_a, ai) in albums">
-      <div class="flipper" :class="{ flip: _a.isFlipped }">
-
-        <div class="card front">
-          <div class="album-art">
-            <img :src="_a.image" @click="flipOver(_a, ai)">
-          </div>
-          <div class="album-desc">
-            <p class="title">{{ _a.title }}</p>
-            <p class="year">{{ _a.year }}</p>
-            <p class="artist">{{ _a.artist }}</p>
-          </div>
-        </div>
-
-        <div class="card back">
-          <div class="album-info">
-            <div class="profile">
-              <img :src="_a.image" @click="flipBack(_a)">
-            </div>
-            <div class="album-summary">
-              <p class="title">{{ _a.title }}</p>
-              <p class="artist">{{ _a.artist }}</p>
-            </div>
-          </div>
-          <ul class="tracks">
-            <li v-for="(_m, mi) in _a.musics" @dblclick="reqAndSetMusic(_a, _m, mi)">
-              <div class="track-number">{{ _m.track }}</div>
-              <div class="music-title">{{ _m.title }}</div>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </main>
-</div>
+  <div id="app"></div>
 
   <script src="./bundle.js"></script>
 </body>
