@@ -1,12 +1,7 @@
-'use strict';
+import path from 'path';
 
-const path = require('path');
-const albumCtrl = require('./albumController.js');
-
-exports.route = function(app, rootPath) {
+export default function(app) {
   app.get('/', (req, res) => {
-    res.sendFile(path.join(rootPath, 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../index.html'));
   });
-
-  app.post('/list', albumCtrl.list);
-};
+}
