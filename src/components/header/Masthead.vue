@@ -1,14 +1,19 @@
 <template>
   <header>
-
+    <info-control-wrapper />
+    <progress-bar />
   </header>
 </template>
 
 <script>
+import InfoControlWrapper from './InfoControlWrapper.vue';
+import ProgressBar from './ProgressBar.vue';
+
 export default {
   name: 'Masthead',
   components: {
-
+    InfoControlWrapper,
+    ProgressBar,
   }
 }
 </script>
