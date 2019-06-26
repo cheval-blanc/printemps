@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Masthead from './components/Masthead.vue';
-import CardContainer from './components/CardContainer.vue';
+import Masthead from './components/header/Masthead.vue';
+import CardContainer from './components/main/CardContainer.vue';
 
 export default {
   name: 'App',
