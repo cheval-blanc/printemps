@@ -18,25 +18,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader'
+        test: /\.(s?)css$/,
+        use: [
+          'vue-style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'sass-loader',
+          'postcss-loader',
+        ]
       },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: {
-          loaders: {
-            'scss': [
-              'vue-style-loader',
-              'css-loader',
-              'sass-loader'
-            ]
-          }
-        }
       },
       {
         test: /\.m?js$/,
