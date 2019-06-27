@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import IconButton from './IconButton';
-import VolumeSlider from './VolumeSlider';
+import IconButton from './IconButton.vue';
+import VolumeSlider from './VolumeSlider.vue';
 
 export default {
   components: {

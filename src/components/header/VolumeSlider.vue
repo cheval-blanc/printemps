@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import IconButton from './IconButton';
+import IconButton from './IconButton.vue';
 
 export default {
   components: {
@@ -34,9 +34,9 @@ export default {
   height: 2px;
   background-color: #B9B9B9;
   cursor: pointer;
-}
 
-.volume-handle {
-  position: absolute;
+  .volume-handle {
+    position: absolute;
+  }
 }
 </style>
