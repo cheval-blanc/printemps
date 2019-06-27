@@ -10,7 +10,6 @@ import ContentWrapper from './ContentWrapper.vue';
 import ProgressBar from './ProgressBar.vue';
 
 export default {
-  name: 'Masthead',
   components: {
     ContentWrapper,
     ProgressBar,

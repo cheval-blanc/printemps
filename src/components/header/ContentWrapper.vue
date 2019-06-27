@@ -12,7 +12,6 @@ import InfoContainer from './InfoContainer.vue';
 import ActionContainer from './ActionContainer.vue';
 
 export default {
-  name: 'ContentWrapper',
   components: {
     ControlContainer,
     InfoContainer,

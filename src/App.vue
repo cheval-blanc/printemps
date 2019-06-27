@@ -10,7 +10,6 @@ import Masthead from './components/header/Masthead.vue';
 import CardContainer from './components/main/CardContainer.vue';
 
 export default {
-  name: 'App',
   components: {
     Masthead,
     CardContainer,
