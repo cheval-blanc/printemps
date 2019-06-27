@@ -21,10 +21,16 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Lora');
 @import url('http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css');
 
+html {
+  overflow: auto;
+}
+
 body {
   font-family: 'Lora', 'Jeju Myeongjo', serif;
-  margin: 0;
-  padding: 0;
-  border: 0;
+
+  #app {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
