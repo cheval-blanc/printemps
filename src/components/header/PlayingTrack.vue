@@ -4,10 +4,10 @@
 
     <div class="hashtag-wrapper">
       <v-icon class="hashtag">fa-hashtag</v-icon>
-      <span class="sub-title">{{ artist }}</span>
+      <span class="track-info">{{ artist }}</span>
 
       <v-icon class="hashtag last">fa-hashtag</v-icon>
-      <span class="sub-title">{{ album }}</span>
+      <span class="track-info">{{ album }}</span>
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   flex: 1;
   flex-direction: column;
 
-  .track-title, .sub-title {
+  .track-title, .track-info {
     color: $bold-color;
   }
 
@@ -47,14 +47,10 @@ export default {
       margin-right: 2px;
       color: $primary-color;
       font-size: 0.8em;
+      &.last { margin-left: $md-pad; }
+    }
 
-      &.last {
-        margin-left: $md-pad;
-      }
-    }
-    .sub-title {
-      font-size: 0.9em;
-    }
+    .track-info { font-size: 0.9em; }
   }
 }
 </style>
