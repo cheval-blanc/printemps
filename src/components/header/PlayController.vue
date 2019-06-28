@@ -22,7 +22,11 @@ export default {
 <style lang="scss" scoped>
 @import '../../scss/variables';
 
-.play-icon {
-  margin: 0 $md-pad;
+.play-controller {
+  margin-right: 30px;
+
+  .play-icon {
+    margin: 0 $md-pad;
+  }
 }
 </style>

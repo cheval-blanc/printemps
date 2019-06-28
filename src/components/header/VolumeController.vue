@@ -32,7 +32,6 @@ export default {
 
 .volume-controller {
   @include flex-vertical-align();
-  margin-left: 30px;
 
   .mute-button {
     margin-right: $lg-pad;
