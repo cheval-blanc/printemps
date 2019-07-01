@@ -26,7 +26,7 @@ export default {
 .album-card {
   position: relative;
   width: 100%;
-  padding-top: 130%;
+  padding-top: 133%;
   perspective: 1000px;
 }
 
