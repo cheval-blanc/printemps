@@ -40,11 +40,10 @@ export default {
   .album-desc {
     flex: 1;
     position: relative;
-    margin: 4px $md-pad 6px $md-pad;
+    margin: 6px $md-pad;
 
     & > p {
       @include text-ellipsis();
-      margin: 0;
       color: $bold-color;
     }
 

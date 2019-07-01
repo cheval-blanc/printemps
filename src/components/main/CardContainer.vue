@@ -1,13 +1,15 @@
 <template>
   <main>
-
+    <album-card />
   </main>
 </template>
 
 <script>
+import AlbumCard from './AlbumCard.vue';
+
 export default {
   components: {
-
+    AlbumCard,
   }
 }
 </script>
@@ -21,9 +23,8 @@ main {
   box-sizing: border-box;
 
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: $md-pad;
-  justify-items: center;
   align-items: center;
 }
 </style>
