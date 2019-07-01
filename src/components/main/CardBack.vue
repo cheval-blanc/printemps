@@ -21,10 +21,10 @@
 <script>
 export default {
   data: ()=>({
-    albumTitle: 'Lorem ipsum dolor sit amet',
+    albumTitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     artist: 'Lorem ipsum',
     tracks: [
-      { number: 1, title: 'Lorem ipsum dolor sit amet' },
+      { number: 1, title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' },
       { number: 2, title: 'Lorem ipsum dolor sit amet' },
     ],
   }),
@@ -38,30 +38,27 @@ export default {
 .card-back {
   @include card-style();
   transform: rotateY(180deg);
-
   display: flex;
   flex-direction: column;
 }
 
 .card-back > .album-desc {
-  flex: initial;
-  display: flex;
-  margin: $sm-pad;
+  @include flex-vertical-align();
+  padding: $sm-pad;
 
   .sm-album-art {
-    margin-right: 4px;
+    flex: none;
     width: 45px;
+    margin-right: 4px;
     border-radius: 50%;
   }
 
   .album-summary {
-    @include flex-vertical-align();
-    flex-direction: column;
     flex: 1;
-    padding: 5px 0;
+    overflow: hidden;
 
     p {
-      @include text-ellipsis();
+      @include text-overflow-ellipsis();
       color: $bold-color;
       font-size: 0.9em;
     }
@@ -70,16 +67,15 @@ export default {
 
 .card-back > .track-container {
   @include custom-scroll();
-  overflow-y: auto;
+  overflow-y: overlay;
   padding: 0 $sm-pad;
   flex: 1;
 
   .track {
     @include flex-vertical-align();
-    @include text-ellipsis();
-
     margin-bottom: 3px;
     cursor: pointer;
+
     &:hover .track-title {
       font-weight: 600;
     }
@@ -94,6 +90,8 @@ export default {
     }
 
     .track-title {
+      @include text-overflow-ellipsis();
+      flex: 1;
       font-size: 1.0em;
       color: $bold-color;
     }

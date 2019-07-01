@@ -30,12 +30,15 @@ export default {
   @include flex-vertical-align();
   flex: 1;
   flex-direction: column;
+  overflow: hidden;
 
   .track-title, .track-info {
     color: $bold-color;
   }
 
   .track-title {
+    @include text-overflow-ellipsis();
+    text-align: center;
     margin-bottom: 5px;
     font-size: 1.2em;
   }

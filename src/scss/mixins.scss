@@ -7,7 +7,8 @@
   align-items: center;
 }
 
-@mixin text-ellipsis($max-width: 100%) {
+@mixin text-overflow-ellipsis($max-width: 100%) {
+  min-width: 0;
   width: $max-width;
   text-overflow: ellipsis;
   white-space: nowrap;

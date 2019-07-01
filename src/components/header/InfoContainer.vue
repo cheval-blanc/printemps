@@ -21,6 +21,7 @@ export default {
 .info-container {
   @include flex-vertical-align();
   flex: 1;
+  overflow: hidden;
 
   .thumbnail {
     flex: none;

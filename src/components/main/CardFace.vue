@@ -43,7 +43,7 @@ export default {
     margin: 6px $md-pad;
 
     & > p {
-      @include text-ellipsis();
+      @include text-overflow-ellipsis();
       color: $bold-color;
     }
 
