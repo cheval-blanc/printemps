@@ -15,6 +15,7 @@ export default {
   color: $primary-color;
   cursor: pointer;
   transition: all .2s ease-in-out;
+  backface-visibility: hidden;
 
   &:hover {
     color: $bold-color;
