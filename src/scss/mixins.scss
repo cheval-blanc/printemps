@@ -21,3 +21,19 @@
   border-radius: $card-border-radius;
   box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.2);
 }
+
+@mixin custom-scroll() {
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: #E5E5E5;
+    border: 2px solid transparent;
+    border-radius: 5px;
+  }
+}
