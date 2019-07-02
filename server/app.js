@@ -8,14 +8,14 @@ import logger from 'morgan';
 import errorHandler from 'errorhandler';
 import favicon from 'serve-favicon';
 
-import connectMongo from './server/mongo';
-import route from './server/router';
+import connectMongo from './mongo';
+import route from './router';
 
 const app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'html');
-app.use(favicon(path.resolve(__dirname, './src/assets/favicon.ico')));
+app.use(favicon(path.resolve(__dirname, '../src/assets/favicon.ico')));
 app.use(logger('dev'));
 app.use(methodOverride());
 app.use(session({
@@ -25,7 +25,7 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.resolve(__dirname, './dist')));
+app.use(express.static(path.resolve(__dirname, '../dist')));
 
 if(app.get('env') === 'development') {
   app.use(errorHandler());

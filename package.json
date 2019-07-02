@@ -2,9 +2,9 @@
   "name": "printemps",
   "version": "0.1.0",
   "description": "Ceci n'est pas la saison, c'est la inspiration.",
-  "main": "server.js",
+  "main": "server/app.js",
   "scripts": {
-    "server": "nodemon --exec babel-node server.js",
+    "server": "nodemon --exec babel-node ./server/app.js",
     "start": "webpack-dev-server --open --config ./build/webpack.dev.js",
     "build": "webpack --config ./build/webpack.prod.js",
     "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
