@@ -1,9 +1,12 @@
 import mongoose from 'mongoose';
 
+import importAudioFiles from './util/audioFilesImporter';
+
 mongoose.Promise = Promise;
 
 mongoose.connection.on('connected', () => {
   console.log('DB Connection Established');
+  importAudioFiles();
 });
 
 mongoose.connection.on('reconnected', () => {

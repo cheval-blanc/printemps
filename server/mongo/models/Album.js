@@ -21,7 +21,7 @@ const AlbumSchema = new Schema({
   albumArtImage: {
     type: Array,
   },
-  tracks: [Track],
+  tracks: [Track.schema],
 });
 
 export default model('Album', AlbumSchema);
