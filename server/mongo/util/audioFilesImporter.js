@@ -12,7 +12,7 @@ class Album {
     this.title = album;
     this.year = new Date(year).getFullYear();
     this.albumArtFormat = picture.format;
-    this.albumArtImage = picture.data;
+    this.albumArtBytes = picture.data;
     this.tracks = [];
   }
 }

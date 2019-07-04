@@ -18,7 +18,7 @@ const AlbumSchema = new Schema({
   albumArtFormat: {
     type: String,
   },
-  albumArtImage: {
+  albumArtBytes: {
     type: Array,
   },
   tracks: [Track.schema],
