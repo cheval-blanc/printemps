@@ -47,7 +47,7 @@ export default {
   .sm-album-art {
     flex: none;
     width: 45px;
-    margin-right: 4px;
+    margin-right: $sm-pad;
     border-radius: 50%;
   }
 
@@ -60,13 +60,17 @@ export default {
       color: $bold-color;
       font-size: 0.9em;
     }
+    .album-title {
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
   }
 }
 
 .card-back > .track-container {
   @include custom-scroll();
   overflow-y: overlay;
-  padding: 0 $sm-pad;
+  padding: 0 $sm-pad 4px;
   flex: 1;
 
   .track {

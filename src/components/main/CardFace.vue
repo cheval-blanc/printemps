@@ -41,7 +41,7 @@ export default {
   .album-desc {
     flex: 1;
     position: relative;
-    margin: 6px $md-pad;
+    margin: 6px $md-pad 8px;
 
     & > p {
       @include text-overflow-ellipsis();

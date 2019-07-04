@@ -31,12 +31,12 @@ export default {
 
 main {
   width: 100%;
-  padding: ($lg-pad + $masthead-height) $lg-pad $lg-pad;
+  padding: ($lg-pad + $masthead-height) $lg-pad 30px;
   box-sizing: border-box;
 
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-gap: $md-pad;
+  grid-gap: 16px;
   align-items: center;
 }
 </style>
