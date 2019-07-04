@@ -1,6 +1,6 @@
 <template>
   <div class="card-face">
-    <img class="album-art" :src="albumArt" />
+    <img class="album-art" :src="albumArt" @click="clickAlbumArt" />
 
     <div class="album-desc">
       <p class="album-title">{{ albumTitle }}</p>
@@ -18,6 +18,11 @@ export default {
     'pubYear',
     'artist',
   ],
+  methods: {
+    clickAlbumArt() {
+      this.$emit('flipCard');
+    },
+  },
 }
 </script>
 
@@ -36,6 +41,7 @@ export default {
     flex: none;
     width: 100%;
     border-radius: $card-border-radius $card-border-radius 0 0;
+    cursor: pointer;
   }
 
   .album-desc {

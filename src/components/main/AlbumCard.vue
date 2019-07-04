@@ -6,12 +6,14 @@
         :albumTitle="album.title"
         :pubYear="album.year"
         :artist="album.artist"
+        @flipCard="flipCard"
       />
       <card-back
         :albumArt="album.albumArt"
         :albumTitle="album.title"
         :artist="album.artist"
         :tracks="album.tracks"
+        @flipCard="flipCard"
       />
     </div>
   </div>
@@ -32,6 +34,11 @@ export default {
   data: ()=>({
     isFlipped: false,
   }),
+  methods: {
+    flipCard() {
+      this.isFlipped = !this.isFlipped;
+    },
+  },
 }
 </script>
 
@@ -49,8 +56,9 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  transition: 1.0s;
+  transition: all .8s ease-in-out;
   transform-style: preserve-3d;
+  will-change: contents;
 
   &.flip {
     transform: rotateY(180deg);

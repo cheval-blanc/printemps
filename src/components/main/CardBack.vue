@@ -1,7 +1,7 @@
 <template>
   <div class="card-back">
     <div class="album-desc">
-      <img class="sm-album-art" :src="albumArt" />
+      <img class="sm-album-art" :src="albumArt" @click="clickAlbumArt" />
 
       <div class="album-summary">
         <p class="album-title">{{ albumTitle }}</p>
@@ -26,6 +26,11 @@ export default {
     'artist',
     'tracks',
   ],
+  methods: {
+    clickAlbumArt() {
+      this.$emit('flipCard');
+    },
+  },
 }
 </script>
 
@@ -49,6 +54,7 @@ export default {
     width: 45px;
     margin-right: $sm-pad;
     border-radius: 50%;
+    cursor: pointer;
   }
 
   .album-summary {
