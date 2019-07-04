@@ -1,8 +1,18 @@
 <template>
   <div class="album-card">
     <div class="flipper" :class="{ flip: isFlipped }">
-      <card-face />
-      <card-back />
+      <card-face
+        :albumArt="album.albumArt"
+        :albumTitle="album.title"
+        :pubYear="album.year"
+        :artist="album.artist"
+      />
+      <card-back
+        :albumArt="album.albumArt"
+        :albumTitle="album.title"
+        :artist="album.artist"
+        :tracks="album.tracks"
+      />
     </div>
   </div>
 </template>
@@ -16,6 +26,9 @@ export default {
     CardFace,
     CardBack,
   },
+  props: [
+    'album',
+  ],
   data: ()=>({
     isFlipped: false,
   }),

@@ -1,16 +1,28 @@
 <template>
   <main>
-    <album-card />
+    <album-card
+      v-for="album in albums"
+      :key="album._id"
+      :album="album"
+    />
   </main>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import AlbumCard from './AlbumCard.vue';
 
 export default {
   components: {
     AlbumCard,
-  }
+  },
+  computed: mapState({
+    albums: state => state.albums.all,
+  }),
+  beforeCreate() {
+    this.$store.dispatch('albums/fetchAlbums');
+  },
 }
 </script>
 

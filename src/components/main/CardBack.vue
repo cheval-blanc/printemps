@@ -1,7 +1,7 @@
 <template>
   <div class="card-back">
     <div class="album-desc">
-      <img class="sm-album-art" src="https://via.placeholder.com/100" />
+      <img class="sm-album-art" :src="albumArt" />
 
       <div class="album-summary">
         <p class="album-title">{{ albumTitle }}</p>
@@ -10,8 +10,8 @@
     </div>
 
     <ul class="track-container">
-      <li class="track" v-for="t in tracks" :key="t.number">
-        <div class="track-number">{{ t.number }}</div>
+      <li class="track" v-for="t in tracks" :key="t._id">
+        <div class="track-number">{{ t.trackNumber }}</div>
         <div class="track-title">{{ t.title }}</div>
       </li>
     </ul>
@@ -20,14 +20,12 @@
 
 <script>
 export default {
-  data: ()=>({
-    albumTitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    artist: 'Lorem ipsum',
-    tracks: [
-      { number: 1, title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' },
-      { number: 2, title: 'Lorem ipsum dolor sit amet' },
-    ],
-  }),
+  props: [
+    'albumArt',
+    'albumTitle',
+    'artist',
+    'tracks',
+  ],
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="card-face">
-    <img class="album-art" src="https://via.placeholder.com/400" />
+    <img class="album-art" :src="albumArt" />
 
     <div class="album-desc">
       <p class="album-title">{{ albumTitle }}</p>
@@ -12,11 +12,12 @@
 
 <script>
 export default {
-  data: ()=>({
-    albumTitle: 'Lorem ipsum dolor sit amet',
-    pubYear: '2019',
-    artist: 'Lorem ipsum',
-  }),
+  props: [
+    'albumArt',
+    'albumTitle',
+    'pubYear',
+    'artist',
+  ],
 }
 </script>
 
