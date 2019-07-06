@@ -32,8 +32,6 @@ export default {
 
 .card-face {
   @include card-style();
-  transform: rotateY(0deg);
-  z-index: 1;
   display: flex;
   flex-direction: column;
 

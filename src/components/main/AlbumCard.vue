@@ -58,10 +58,10 @@ export default {
   height: 100%;
   transition: all .8s ease-in-out;
   transform-style: preserve-3d;
-  will-change: contents;
 
   &.flip {
     transform: rotateY(180deg);
+    will-change: contents;
   }
 
   & > div {
