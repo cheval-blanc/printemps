@@ -17,6 +17,8 @@
   "dependencies": {
     "@babel/runtime": "^7.4.5",
     "axios": "^0.19.0",
+    "binaryjs": "^0.2.1",
+    "binaryjs-client": "^1.0.0",
     "body-parser": "^1.18.3",
     "errorhandler": "^1.5.0",
     "express": "^4.8.0",

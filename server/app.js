@@ -9,6 +9,7 @@ import errorHandler from 'errorhandler';
 import favicon from 'serve-favicon';
 
 import connectMongo from './mongo';
+import createBinaryServer from './binaryJs';
 import route from './router';
 
 const app = express();
@@ -32,6 +33,7 @@ if(app.get('env') === 'development') {
 }
 
 connectMongo();
+createBinaryServer();
 route(app);
 
 http.createServer(app).listen(app.get('port'), () => {
