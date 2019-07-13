@@ -1,10 +1,9 @@
 import path from 'path';
 import { promises as fs } from 'fs';
 
+import { AUDIO_PATH } from '../../path';
 import readMediaTags from './mediaTagsReader';
 import { importAlbums } from '../controllers/albumController';
-
-const audioFolderName = 'audio_files';
 
 class Album {
   constructor({ artist, album, year, picture }) {
@@ -21,7 +20,7 @@ class Track {
   constructor({ track, title }, filePath) {
     this.trackNumber = track;
     this.title = title;
-    this.filePath = filePath.replace(/\\/g, '/').split(`${audioFolderName}/`)[1];
+    this.filePath = filePath.replace(`${AUDIO_PATH}\\`, '').replace(/\\/g, '/');
   }
 }
 
@@ -58,9 +57,7 @@ async function makeAlbumMap(audioFiles) {
 export default async function() {
   console.time('importAudioFiles()');
 
-  const audioFolderPath = path.resolve(__dirname, `../../../${audioFolderName}`);
-
-  const audioFiles = await walkDirectory(audioFolderPath);
+  const audioFiles = await walkDirectory(AUDIO_PATH);
   const albumMap = await makeAlbumMap(audioFiles);
 
   const { upsertedCount, modifiedCount } = await importAlbums(albumMap);
