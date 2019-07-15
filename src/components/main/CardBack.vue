@@ -10,7 +10,7 @@
     </div>
 
     <ul class="track-container">
-      <li class="track" v-for="t in tracks" :key="t._id">
+      <li class="track" v-for="t in tracks" :key="t._id" @dblclick="requestTrack(t.filePath)">
         <div class="track-number">{{ t.trackNumber }}</div>
         <div class="track-title">{{ t.title }}</div>
       </li>
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { emit } from '../../common/binaryClient';
+
 export default {
   props: [
     'albumArt',
@@ -29,6 +31,9 @@ export default {
   methods: {
     clickAlbumArt() {
       this.$emit('flipCard');
+    },
+    requestTrack(filePath) {
+      emit(filePath);
     },
   },
 }
