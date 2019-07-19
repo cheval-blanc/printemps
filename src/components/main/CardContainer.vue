@@ -9,9 +9,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 import AlbumCard from './AlbumCard.vue';
+import { mapState } from 'vuex';
 
 export default {
   components: {
