@@ -1,7 +1,7 @@
 <template>
   <div class="card-back">
     <div class="album-desc">
-      <img class="sm-album-art" :src="albumArt" @click="clickAlbumArt" />
+      <img class="sm-album-art" :src="albumArt" @click="$emit('flipCard')" />
 
       <div class="album-summary">
         <p class="album-title">{{ albumTitle }}</p>
@@ -10,7 +10,7 @@
     </div>
 
     <ul class="track-container">
-      <li class="track" v-for="t in tracks" :key="t._id" @dblclick="requestTrack(t.filePath)">
+      <li class="track" v-for="t in tracks" :key="t._id" @dblclick="requestTrack(t)">
         <div class="track-number">{{ t.trackNumber }}</div>
         <div class="track-title">{{ t.title }}</div>
       </li>
@@ -29,10 +29,7 @@ export default {
     'tracks',
   ],
   methods: {
-    clickAlbumArt() {
-      this.$emit('flipCard');
-    },
-    requestTrack(filePath) {
+    requestTrack({ filePath }) {
       emit(filePath);
     },
   },
