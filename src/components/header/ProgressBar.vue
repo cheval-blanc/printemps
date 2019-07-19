@@ -1,6 +1,6 @@
 <template>
-  <div class="progress-bar">
-    <div class="scrubber" :style="{ width: scrubberWidth }"></div>
+  <div class="progress-bar" ref="progressBar" @click="movePlayTime($event)">
+    <div class="scrubber" :style="{ width: `${scrubberRatio}%` }"></div>
 
     <span class="play-time current">{{ currentTime }}</span>
     <span class="play-time remain">{{ remainTime }}</span>
@@ -8,17 +8,59 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { secToHms } from '../../common/util';
+
+let progressUpdater = null;
+
 export default {
-  data: ()=>({
-    scrubberWidth: '40%',
-    currentTime: '0:34',
-    remainTime: '5:67:89',
+  computed: mapState({
+    audioCtx: state => state.audioCtx.audioCtx,
+    paused: state => state.audioCtx.paused,
   }),
+  data: ()=>({
+    scrubberRatio: 0,
+    currentTime: secToHms(),
+    remainTime: secToHms(),
+  }),
+  watch: {
+    paused() {
+      if(this.paused) {
+        clearInterval(progressUpdater);
+        return;
+      }
+
+      progressUpdater = setInterval(() => {
+        if(this.audioCtx.ended) {
+          clearInterval(progressUpdater);
+        } else {
+          this.updateProgress();
+        }
+      }, 30);
+    },
+  },
+  methods: {
+    updateProgress() {
+      const current = this.audioCtx.currentTime;
+      const duration = this.audioCtx.duration;
+
+      this.scrubberRatio = current / duration * 100;
+      this.currentTime = secToHms(current);
+      this.remainTime = secToHms(duration - current);
+    },
+    movePlayTime({ pageX }) {
+      if(this.audioCtx.src.length === 0) { return; }
+
+      const playTime = this.audioCtx.duration * (pageX / this.$refs.progressBar.clientWidth);
+      this.$store.commit('audioCtx/setCurrentTime', playTime);
+
+      this.updateProgress();
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/variables';
 @import '../../scss/variables';
 
 .progress-bar {

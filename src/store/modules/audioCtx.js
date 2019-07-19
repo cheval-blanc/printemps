@@ -11,6 +11,9 @@ const mutations = {
     const src = (window.URL || window.webkitURL).createObjectURL(new Blob(arrayBuffer));
     state.audioCtx.src = src;
   },
+  setCurrentTime(state, currentTime) {
+    state.audioCtx.currentTime = currentTime;
+  },
   pauseAudio(state) {
     if(state.audioCtx.src !== null) {
       state.audioCtx.pause();
