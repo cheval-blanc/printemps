@@ -9,30 +9,23 @@
       </div>
     </div>
 
-    <ul class="track-container">
-      <li class="track" v-for="t in tracks" :key="t._id" @dblclick="requestTrack(t)">
-        <div class="track-number">{{ t.trackNumber }}</div>
-        <div class="track-title">{{ t.title }}</div>
-      </li>
-    </ul>
+    <track-list :tracks="tracks" />
   </div>
 </template>
 
 <script>
-import { emit } from '../../common/binaryClient';
+import TrackList from './TrackList.vue';
 
 export default {
+  components: {
+    TrackList,
+  },
   props: [
     'albumArt',
     'albumTitle',
     'artist',
     'tracks',
   ],
-  methods: {
-    requestTrack({ filePath }) {
-      emit(filePath);
-    },
-  },
 }
 </script>
 
@@ -71,39 +64,6 @@ export default {
     .album-title {
       margin-bottom: 2px;
       font-weight: 600;
-    }
-  }
-}
-
-.card-back > .track-container {
-  @include custom-scroll();
-  overflow-y: overlay;
-  padding: 0 $sm-pad 4px;
-  flex: 1;
-
-  .track {
-    @include flex-vertical-align();
-    margin-bottom: 3px;
-    cursor: pointer;
-
-    &:hover .track-title {
-      font-weight: 600;
-    }
-
-    .track-number {
-      flex: none;
-      width: 16px;
-      margin-right: 4px;
-      text-align: center;
-      font-size: 0.8em;
-      color: $primary-color;
-    }
-
-    .track-title {
-      @include text-overflow-ellipsis();
-      flex: 1;
-      font-size: 1.0em;
-      color: $bold-color;
     }
   }
 }
