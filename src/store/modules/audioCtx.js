@@ -12,6 +12,9 @@ const mutations = {
   setCurrentTime(state, currentTime) {
     state.audioCtx.currentTime = currentTime;
   },
+  setVolume(state, volume) {
+    state.audioCtx.volume = volume;
+  },
   setPaused(state, paused) {
     state.paused = paused;
   },

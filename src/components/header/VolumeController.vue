@@ -7,7 +7,9 @@
       :style="{ width: volumeSize + 3 }"
       @click.native="muteVolume"
     />
-    <volume-slider />
+    <volume-slider
+      @changeVolume="updateVolumeStatus"
+    />
   </div>
 </template>
 
@@ -30,15 +32,22 @@ export default {
     volumeSize: 20,
   }),
   mounted() {
-    this.volumeStatus = this.getVolumeStatus();
+    this.updateVolumeStatus();
   },
   methods: {
     muteVolume() {
       this.$store.commit('audioCtx/toggleMuted');
-      this.volumeStatus = this.muted ? 'mute' : this.getVolumeStatus();
+
+      if(this.muted) {
+        this.volumeStatus = 'mute';
+      } else {
+        this.updateVolumeStatus();
+      }
     },
-    getVolumeStatus(volume = this.audioCtx.volume) {
-      return (volume === 0) ? 'off' : (volume < 0.5) ? 'down' : 'up';
+    updateVolumeStatus(volume = this.audioCtx.volume) {
+      if(!this.muted) {
+        this.volumeStatus =  (volume === 0) ? 'off' : (volume < 0.5) ? 'down' : 'up';
+      }
     },
   },
 }
@@ -52,7 +61,7 @@ export default {
   @include flex-vertical-align();
 
   .volume-status {
-    margin-right: $lg-pad;
+    margin-right: $md-pad;
   }
 }
 </style>

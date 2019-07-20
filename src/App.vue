@@ -1,5 +1,9 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    @mousemove="$root.$emit('mMoveVolume', $event)"
+    @mouseup="$root.$emit('mUpVolume')"
+  >
     <masthead />
     <card-container />
   </div>

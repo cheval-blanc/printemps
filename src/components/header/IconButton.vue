@@ -17,7 +17,7 @@ export default {
   transition: all .2s ease-in-out;
   backface-visibility: hidden;
 
-  &:hover {
+  &:hover, &:active {
     color: $bold-color;
     transform: scale(1.2);
   }
