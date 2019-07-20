@@ -2,19 +2,19 @@
   <div class="play-controller">
     <icon-button
       class="play-icon"
-      :iconSize="iconSize"
       iconName="backward"
+      :iconSize="iconSize"
     />
     <icon-button
       class="play-icon"
-      :iconSize="iconSize"
       :iconName="paused ? 'play' : 'pause'"
+      :iconSize="iconSize"
       @click.native="pauseOrPlay()"
     />
     <icon-button
       class="play-icon"
-      :iconSize="iconSize"
       iconName="forward"
+      :iconSize="iconSize"
     />
   </div>
 </template>

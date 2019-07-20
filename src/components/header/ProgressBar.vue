@@ -85,8 +85,8 @@ export default {
     font-size: 0.9em;
     cursor: default;
 
-    &.current { left: 3px; }
-    &.remain { right: 3px; }
+    &.current { left: 4px; }
+    &.remain { right: 4px; }
   }
 }
 </style>
