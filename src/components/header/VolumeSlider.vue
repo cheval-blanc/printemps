@@ -4,7 +4,7 @@
       class="volume-handle"
       iconName="circle"
       :iconSize="iconSize"
-      :style="{ top: halfIconSize + 1, left: halfIconSize + handlePos }"
+      :style="{ top: halfIconSize + 1.5, left: halfIconSize + handlePos }"
       @mousedown.native="mDownVolume"
     />
   </div>
@@ -25,15 +25,15 @@ export default {
     handlePos: 0,
   }),
   computed: {
-    ...mapState({
-      audioCtx: state => state.audioCtx.audioCtx,
-    }),
+    ...mapState('audioCtx', [
+      'audio',
+    ]),
     halfIconSize() {
       return this.iconSize / 2 * -1;
     },
   },
   mounted() {
-    this.handlePos = this.audioCtx.volume * this.$refs.volumeBar.clientWidth;
+    this.handlePos = this.audio.volume * this.$refs.volumeBar.clientWidth;
 
     this.$root.$on('mMoveVolume', this.mMoveVolume);
     this.$root.$on('mUpVolume', this.mUpVolume);

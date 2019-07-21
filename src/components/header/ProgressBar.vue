@@ -14,10 +14,10 @@ import { secToHms } from '../../common/util';
 let progressUpdater = null;
 
 export default {
-  computed: mapState({
-    audioCtx: state => state.audioCtx.audioCtx,
-    paused: state => state.audioCtx.paused,
-  }),
+  computed: mapState('audioCtx', [
+    'audio',
+    'paused',
+  ]),
   data: ()=>({
     scrubberRatio: 0,
     currentTime: secToHms(),
@@ -31,7 +31,7 @@ export default {
       }
 
       progressUpdater = setInterval(() => {
-        if(this.audioCtx.ended) {
+        if(this.audio.ended) {
           clearInterval(progressUpdater);
         } else {
           this.updateProgress();
@@ -41,17 +41,16 @@ export default {
   },
   methods: {
     updateProgress() {
-      const current = this.audioCtx.currentTime;
-      const duration = this.audioCtx.duration;
+      const { currentTime, duration } = this.audio;
 
-      this.scrubberRatio = current / duration * 100;
-      this.currentTime = secToHms(current);
-      this.remainTime = secToHms(duration - current);
+      this.scrubberRatio = currentTime / duration * 100;
+      this.currentTime = secToHms(currentTime);
+      this.remainTime = secToHms(duration - currentTime);
     },
     movePlayTime({ pageX }) {
-      if(this.audioCtx.src.length === 0) { return; }
+      if(this.audio.src.length === 0) { return; }
 
-      const playTime = this.audioCtx.duration * (pageX / this.$refs.progressBar.clientWidth);
+      const playTime = this.audio.duration * (pageX / this.$refs.progressBar.clientWidth);
       this.$store.commit('audioCtx/setCurrentTime', playTime);
 
       this.updateProgress();
@@ -76,6 +75,7 @@ export default {
     left: 0;
     height: inherit;
     background-color: #DA1C31;
+    transition: width 0.05s ease-out;
   }
 
   .play-time {

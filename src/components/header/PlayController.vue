@@ -27,10 +27,9 @@ export default {
   components: {
     IconButton,
   },
-  computed: mapState({
-    audioCtx: state => state.audioCtx.audioCtx,
-    paused: state => state.audioCtx.paused,
-  }),
+  computed: mapState('audioCtx', [
+    'paused',
+  ]),
   data: ()=>({
     iconSize: '2.5em',
   }),

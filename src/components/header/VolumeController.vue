@@ -23,10 +23,10 @@ export default {
     IconButton,
     VolumeSlider,
   },
-  computed: mapState({
-    audioCtx: state => state.audioCtx.audioCtx,
-    muted: state => state.audioCtx.muted,
-  }),
+  computed: mapState('audioCtx', [
+    'audio',
+    'muted',
+  ]),
   data: ()=>({
     volumeStatus: null,
     volumeSize: 20,
@@ -44,7 +44,7 @@ export default {
         this.updateVolumeStatus();
       }
     },
-    updateVolumeStatus(volume = this.audioCtx.volume) {
+    updateVolumeStatus(volume = this.audio.volume) {
       if(!this.muted) {
         this.volumeStatus =  (volume === 0) ? 'off' : (volume < 0.5) ? 'down' : 'up';
       }
