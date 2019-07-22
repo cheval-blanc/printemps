@@ -14,7 +14,7 @@ export default {
 .v-icon {
   color: $primary-color;
   cursor: pointer;
-  transition: all .2s ease-in-out;
+  transition: transform .2s ease-in-out;
   backface-visibility: hidden;
 
   &:hover, &:active {
