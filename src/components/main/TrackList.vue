@@ -1,6 +1,11 @@
 <template>
   <ul class="track-list">
-    <li class="track" v-for="t in tracks" :key="t._id" @dblclick="requestTrack(t)">
+    <li
+      class="track"
+      v-for="(t, i) in tracks"
+      :key="t._id"
+      @dblclick="requestTrack(t, i)"
+    >
       <div class="track-number">{{ t.trackNumber }}</div>
       <div class="track-title">{{ t.title }}</div>
     </li>
@@ -15,8 +20,9 @@ export default {
     'tracks',
   ],
   methods: {
-    requestTrack({ filePath }) {
+    requestTrack({ filePath }, index) {
       emit(filePath);
+      this.$emit('fetchQueue', index);
     },
   },
 }

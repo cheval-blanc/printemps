@@ -1,17 +1,25 @@
 <template>
   <div class="info-container">
-    <img class="thumbnail" src="https://via.placeholder.com/100" />
+    <img
+      class="thumbnail"
+      v-if="albumArt !== null"
+      :src="albumArt"
+    />
     <playing-track />
   </div>
 </template>
 
 <script>
 import PlayingTrack from './PlayingTrack.vue';
+import { mapState } from 'vuex';
 
 export default {
   components: {
     PlayingTrack,
-  }
+  },
+  computed: mapState('playingAlbum', [
+    'albumArt',
+  ]),
 }
 </script>
 

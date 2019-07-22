@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import albums from './modules/albums';
 import audioCtx from './modules/audioCtx';
+import playingAlbum from './modules/playingAlbum';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   modules: {
     albums,
     audioCtx,
+    playingAlbum,
   },
   strict: debug,
 });

@@ -2,23 +2,25 @@
   <div class="playing-track">
     <div class="track-title">{{ trackTitle }}</div>
 
-    <div class="hashtag-wrapper">
+    <div class="hashtag-wrapper" v-if="trackTitle.length !== 0">
       <v-icon class="hashtag">fa-hashtag</v-icon>
-      <span class="track-info">{{ artist }}</span>
+      <span class="track-info">{{ albumTitle }}</span>
 
       <v-icon class="hashtag last">fa-hashtag</v-icon>
-      <span class="track-info">{{ album }}</span>
+      <span class="track-info">{{ artist }}</span>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-  data: ()=>({
-    trackTitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    artist: 'Lorem ipsum',
-    album: 'Lorem ipsum',
-  }),
+  computed: mapState('playingAlbum', [
+    'trackTitle',
+    'albumTitle',
+    'artist',
+  ]),
 }
 </script>
 

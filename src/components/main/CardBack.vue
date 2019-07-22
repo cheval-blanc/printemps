@@ -9,7 +9,10 @@
       </div>
     </div>
 
-    <track-list :tracks="tracks" />
+    <track-list
+      :tracks="tracks"
+      @fetchQueue="fetchQueue"
+    />
   </div>
 </template>
 
@@ -26,6 +29,17 @@ export default {
     'artist',
     'tracks',
   ],
+  methods: {
+    fetchQueue(playingIndex) {
+      this.$store.dispatch('playingAlbum/fetchPlayingAlbum', {
+        playingIndex,
+        queue: this.tracks,
+        albumTitle: this.albumTitle,
+        albumArt: this.albumArt,
+        artist: this.artist,
+      });
+    },
+  },
 }
 </script>
 
