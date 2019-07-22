@@ -24,6 +24,6 @@ export default {
   @include flex-vertical-align();
   flex: initial;
   width: 350px;
-  margin-right: 40px;
+  margin-right: 50px;
 }
 </style>
