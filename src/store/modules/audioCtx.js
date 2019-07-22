@@ -19,8 +19,7 @@ const mutations = {
     state.paused = paused;
   },
   toggleMuted(state) {
-    state.muted = !state.muted;
-    state.audio.muted = state.muted;
+    state.audio.muted = state.muted = !state.muted;
   },
   pauseAudio(state) {
     if(state.audio.src.length > 0) {
