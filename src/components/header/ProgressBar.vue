@@ -33,6 +33,10 @@ export default {
       progressUpdater = setInterval(() => {
         if(this.audio.ended) {
           clearInterval(progressUpdater);
+          this.scrubberRatio = 0;
+
+          this.$store.commit('audioCtx/setPaused', true);
+          this.$store.dispatch('playingAlbum/requestNextTrack');
         } else {
           this.updateProgress();
         }
