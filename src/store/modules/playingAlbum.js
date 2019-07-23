@@ -1,3 +1,5 @@
+import { emit } from '../../common/binaryClient';
+
 const state = {
   queue: [],
   playingIndex: 0,
@@ -13,6 +15,14 @@ const mutations = {
   },
   setPlayingIndex(state, index) {
     state.playingIndex = index;
+  },
+  goForwardTrack(state) {
+    const forward = state.playingIndex + 1;
+    state.playingIndex = forward > state.queue.length - 1 ? 0 : forward;
+  },
+  goBackwardTrack(state) {
+    const backward = state.playingIndex - 1;
+    state.playingIndex = backward < 0 ? state.queue.length - 1 : backward;
   },
   setAlbumTitle(state, albumTitle) {
     state.albumTitle = albumTitle;
@@ -31,7 +41,6 @@ const mutations = {
 const actions = {
   fetchPlayingAlbum({ state, commit }, albumData) {
     const { queue, playingIndex, albumTitle, albumArt, artist } = albumData;
-    const trackTitle = queue[playingIndex].title;
 
     if(state.albumTitle !== albumTitle || state.artist !== artist) {
       commit('setQueue', queue);
@@ -41,8 +50,25 @@ const actions = {
     }
 
     commit('setPlayingIndex', playingIndex);
-    commit('setTrackTitle', trackTitle);
+    commit('setTrackTitle', queue[playingIndex].title);
   },
+  requestNextTrack({ state, commit, dispatch }) {
+    if(state.queue.length === 0) { return; }
+
+    commit('goForwardTrack');
+    dispatch('requestTrack');
+  },
+  requestPreviousTrack({ state, commit, dispatch }) {
+    if(state.queue.length === 0) { return; }
+
+    commit('goBackwardTrack');
+    dispatch('requestTrack');
+  },
+  requestTrack({ state, commit }) {
+    const { filePath, title } = state.queue[state.playingIndex];
+    emit(filePath);
+    commit('setTrackTitle', title);
+  }
 };
 
 export default {

@@ -4,17 +4,19 @@
       class="play-icon"
       iconName="backward"
       :iconSize="iconSize"
+      @click.native="playPrevious"
     />
     <icon-button
       class="play-icon"
       :iconName="paused ? 'play' : 'pause'"
       :iconSize="iconSize"
-      @click.native="pauseOrPlay()"
+      @click.native="pauseOrPlay"
     />
     <icon-button
       class="play-icon"
       iconName="forward"
       :iconSize="iconSize"
+      @click.native="playNext"
     />
   </div>
 </template>
@@ -28,6 +30,7 @@ export default {
     IconButton,
   },
   computed: mapState('audioCtx', [
+    'audio',
     'paused',
   ]),
   data: ()=>({
@@ -39,6 +42,16 @@ export default {
         this.$store.dispatch('audioCtx/playAudio');
       } else {
         this.$store.commit('audioCtx/pauseAudio');
+      }
+    },
+    playNext() {
+      this.$store.dispatch('playingAlbum/requestNextTrack');
+    },
+    playPrevious() {
+      if(this.audio.currentTime > 10) {
+        this.$store.commit('audioCtx/setCurrentTime', 0);
+      } else {
+        this.$store.dispatch('playingAlbum/requestPreviousTrack');
       }
     },
   },
