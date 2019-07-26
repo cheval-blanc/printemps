@@ -1,6 +1,6 @@
 <template>
   <div class="card-face">
-    <img class="album-art" :src="albumArt" @click="$emit('flipCard')" />
+    <img class="album-art" :src="albumArt" @click="$emit('flipOver')" />
 
     <div class="album-desc">
       <p class="album-title">{{ albumTitle }}</p>

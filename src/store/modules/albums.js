@@ -10,6 +10,9 @@ const mutations = {
   setAlbums(state, albums) {
     state.all = albums;
   },
+  toggleFlipped(state, albumIndex) {
+    state.all[albumIndex].isFlipped = !state.all[albumIndex].isFlipped;
+  },
 };
 
 const actions = {
@@ -18,6 +21,7 @@ const actions = {
 
     commit('setAlbums', data.map(({ albumArtFormat, albumArtBytes, ...rest }) => {
       rest.albumArt = bytesToImage(albumArtFormat, albumArtBytes);
+      rest.isFlipped = false;
       return rest;
     }));
   },

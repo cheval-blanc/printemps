@@ -1,19 +1,19 @@
 <template>
   <div class="album-card">
-    <div class="flipper" :class="{ flip: isFlipped }">
+    <div class="flipper" :class="{ flip: album.isFlipped }">
       <card-face
         :albumArt="album.albumArt"
         :albumTitle="album.title"
         :pubYear="album.year"
         :artist="album.artist"
-        @flipCard="flipCard"
+        @flipOver="$emit('flipOver', albumIndex)"
       />
       <card-back
         :albumArt="album.albumArt"
         :albumTitle="album.title"
         :artist="album.artist"
         :tracks="album.tracks"
-        @flipCard="flipCard"
+        @flipBack="$emit('flipBack', albumIndex)"
       />
     </div>
   </div>
@@ -30,15 +30,8 @@ export default {
   },
   props: [
     'album',
+    'albumIndex',
   ],
-  data: ()=>({
-    isFlipped: false,
-  }),
-  methods: {
-    flipCard() {
-      this.isFlipped = !this.isFlipped;
-    },
-  },
 }
 </script>
 
