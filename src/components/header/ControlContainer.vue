@@ -23,7 +23,7 @@ export default {
 .control-container {
   @include flex-vertical-align();
   flex: initial;
-  width: 350px;
-  margin-right: 50px;
+  width: 340px;
+  margin-right: 45px;
 }
 </style>
