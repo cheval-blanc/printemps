@@ -31,7 +31,7 @@ export default {
   ],
   methods: {
     fetchQueue(playingIndex) {
-      this.$store.dispatch('playingAlbum/fetchPlayingAlbum', {
+      this.$store.dispatch('trackManager/fetchPlayingAlbum', {
         playingIndex,
         queue: this.tracks,
         albumTitle: this.albumTitle,

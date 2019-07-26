@@ -16,7 +16,7 @@
 import { mapState } from 'vuex';
 
 export default {
-  computed: mapState('playingAlbum', [
+  computed: mapState('trackManager', [
     'trackTitle',
     'albumTitle',
     'artist',

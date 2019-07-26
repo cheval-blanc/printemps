@@ -36,7 +36,7 @@ export default {
           this.scrubberRatio = 0;
 
           this.$store.commit('audioCtx/setPaused', true);
-          this.$store.dispatch('playingAlbum/requestNextTrack');
+          this.$store.dispatch('trackManager/requestNextTrack');
         } else {
           this.updateProgress();
         }

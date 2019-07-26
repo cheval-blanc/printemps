@@ -45,13 +45,13 @@ export default {
       }
     },
     playNext() {
-      this.$store.dispatch('playingAlbum/requestNextTrack');
+      this.$store.dispatch('trackManager/requestNextTrack');
     },
     playPrevious() {
       if(this.audio.currentTime > 10) {
         this.$store.commit('audioCtx/setCurrentTime', 0);
       } else {
-        this.$store.dispatch('playingAlbum/requestPreviousTrack');
+        this.$store.dispatch('trackManager/requestPreviousTrack');
       }
     },
   },

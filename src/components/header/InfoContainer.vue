@@ -17,7 +17,7 @@ export default {
   components: {
     PlayingTrack,
   },
-  computed: mapState('playingAlbum', [
+  computed: mapState('trackManager', [
     'albumArt',
   ]),
 }
