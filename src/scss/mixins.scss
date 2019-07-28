@@ -38,3 +38,18 @@
     border-radius: 5px;
   }
 }
+
+@mixin responsive-grid-columns() {
+  $breakpoints: (480px, 768px, 1024px, 1280px, 1440px, 1680px, 1920px);
+
+  $ni: length($breakpoints);
+  @for $i from 1 to $ni {
+    @media(min-width: nth($breakpoints, $i)) and (max-width: nth($breakpoints, $i + 1) - 1) {
+      grid-template-columns: repeat($i + 1, 1fr);
+    }
+  }
+
+  @media print and (min-width: nth($breakpoints, $ni)) {
+    grid-template-columns: repeat($ni + 1, 1fr);
+  }
+}

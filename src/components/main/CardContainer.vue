@@ -50,14 +50,16 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../scss/variables';
+@import '../../scss/mixins';
 
 main {
+  @include responsive-grid-columns();
+
   width: 100%;
   padding: ($lg-pad + $masthead-height) $lg-pad 30px;
   box-sizing: border-box;
 
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
   grid-gap: 16px;
   align-items: center;
 }
