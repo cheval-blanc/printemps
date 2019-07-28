@@ -44,7 +44,10 @@
 
   $ni: length($breakpoints);
   @for $i from 1 to $ni {
-    @media(min-width: nth($breakpoints, $i)) and (max-width: nth($breakpoints, $i + 1) - 1) {
+    $current: nth($breakpoints, $i);
+    $next: nth($breakpoints, $i + 1);
+
+    @media (min-width: $current) and (max-width: $next - 1) {
       grid-template-columns: repeat($i + 1, 1fr);
     }
   }
