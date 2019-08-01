@@ -15,7 +15,7 @@ export default {
 <style lang="scss" scoped>
 .action-container {
   flex: initial;
-  width: 410px;
+  width: 415px;
   min-width: 200px;
 }
 </style>
