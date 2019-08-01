@@ -26,7 +26,7 @@ export default {
 .content-wrapper {
   width: auto;
   height: $masthead-height - $progress-bar-height;
-  padding: 0 $lg-pad;
+  padding: 0 25px;
   display: flex;
 }
 </style>

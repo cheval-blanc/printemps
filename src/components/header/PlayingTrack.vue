@@ -32,6 +32,7 @@ export default {
   @include flex-vertical-align();
   flex: 1;
   flex-direction: column;
+  margin: 0 5px;
   overflow: hidden;
 
   .track-title, .track-info {
