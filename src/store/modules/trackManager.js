@@ -7,6 +7,7 @@ const state = {
   albumArt: null,
   artist: '',
   trackTitle: '',
+  isShuffle: false,
 };
 
 const mutations = {
@@ -35,6 +36,9 @@ const mutations = {
   },
   setTrackTitle(state, trackTitle) {
     state.trackTitle = trackTitle;
+  },
+  toggleShuffle(state) {
+    state.isShuffle = !state.isShuffle;
   },
 };
 

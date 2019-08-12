@@ -3,25 +3,26 @@
     class="random-button"
     iconName="random"
     iconSize="18px"
-    :class="{ 'turn-on': isRandom }"
-    @click.native="toggleRandom"
+    :class="{ 'turn-on': isShuffle }"
+    @click.native="toggleShuffle"
   />
 </template>
 
 <script>
 import IconButton from './IconButton.vue';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: {
     IconButton,
   },
-  data: ()=>({
-    isRandom: false,
-  }),
+  computed: mapState('trackManager', [
+    'isShuffle',
+  ]),
   methods: {
-    toggleRandom() {
-      this.isRandom = !this.isRandom;
-    },
+    ...mapMutations('trackManager', [
+      'toggleShuffle',
+    ]),
   },
 }
 </script>

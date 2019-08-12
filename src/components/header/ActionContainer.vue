@@ -6,16 +6,19 @@
 
 <script>
 export default {
-  components: {
 
-  }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../../scss/mixins';
+
 .action-container {
+  @include flex-vertical-align();
   flex: initial;
-  width: 415px;
+  width: 417px;
   min-width: 200px;
+  justify-content: flex-end;
+  padding-right: 15px;
 }
 </style>
