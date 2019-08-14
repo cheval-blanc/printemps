@@ -14,7 +14,7 @@ export default {
     PlayController,
     VolumeController,
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -2,7 +2,7 @@
   <div class="playing-track">
     <div class="track-title">{{ trackTitle }}</div>
 
-    <div class="hashtag-wrapper" v-if="trackTitle.length !== 0">
+    <div v-if="trackTitle.length !== 0" class="hashtag-wrapper">
       <v-icon class="hashtag">fa-hashtag</v-icon>
       <span class="track-info">{{ albumTitle }}</span>
 
@@ -16,12 +16,8 @@
 import { mapState } from 'vuex';
 
 export default {
-  computed: mapState('trackManager', [
-    'trackTitle',
-    'albumTitle',
-    'artist',
-  ]),
-}
+  computed: mapState('trackManager', ['trackTitle', 'albumTitle', 'artist']),
+};
 </script>
 
 <style lang="scss" scoped>
@@ -35,7 +31,8 @@ export default {
   margin: 0 5px;
   overflow: hidden;
 
-  .track-title, .track-info {
+  .track-title,
+  .track-info {
     color: $bold-color;
   }
 
@@ -53,10 +50,14 @@ export default {
       margin-right: 2px;
       color: $primary-color;
       font-size: 0.8em;
-      &.last { margin-left: $md-pad; }
+      &.last {
+        margin-left: $md-pad;
+      }
     }
 
-    .track-info { font-size: 0.9em; }
+    .track-info {
+      font-size: 0.9em;
+    }
   }
 }
 </style>

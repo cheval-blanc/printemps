@@ -46,7 +46,7 @@ const actions = {
   fetchPlayingAlbum({ state, commit }, albumData) {
     const { queue, playingIndex, albumTitle, albumArt, artist } = albumData;
 
-    if(state.albumTitle !== albumTitle || state.artist !== artist) {
+    if (state.albumTitle !== albumTitle || state.artist !== artist) {
       commit('setQueue', queue);
       commit('setAlbumTitle', albumTitle);
       commit('setAlbumArt', albumArt);
@@ -57,13 +57,17 @@ const actions = {
     commit('setTrackTitle', queue[playingIndex].title);
   },
   requestNextTrack({ state, commit, dispatch }) {
-    if(state.queue.length === 0) { return; }
+    if (state.queue.length === 0) {
+      return;
+    }
 
     commit('goForwardTrack');
     dispatch('requestTrack');
   },
   requestPreviousTrack({ state, commit, dispatch }) {
-    if(state.queue.length === 0) { return; }
+    if (state.queue.length === 0) {
+      return;
+    }
 
     commit('goBackwardTrack');
     dispatch('requestTrack');
@@ -72,7 +76,7 @@ const actions = {
     const { filePath, title } = state.queue[state.playingIndex];
     emit(filePath);
     commit('setTrackTitle', title);
-  }
+  },
 };
 
 export default {
@@ -80,4 +84,4 @@ export default {
   state,
   mutations,
   actions,
-}
+};

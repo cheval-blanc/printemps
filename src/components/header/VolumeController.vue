@@ -2,14 +2,13 @@
   <div class="volume-controller">
     <icon-button
       class="volume-status"
-      :iconName="`volume-${volumeStatus}`"
-      :iconSize="volumeSize"
-      :style="{ width: volumeSize + 3 }"
+      :icon-name="`volume-${volumeStatus}`"
+      :icon-size="`${volumeSize}px`"
+      :style="{ width: `${volumeSize + 3}px` }"
       @click.native="muteVolume"
     />
-    <volume-slider
-      @changeVolume="updateVolumeStatus"
-    />
+
+    <volume-slider @changeVolume="updateVolumeStatus" />
   </div>
 </template>
 
@@ -23,14 +22,11 @@ export default {
     IconButton,
     VolumeSlider,
   },
-  computed: mapState('audioCtx', [
-    'audio',
-    'muted',
-  ]),
-  data: ()=>({
+  data: () => ({
     volumeStatus: null,
     volumeSize: 20,
   }),
+  computed: mapState('audioCtx', ['audio', 'muted']),
   mounted() {
     this.updateVolumeStatus();
   },
@@ -38,19 +34,19 @@ export default {
     muteVolume() {
       this.$store.commit('audioCtx/toggleMuted');
 
-      if(this.muted) {
+      if (this.muted) {
         this.volumeStatus = 'mute';
       } else {
         this.updateVolumeStatus();
       }
     },
     updateVolumeStatus(volume = this.audio.volume) {
-      if(!this.muted) {
-        this.volumeStatus =  (volume === 0) ? 'off' : (volume < 0.5) ? 'down' : 'up';
+      if (!this.muted) {
+        this.volumeStatus = volume === 0 ? 'off' : volume < 0.5 ? 'down' : 'up';
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -9,11 +9,11 @@ import store from './store';
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify, {
-  iconfont: 'fa'
+  iconfont: 'fa',
 });
 
 new Vue({
   el: '#app',
   store,
-  render: h => h(App)
+  render: h => h(App),
 });

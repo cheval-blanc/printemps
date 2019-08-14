@@ -14,6 +14,7 @@ module.exports = {
     'plugin:vue/recommended',
     'prettier',
     'prettier/standard',
+    'prettier/vue',
   ],
   plugins: [
     'vue',

@@ -9,10 +9,7 @@
       </div>
     </div>
 
-    <track-list
-      :tracks="tracks"
-      @fetchQueue="fetchQueue"
-    />
+    <track-list :tracks="tracks" @fetchQueue="fetchQueue" />
   </div>
 </template>
 
@@ -23,12 +20,26 @@ export default {
   components: {
     TrackList,
   },
-  props: [
-    'albumArt',
-    'albumTitle',
-    'artist',
-    'tracks',
-  ],
+  props: {
+    albumArt: {
+      type: String,
+      default: '',
+    },
+    albumTitle: {
+      type: String,
+      default: '',
+    },
+    artist: {
+      type: String,
+      default: '',
+    },
+    tracks: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
   methods: {
     fetchQueue(playingIndex) {
       this.$store.dispatch('trackManager/fetchPlayingAlbum', {
@@ -40,7 +51,7 @@ export default {
       });
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

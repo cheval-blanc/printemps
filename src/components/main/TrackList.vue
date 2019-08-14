@@ -1,9 +1,9 @@
 <template>
   <ul class="track-list">
     <li
-      class="track"
       v-for="(t, i) in tracks"
       :key="t._id"
+      class="track"
       @dblclick="requestTrack(t, i)"
     >
       <div class="track-number">{{ t.trackNumber }}</div>
@@ -16,16 +16,21 @@
 import { emit } from '../../common/binaryClient';
 
 export default {
-  props: [
-    'tracks',
-  ],
+  props: {
+    tracks: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
   methods: {
     requestTrack({ filePath }, index) {
       emit(filePath);
       this.$emit('fetchQueue', index);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +64,7 @@ export default {
     .track-title {
       @include text-overflow-ellipsis();
       flex: 1;
-      font-size: 1.0em;
+      font-size: 1em;
       color: $bold-color;
     }
   }

@@ -2,15 +2,15 @@
   <div class="album-card">
     <div class="flipper" :class="{ flip: album.isFlipped }">
       <card-face
-        :albumArt="album.albumArt"
-        :albumTitle="album.title"
-        :pubYear="album.year"
+        :album-art="album.albumArt"
+        :album-title="album.title"
+        :pub-year="album.year"
         :artist="album.artist"
         @flipOver="$emit('flipOver', albumIndex)"
       />
       <card-back
-        :albumArt="album.albumArt"
-        :albumTitle="album.title"
+        :album-art="album.albumArt"
+        :album-title="album.title"
         :artist="album.artist"
         :tracks="album.tracks"
         @flipBack="$emit('flipBack', albumIndex)"
@@ -28,11 +28,17 @@ export default {
     CardFace,
     CardBack,
   },
-  props: [
-    'album',
-    'albumIndex',
-  ],
-}
+  props: {
+    album: {
+      type: Object,
+      default: null,
+    },
+    albumIndex: {
+      type: Number,
+      default: 0,
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -49,7 +55,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  transition: all .8s ease-in-out;
+  transition: all 0.8s ease-in-out;
   transform-style: preserve-3d;
 
   &.flip {

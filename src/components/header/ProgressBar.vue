@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-bar" ref="progressBar" @click="movePlayTime($event)">
+  <div ref="progressBar" class="progress-bar" @click="movePlayTime($event)">
     <div class="scrubber" :style="{ width: `${scrubberRatio}%` }"></div>
 
     <span class="play-time current">{{ currentTime }}</span>
@@ -14,24 +14,21 @@ import { secToHms } from '../../common/util';
 let progressUpdater = null;
 
 export default {
-  computed: mapState('audioCtx', [
-    'audio',
-    'paused',
-  ]),
-  data: ()=>({
+  data: () => ({
     scrubberRatio: 0,
     currentTime: secToHms(),
     remainTime: secToHms(),
   }),
+  computed: mapState('audioCtx', ['audio', 'paused']),
   watch: {
     paused() {
-      if(this.paused) {
+      if (this.paused) {
         clearInterval(progressUpdater);
         return;
       }
 
       progressUpdater = setInterval(() => {
-        if(this.audio.ended) {
+        if (this.audio.ended) {
           clearInterval(progressUpdater);
           this.scrubberRatio = 0;
 
@@ -47,20 +44,23 @@ export default {
     updateProgress() {
       const { currentTime, duration } = this.audio;
 
-      this.scrubberRatio = currentTime / duration * 100;
+      this.scrubberRatio = (currentTime / duration) * 100;
       this.currentTime = secToHms(currentTime);
       this.remainTime = secToHms(duration - currentTime);
     },
     movePlayTime({ pageX }) {
-      if(this.audio.src.length === 0) { return; }
+      if (this.audio.src.length === 0) {
+        return;
+      }
 
-      const playTime = this.audio.duration * (pageX / this.$refs.progressBar.clientWidth);
-      this.$store.commit('audioCtx/setCurrentTime', playTime);
-
+      this.$store.commit(
+        'audioCtx/setCurrentTime',
+        this.audio.duration * (pageX / this.$refs.progressBar.clientWidth),
+      );
       this.updateProgress();
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -78,7 +78,7 @@ export default {
     top: 0;
     left: 0;
     height: inherit;
-    background-color: #DA1C31;
+    background-color: #da1c31;
     transition: width 0.05s ease-out;
   }
 
@@ -89,8 +89,12 @@ export default {
     font-size: 0.9em;
     cursor: default;
 
-    &.current { left: 4px; }
-    &.remain { right: 4px; }
+    &.current {
+      left: 4px;
+    }
+    &.remain {
+      right: 4px;
+    }
   }
 }
 </style>

@@ -12,13 +12,25 @@
 
 <script>
 export default {
-  props: [
-    'albumArt',
-    'albumTitle',
-    'pubYear',
-    'artist',
-  ],
-}
+  props: {
+    albumArt: {
+      type: String,
+      default: '',
+    },
+    albumTitle: {
+      type: String,
+      default: '',
+    },
+    pubYear: {
+      type: Number,
+      default: 0,
+    },
+    artist: {
+      type: String,
+      default: '',
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +62,7 @@ export default {
 
     .album-title {
       margin-bottom: 3px;
-      font-size: 1.0em;
+      font-size: 1em;
       font-weight: 600;
     }
     .pub-year {

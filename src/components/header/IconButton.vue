@@ -4,8 +4,17 @@
 
 <script>
 export default {
-  props: ['iconSize', 'iconName']
-}
+  props: {
+    iconSize: {
+      type: String,
+      default: '1em',
+    },
+    iconName: {
+      type: String,
+      default: '',
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -14,10 +23,11 @@ export default {
 .v-icon {
   color: $primary-color;
   cursor: pointer;
-  transition: transform .2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   backface-visibility: hidden;
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     color: $bold-color;
     transform: scale(1.2);
   }

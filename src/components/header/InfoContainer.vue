@@ -1,11 +1,7 @@
 <template>
   <div class="info-container">
-    <div class="thumbnail" v-if="albumArt === null"></div>
-    <img
-      class="thumbnail"
-      :src="albumArt"
-      v-else
-    />
+    <div v-if="albumArt === null" class="thumbnail"></div>
+    <img v-else class="thumbnail" :src="albumArt" />
 
     <playing-track />
     <autoplay-controller />
@@ -22,10 +18,8 @@ export default {
     PlayingTrack,
     AutoplayController,
   },
-  computed: mapState('trackManager', [
-    'albumArt',
-  ]),
-}
+  computed: mapState('trackManager', ['albumArt']),
+};
 </script>
 
 <style lang="scss" scoped>
@@ -43,7 +37,7 @@ export default {
     width: $thumbnail-size;
     height: $thumbnail-size;
     border-radius: 3px;
-    background-color: #EEE;
+    background-color: #eee;
   }
 }
 </style>

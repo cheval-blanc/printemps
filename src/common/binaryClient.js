@@ -23,13 +23,14 @@ binaryClient.on('stream', (stream, meta) => {
 });
 
 window.addEventListener('beforeunload', () => {
-  if(binaryClient !== null) {
+  if (binaryClient !== null) {
     binaryClient.close();
   }
 });
 
 export function emit(filePath) {
-  binaryClient.send({}, {
+  const data = {};
+  binaryClient.send(data, {
     filePath,
   });
 }

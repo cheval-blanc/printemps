@@ -17,8 +17,8 @@ export default {
   components: {
     Masthead,
     CardContainer,
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">
@@ -46,7 +46,9 @@ body {
     width: 100%;
     height: 100%;
 
-    & > * { user-select: none; }
+    & > * {
+      user-select: none;
+    }
   }
 }
 </style>

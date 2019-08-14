@@ -19,11 +19,14 @@ const actions = {
   async fetchAlbums({ commit }) {
     const { data } = await axios.get('/albums');
 
-    commit('setAlbums', data.map(({ albumArtFormat, albumArtBytes, ...rest }) => {
-      rest.albumArt = bytesToImage(albumArtFormat, albumArtBytes);
-      rest.isFlipped = false;
-      return rest;
-    }));
+    commit(
+      'setAlbums',
+      data.map(({ albumArtFormat, albumArtBytes, ...rest }) => {
+        rest.albumArt = bytesToImage(albumArtFormat, albumArtBytes);
+        rest.isFlipped = false;
+        return rest;
+      }),
+    );
   },
 };
 
@@ -32,4 +35,4 @@ export default {
   state,
   mutations,
   actions,
-}
+};

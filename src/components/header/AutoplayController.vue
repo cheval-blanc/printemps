@@ -1,8 +1,8 @@
 <template>
   <icon-button
     class="random-button"
-    iconName="random"
-    iconSize="18px"
+    icon-name="random"
+    icon-size="18px"
     :class="{ 'turn-on': isShuffle }"
     @click.native="toggleShuffle"
   />
@@ -16,20 +16,16 @@ export default {
   components: {
     IconButton,
   },
-  computed: mapState('trackManager', [
-    'isShuffle',
-  ]),
+  computed: mapState('trackManager', ['isShuffle']),
   methods: {
-    ...mapMutations('trackManager', [
-      'toggleShuffle',
-    ]),
+    ...mapMutations('trackManager', ['toggleShuffle']),
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
 @import '../../scss/variables';
-$toggle-color: #EEE;
+$toggle-color: #eee;
 
 .random-button {
   width: 25px;
@@ -43,7 +39,8 @@ $toggle-color: #EEE;
   color: $toggle-color;
   background-color: $primary-color;
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     color: $toggle-color;
   }
 }

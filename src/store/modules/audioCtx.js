@@ -6,8 +6,9 @@ const state = {
 
 const mutations = {
   setAudioSrc(state, arrayBuffer) {
-    const src = (window.URL || window.webkitURL).createObjectURL(new Blob(arrayBuffer));
-    state.audio.src = src;
+    state.audio.src = (window.URL || window.webkitURL).createObjectURL(
+      new Blob(arrayBuffer),
+    );
   },
   setCurrentTime(state, currentTime) {
     state.audio.currentTime = currentTime;
@@ -22,7 +23,7 @@ const mutations = {
     state.audio.muted = state.muted = !state.muted;
   },
   pauseAudio(state) {
-    if(state.audio.src.length > 0) {
+    if (state.audio.src.length > 0) {
       state.audio.pause();
       state.paused = true;
     }
@@ -33,12 +34,14 @@ const actions = {
   playAudio({ state, commit }) {
     const playPromise = state.audio.play();
 
-    if(playPromise !== undefined) {
-      playPromise.then(() => {
-        commit('setPaused', false);
-      }).catch(err => {
-        console.error(err);
-      });
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          commit('setPaused', false);
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
   },
 };
@@ -48,4 +51,4 @@ export default {
   state,
   mutations,
   actions,
-}
+};

@@ -1,13 +1,9 @@
 <template>
-  <div class="action-container">
-
-  </div>
+  <div class="action-container"></div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style lang="scss" scoped>

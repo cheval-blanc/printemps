@@ -27,16 +27,18 @@ class Track {
 async function walkDirectory(dirPath) {
   const dirs = await fs.readdir(dirPath);
 
-  const files = await Promise.all(dirs.map(async file => {
-    const filePath = path.join(dirPath, file);
-    const stats = await fs.stat(filePath);
+  const files = await Promise.all(
+    dirs.map(async file => {
+      const filePath = path.join(dirPath, file);
+      const stats = await fs.stat(filePath);
 
-    if(stats.isDirectory()) {
-      return walkDirectory(filePath);
-    } else if(stats.isFile()) {
-      return filePath;
-    }
-  }));
+      if (stats.isDirectory()) {
+        return walkDirectory(filePath);
+      } else if (stats.isFile()) {
+        return filePath;
+      }
+    }),
+  );
 
   return files.reduce((all, f) => all.concat(f), []);
 }
@@ -61,7 +63,7 @@ export default async function() {
   const albumMap = await makeAlbumMap(audioFiles);
 
   const { upsertedCount, modifiedCount } = await importAlbums(albumMap);
-  console.log(`upsertedCount: ${upsertedCount}, modifiedCount: ${modifiedCount}`);
+  console.log(`upserted: ${upsertedCount}, modified: ${modifiedCount}`);
 
   console.timeEnd('importAudioFiles()');
 }

@@ -4,7 +4,7 @@
       v-for="(album, i) in albums"
       :key="album._id"
       :album="album"
-      :albumIndex="i"
+      :album-index="i"
       @flipOver="flipOver"
       @flipBack="flipBack"
     />
@@ -19,21 +19,19 @@ export default {
   components: {
     AlbumCard,
   },
+  data: () => ({
+    flippedIndex: -1,
+  }),
   computed: mapState({
     albums: state => state.albums.all,
-  }),
-  data: ()=>({
-    flippedIndex: -1,
   }),
   beforeCreate() {
     this.$store.dispatch('albums/fetchAlbums');
   },
   methods: {
-    ...mapMutations('albums', [
-      'toggleFlipped',
-    ]),
+    ...mapMutations('albums', ['toggleFlipped']),
     flipOver(albumIndex) {
-      if(this.flippedIndex !== -1) {
+      if (this.flippedIndex !== -1) {
         this.toggleFlipped(this.flippedIndex);
       }
 
@@ -45,7 +43,7 @@ export default {
       this.toggleFlipped(albumIndex);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

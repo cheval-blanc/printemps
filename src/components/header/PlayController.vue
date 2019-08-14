@@ -2,20 +2,20 @@
   <div class="play-controller">
     <icon-button
       class="play-icon"
-      iconName="backward"
-      :iconSize="iconSize"
+      icon-name="backward"
+      :icon-size="iconSize"
       @click.native="playPrevious"
     />
     <icon-button
       class="play-icon"
-      :iconName="paused ? 'play' : 'pause'"
-      :iconSize="iconSize"
+      :icon-name="paused ? 'play' : 'pause'"
+      :icon-size="iconSize"
       @click.native="pauseOrPlay"
     />
     <icon-button
       class="play-icon"
-      iconName="forward"
-      :iconSize="iconSize"
+      icon-name="forward"
+      :icon-size="iconSize"
       @click.native="playNext"
     />
   </div>
@@ -29,16 +29,13 @@ export default {
   components: {
     IconButton,
   },
-  computed: mapState('audioCtx', [
-    'audio',
-    'paused',
-  ]),
-  data: ()=>({
+  data: () => ({
     iconSize: '2.5em',
   }),
+  computed: mapState('audioCtx', ['audio', 'paused']),
   methods: {
     pauseOrPlay() {
-      if(this.paused) {
+      if (this.paused) {
         this.$store.dispatch('audioCtx/playAudio');
       } else {
         this.$store.commit('audioCtx/pauseAudio');
@@ -48,14 +45,14 @@ export default {
       this.$store.dispatch('trackManager/requestNextTrack');
     },
     playPrevious() {
-      if(this.audio.currentTime > 10) {
+      if (this.audio.currentTime > 10) {
         this.$store.commit('audioCtx/setCurrentTime', 0);
       } else {
         this.$store.dispatch('trackManager/requestPreviousTrack');
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

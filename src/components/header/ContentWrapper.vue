@@ -16,8 +16,8 @@ export default {
     ControlContainer,
     InfoContainer,
     ActionContainer,
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
