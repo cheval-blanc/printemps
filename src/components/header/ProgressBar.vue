@@ -9,15 +9,15 @@
 
 <script>
 import { mapState } from 'vuex';
-import { secToHms } from '../../common/util';
+import { formatSec } from '../../common/util';
 
 let progressUpdater = null;
 
 export default {
   data: () => ({
     scrubberRatio: 0,
-    currentTime: secToHms(),
-    remainTime: secToHms(),
+    currentTime: formatSec(),
+    remainTime: formatSec(),
   }),
   computed: mapState('audioCtx', ['audio', 'paused']),
   watch: {
@@ -45,8 +45,8 @@ export default {
       const { currentTime, duration } = this.audio;
 
       this.scrubberRatio = (currentTime / duration) * 100;
-      this.currentTime = secToHms(currentTime);
-      this.remainTime = secToHms(duration - currentTime);
+      this.currentTime = formatSec(currentTime);
+      this.remainTime = formatSec(duration - currentTime);
     },
     movePlayTime({ pageX }) {
       if (this.audio.src.length === 0) {

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { addHours, addSeconds, format, getHours } from 'date-fns';
 
 export function bytesToImage(format, bytes) {
   const base64String = bytes.reduce((str, b) => {
@@ -7,17 +7,16 @@ export function bytesToImage(format, bytes) {
   return `data:${format};base64,${window.btoa(base64String)}`;
 }
 
-export function secToHms(sec = 0) {
+export function formatSec(sec = 0) {
   sec = Number(sec);
   if (isNaN(sec) || sec === 0) {
     return '0:00';
   }
 
-  const dur = moment.duration(sec, 's');
-  const hms = [dur.hours(), dur.minutes(), ('0' + dur.seconds()).slice(-2)];
-  if (hms[0] === 0) {
-    hms.shift();
-  }
+  const date = new Date(0);
+  const timezoneDiff = date.getTimezoneOffset() / 60;
+  const dateZero = addHours(date, timezoneDiff);
 
-  return hms.join(':');
+  const dateWithSec = addSeconds(dateZero, sec);
+  return format(dateWithSec, getHours(dateWithSec) > 1 ? 'h:mm:ss' : 'm:ss');
 }
