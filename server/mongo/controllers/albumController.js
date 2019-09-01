@@ -2,7 +2,7 @@ import Album from '../models/Album';
 
 export async function listAlbums() {
   try {
-    return await Album.find().sort({ artist: 1, title: 1 });
+    return await Album.find().sort({ artist: 1, year: 1 });
   } catch (e) {
     console.error(e);
   }
