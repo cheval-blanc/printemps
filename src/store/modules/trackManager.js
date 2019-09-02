@@ -1,4 +1,5 @@
 import { emit } from '../../common/binaryClient';
+import { shuffleQueue, sortQueue } from '../../common/util';
 
 const state = {
   queue: [],
@@ -43,39 +44,59 @@ const mutations = {
 };
 
 const actions = {
-  fetchPlayingAlbum({ state, commit }, albumData) {
-    const { queue, playingIndex, albumTitle, albumArt, artist } = albumData;
+  fetchPlayingAlbum({ state, commit, dispatch }, albumData) {
+    const { playingIndex, queue, albumTitle, albumArt, artist } = albumData;
+
+    commit('setPlayingIndex', playingIndex);
 
     if (state.albumTitle !== albumTitle || state.artist !== artist) {
-      commit('setQueue', queue);
+      if (state.isShuffle) {
+        dispatch('shuffleQueue', queue);
+      } else {
+        commit('setQueue', queue);
+      }
+
       commit('setAlbumTitle', albumTitle);
       commit('setAlbumArt', albumArt);
       commit('setArtist', artist);
     }
-
-    commit('setPlayingIndex', playingIndex);
-    commit('setTrackTitle', queue[playingIndex].title);
   },
-  requestNextTrack({ state, commit, dispatch }) {
-    if (state.queue.length === 0) {
-      return;
-    }
 
-    commit('goForwardTrack');
-    dispatch('requestTrack');
+  requestNextTrack({ state, commit, dispatch }) {
+    if (state.queue.length > 0) {
+      commit('goForwardTrack');
+      dispatch('requestTrack');
+    }
   },
   requestPreviousTrack({ state, commit, dispatch }) {
-    if (state.queue.length === 0) {
-      return;
+    if (state.queue.length > 0) {
+      commit('goBackwardTrack');
+      dispatch('requestTrack');
     }
-
-    commit('goBackwardTrack');
-    dispatch('requestTrack');
   },
   requestTrack({ state, commit }) {
     const { filePath, title } = state.queue[state.playingIndex];
     emit(filePath);
     commit('setTrackTitle', title);
+  },
+
+  shuffleQueue({ state, commit }, queue) {
+    if (state.queue.length > 0 || queue !== undefined) {
+      commit(
+        'setQueue',
+        shuffleQueue(queue || state.queue, state.playingIndex),
+      );
+      commit('setPlayingIndex', 0);
+    }
+  },
+  sortQueue({ state, commit }) {
+    if (state.queue.length > 0) {
+      commit(
+        'setPlayingIndex',
+        state.queue[state.playingIndex].trackNumber - 1,
+      );
+      commit('setQueue', sortQueue(state.queue));
+    }
   },
 };
 

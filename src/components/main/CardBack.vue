@@ -49,6 +49,8 @@ export default {
         albumArt: this.albumArt,
         artist: this.artist,
       });
+
+      this.$store.dispatch('trackManager/requestTrack');
     },
   },
 };

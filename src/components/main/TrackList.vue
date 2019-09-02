@@ -4,7 +4,7 @@
       v-for="(t, i) in tracks"
       :key="t._id"
       class="track"
-      @dblclick="requestTrack(t, i)"
+      @dblclick="$emit('fetchQueue', i)"
     >
       <div class="track-number">{{ t.trackNumber }}</div>
       <div class="track-title">{{ t.title }}</div>
@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import { emit } from '../../common/binaryClient';
-
 export default {
   props: {
     tracks: {
@@ -22,12 +20,6 @@ export default {
       default() {
         return [];
       },
-    },
-  },
-  methods: {
-    requestTrack({ filePath }, index) {
-      emit(filePath);
-      this.$emit('fetchQueue', index);
     },
   },
 };

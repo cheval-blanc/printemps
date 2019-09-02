@@ -10,7 +10,7 @@
 
 <script>
 import IconButton from './IconButton.vue';
-import { mapState, mapMutations } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -18,7 +18,15 @@ export default {
   },
   computed: mapState('trackManager', ['isShuffle']),
   methods: {
-    ...mapMutations('trackManager', ['toggleShuffle']),
+    toggleShuffle() {
+      this.$store.commit('trackManager/toggleShuffle');
+
+      if (this.isShuffle) {
+        this.$store.dispatch('trackManager/shuffleQueue');
+      } else {
+        this.$store.dispatch('trackManager/sortQueue');
+      }
+    },
   },
 };
 </script>

@@ -1,4 +1,5 @@
 import { addHours, addSeconds, format, getHours } from 'date-fns';
+import { cloneDeep, shuffle, orderBy } from 'lodash-es';
 
 export function bytesToImage(format, bytes) {
   const base64String = bytes.reduce((str, b) => {
@@ -19,4 +20,16 @@ export function formatSec(sec = 0) {
 
   const dateWithSec = addSeconds(dateUTC, sec);
   return format(dateWithSec, getHours(dateWithSec) > 1 ? 'h:mm:ss' : 'm:ss');
+}
+
+export function shuffleQueue(queue, playingIndex) {
+  const cloned = cloneDeep(queue);
+  const current = cloned.splice(playingIndex, 1);
+
+  return current.concat(shuffle(cloned));
+}
+
+export function sortQueue(queue) {
+  const cloned = cloneDeep(queue);
+  return orderBy(cloned, ['trackNumber']);
 }
