@@ -1,12 +1,11 @@
 <template>
-  <div
-    id="app"
-    @mousemove="$root.$emit('mMoveVolume', $event)"
-    @mouseup="$root.$emit('mUpVolume')"
+  <v-app
+    @mousemove.native="$root.$emit('mMoveVolume', $event)"
+    @mouseup.native="$root.$emit('mUpVolume')"
   >
     <masthead />
     <card-container />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -39,16 +38,16 @@ html {
   }
 }
 
-body {
+#app {
   font-family: 'Lora', 'Jeju Myeongjo', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-  #app {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    & > * {
-      user-select: none;
-    }
+  & > * {
+    user-select: none;
   }
 }
 </style>
