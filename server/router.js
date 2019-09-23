@@ -7,7 +7,7 @@ export default function(app) {
     res.sendFile(path.resolve(__dirname, '../index.html'));
   });
 
-  app.get('/albums', async (reg, res) => {
+  app.get('/albums', async (req, res) => {
     const albums = await listAlbums();
     res.json(albums);
   });

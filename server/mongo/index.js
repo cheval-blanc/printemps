@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import importAudioFiles from './util/audioFilesImporter';
+import importAudioFiles from './common/audioFilesImporter';
 
 mongoose.Promise = Promise;
 
