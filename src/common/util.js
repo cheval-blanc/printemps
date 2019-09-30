@@ -11,7 +11,7 @@ export function bytesToImage(format, bytes) {
 
 export function formatSec(sec = 0) {
   sec = Number(sec);
-  if (isNaN(sec) || sec === 0) {
+  if (isNaN(sec) || sec < 1) {
     return '0:00';
   }
 
@@ -19,7 +19,7 @@ export function formatSec(sec = 0) {
   const dateUTC = addHours(date, date.getTimezoneOffset() / 60);
 
   const dateWithSec = addSeconds(dateUTC, sec);
-  return format(dateWithSec, getHours(dateWithSec) > 1 ? 'h:mm:ss' : 'm:ss');
+  return format(dateWithSec, getHours(dateWithSec) > 0 ? 'H:mm:ss' : 'm:ss');
 }
 
 export function shuffleQueue(queue, playingIndex) {
