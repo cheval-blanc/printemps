@@ -1,7 +1,11 @@
 import { addHours, addSeconds, format, getHours } from 'date-fns';
-import { cloneDeep, shuffle, orderBy } from 'lodash-es';
+import * as _ from 'lodash-es';
 
 export function bytesToImage(format, bytes) {
+  if (_.isEmpty(format) || _.isEmpty(bytes)) {
+    return '';
+  }
+
   const base64String = bytes.reduce((str, b) => {
     return str + String.fromCharCode(b);
   }, '');
@@ -23,13 +27,13 @@ export function formatSec(sec = 0) {
 }
 
 export function shuffleQueue(queue, playingIndex) {
-  const cloned = cloneDeep(queue);
+  const cloned = _.cloneDeep(queue);
   const current = cloned.splice(playingIndex, 1);
 
-  return current.concat(shuffle(cloned));
+  return current.concat(_.shuffle(cloned));
 }
 
 export function sortQueue(queue) {
-  const cloned = cloneDeep(queue);
-  return orderBy(cloned, ['trackNumber']);
+  const cloned = _.cloneDeep(queue);
+  return _.orderBy(cloned, ['trackNumber']);
 }
