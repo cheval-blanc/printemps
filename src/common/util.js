@@ -38,6 +38,10 @@ export function shuffleQueue(queue, playingIndex) {
 }
 
 export function sortQueue(queue) {
+  if (_.isEmpty(queue) || queue.length < 3) {
+    return queue;
+  }
+
   const cloned = _.cloneDeep(queue);
   return _.orderBy(cloned, ['trackNumber']);
 }

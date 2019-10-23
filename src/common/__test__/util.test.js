@@ -57,17 +57,38 @@ describe('util:shuffleQueue()', () => {
     expect(shuffleQueue(emptyQueue, 0)).toBe(emptyQueue);
   });
 
-  it('length of queue is less than 3', () => {
+  it('queue has less than 3 elements', () => {
     const tinyQueue = [1, 2];
     expect(shuffleQueue(tinyQueue, 0)).toBe(tinyQueue);
   });
 
-  it('length of queue is 5', () => {
+  it('queue has 5 elements', () => {
     const smallQueue = Array.from(new Array(5), (v, i) => i);
     const playingIndex = 3;
 
     const shuffled = shuffleQueue(smallQueue, playingIndex);
     expect(shuffled[0]).toBe(playingIndex);
     expect(shuffled[1]).not.toBe(playingIndex);
+  });
+});
+
+describe('util:sortQueue()', () => {
+  const { sortQueue, shuffleQueue } = util;
+
+  it('queue is empty', () => {
+    const emptyQueue = [];
+    expect(sortQueue(emptyQueue, 0)).toBe(emptyQueue);
+  });
+
+  it('sort shuffled queue that has 5 elements', () => {
+    const dummyQueue = Array.from(new Array(5), (v, i) => {
+      return {
+        trackNumber: i + 1,
+        title: String.fromCharCode(i + 1),
+      };
+    });
+
+    const sorted = sortQueue(shuffleQueue(dummyQueue, 0));
+    expect(sorted[0].trackNumber).toBeLessThan(sorted[1].trackNumber);
   });
 });
