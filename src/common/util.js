@@ -27,6 +27,10 @@ export function formatSec(sec = 0) {
 }
 
 export function shuffleQueue(queue, playingIndex) {
+  if (_.isEmpty(queue) || queue.length < 3) {
+    return queue;
+  }
+
   const cloned = _.cloneDeep(queue);
   const current = cloned.splice(playingIndex, 1);
 

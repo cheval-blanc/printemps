@@ -48,3 +48,26 @@ describe('util:formatSec()', () => {
     expect(formatSec(oneHour * 13)).toBe('13:00:00');
   });
 });
+
+describe('util:shuffleQueue()', () => {
+  const { shuffleQueue } = util;
+
+  it('queue is empty', () => {
+    const emptyQueue = [];
+    expect(shuffleQueue(emptyQueue, 0)).toBe(emptyQueue);
+  });
+
+  it('length of queue is less than 3', () => {
+    const tinyQueue = [1, 2];
+    expect(shuffleQueue(tinyQueue, 0)).toBe(tinyQueue);
+  });
+
+  it('length of queue is 5', () => {
+    const smallQueue = Array.from(new Array(5), (v, i) => i);
+    const playingIndex = 3;
+
+    const shuffled = shuffleQueue(smallQueue, playingIndex);
+    expect(shuffled[0]).toBe(playingIndex);
+    expect(shuffled[1]).not.toBe(playingIndex);
+  });
+});
