@@ -47,12 +47,12 @@
     $current: nth($breakpoints, $i);
     $next: nth($breakpoints, $i + 1);
 
-    @media (min-width: $current) and (max-width: $next - 1) {
+    @media screen and (min-width: $current) and (max-width: $next - 1) {
       grid-template-columns: repeat($i + 1, 1fr);
     }
   }
 
-  @media print and (min-width: nth($breakpoints, $ni)) {
+  @media screen and (min-width: nth($breakpoints, $ni)) {
     grid-template-columns: repeat($ni + 1, 1fr);
   }
 }
