@@ -5,17 +5,20 @@
   >
     <masthead />
     <card-container />
+    <throbber-icon />
   </v-app>
 </template>
 
 <script>
 import Masthead from './components/header/Masthead.vue';
 import CardContainer from './components/main/CardContainer.vue';
+import ThrobberIcon from './components/ThrobberIcon.vue';
 
 export default {
   components: {
     Masthead,
     CardContainer,
+    ThrobberIcon,
   },
 };
 </script>

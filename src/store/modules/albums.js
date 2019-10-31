@@ -4,6 +4,7 @@ import { bytesToImage } from '../../common/util';
 
 const state = {
   all: [],
+  isFetched: false,
 };
 
 const mutations = {
@@ -12,6 +13,9 @@ const mutations = {
   },
   toggleFlipped(state, albumIndex) {
     state.all[albumIndex].isFlipped = !state.all[albumIndex].isFlipped;
+  },
+  setFetched(state, isFetched) {
+    state.isFetched = isFetched;
   },
 };
 
@@ -27,6 +31,8 @@ const actions = {
         return rest;
       }),
     );
+
+    commit('setFetched', true);
   },
 };
 
