@@ -20,5 +20,6 @@ module.exports = {
     '!node_modules/**',
     '!build/**',
     '!coverage/**',
+    '!*.config.js',
   ],
 };
