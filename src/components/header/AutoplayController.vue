@@ -16,15 +16,15 @@ export default {
   components: {
     IconButton,
   },
-  computed: mapState('trackManager', ['isShuffle']),
+  computed: mapState('playingAlbum', ['isShuffle']),
   methods: {
     toggleShuffle() {
-      this.$store.commit('trackManager/toggleShuffle');
+      this.$store.commit('playingAlbum/toggleShuffle');
 
       if (this.isShuffle) {
-        this.$store.dispatch('trackManager/shuffleQueue');
+        this.$store.dispatch('playingAlbum/shuffleQueue');
       } else {
-        this.$store.dispatch('trackManager/sortQueue');
+        this.$store.dispatch('playingAlbum/sortQueue');
       }
     },
   },

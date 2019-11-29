@@ -42,13 +42,13 @@ export default {
       }
     },
     playNext() {
-      this.$store.dispatch('trackManager/requestNextTrack');
+      this.$store.dispatch('playingAlbum/requestNextTrack');
     },
     playPrevious() {
       if (this.audio.currentTime > 10) {
         this.$store.commit('audioCtx/setCurrentTime', 0);
       } else {
-        this.$store.dispatch('trackManager/requestPreviousTrack');
+        this.$store.dispatch('playingAlbum/requestPreviousTrack');
       }
     },
   },

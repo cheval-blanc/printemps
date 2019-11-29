@@ -44,7 +44,7 @@ const mutations = {
 };
 
 const actions = {
-  fetchPlayingAlbum({ state, commit, dispatch }, albumData) {
+  fetchAlbumData({ state, commit, dispatch }, albumData) {
     const { trackNumber, queue, albumTitle, albumArt, artist } = albumData;
 
     if (state.albumTitle !== albumTitle || state.artist !== artist) {

@@ -18,7 +18,7 @@ export default {
     PlayingTrack,
     AutoplayController,
   },
-  computed: mapState('trackManager', ['albumArt']),
+  computed: mapState('playingAlbum', ['albumArt']),
 };
 </script>
 

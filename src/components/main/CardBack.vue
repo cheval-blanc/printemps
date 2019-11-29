@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     fetchQueue(trackNumber) {
-      this.$store.dispatch('trackManager/fetchPlayingAlbum', {
+      this.$store.dispatch('playingAlbum/fetchAlbumData', {
         trackNumber,
         queue: this.tracks,
         albumTitle: this.albumTitle,
@@ -50,7 +50,7 @@ export default {
         artist: this.artist,
       });
 
-      this.$store.dispatch('trackManager/requestTrack');
+      this.$store.dispatch('playingAlbum/requestTrack');
     },
   },
 };
