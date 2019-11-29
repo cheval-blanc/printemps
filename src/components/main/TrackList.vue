@@ -1,10 +1,10 @@
 <template>
   <ul class="track-list">
     <li
-      v-for="(t, i) in tracks"
+      v-for="t in tracks"
       :key="t._id"
       class="track"
-      @dblclick="$emit('fetchQueue', i)"
+      @dblclick="$emit('fetchQueue', t.trackNumber)"
     >
       <div class="track-number">{{ t.trackNumber }}</div>
       <div class="track-title">{{ t.title }}</div>
