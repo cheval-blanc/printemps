@@ -32,10 +32,8 @@ export default async function() {
 
     await mongoose.connect(DB_URI, {
       useNewUrlParser: true,
+      useUnifiedTopology: true,
       useCreateIndex: true,
-      autoReconnect: true,
-      reconnectTries: 900,
-      reconnectInterval: 2000, // 900 * 2000 ms = 30 min
     });
   } catch (e) {
     console.error(e);
