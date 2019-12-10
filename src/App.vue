@@ -29,7 +29,9 @@ export default {
 
 html {
   overflow: auto;
+}
 
+.v-application {
   p {
     margin: 0;
   }

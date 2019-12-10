@@ -1,19 +1,13 @@
 import Vue from 'vue';
-import Vuetify from 'vuetify';
 
-import 'vuetify/dist/vuetify.min.css';
-import '@fortawesome/fontawesome-free/css/all.css';
-
-import App from './App.vue';
+import vuetify from './plugins/vuetify';
 import store from './store';
+import App from './App.vue';
 
 Vue.config.productionTip = false;
-Vue.use(Vuetify, {
-  iconfont: 'fa',
-});
 
 new Vue({
-  el: '#app',
+  vuetify,
   store,
   render: h => h(App),
-});
+}).$mount('#app');
