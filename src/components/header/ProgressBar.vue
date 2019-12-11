@@ -78,7 +78,7 @@ export default {
     top: 0;
     left: 0;
     height: inherit;
-    background-color: #da1c31;
+    background-color: #c73838;
     transition: width 0.05s ease-out;
   }
 
