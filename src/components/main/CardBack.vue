@@ -15,6 +15,7 @@
 
 <script>
 import TrackList from './TrackList.vue';
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -40,17 +41,30 @@ export default {
       },
     },
   },
+  computed: mapState('playingAlbum', {
+    __albumTitle: state => state.albumTitle,
+    __trackTitle: state => state.trackTitle,
+  }),
   methods: {
-    fetchQueue(trackNumber) {
-      this.$store.dispatch('playingAlbum/fetchAlbumData', {
-        trackNumber,
-        queue: this.tracks,
-        albumTitle: this.albumTitle,
-        albumArt: this.albumArt,
-        artist: this.artist,
-      });
+    fetchQueue(trackTitle, trackNumber) {
+      if (this.isSameTrack(trackTitle)) {
+        this.$store.commit('audioCtx/setCurrentTime', 0);
+      } else {
+        this.$store.dispatch('playingAlbum/fetchAlbumData', {
+          queue: this.tracks,
+          albumTitle: this.albumTitle,
+          albumArt: this.albumArt,
+          artist: this.artist,
+        });
 
-      this.$store.dispatch('playingAlbum/requestTrack');
+        this.$store.dispatch('playingAlbum/fetchPlayingIndex', trackNumber);
+      }
+    },
+    isSameTrack(trackTitle) {
+      return (
+        this.__albumTitle === this.albumTitle &&
+        this.__trackTitle === trackTitle
+      );
     },
   },
 };

@@ -4,7 +4,7 @@
       v-for="t in tracks"
       :key="t._id"
       class="track"
-      @dblclick="$emit('fetchQueue', t.trackNumber)"
+      @dblclick="$emit('fetchQueue', t.title, t.trackNumber)"
     >
       <div class="track-number">{{ t.trackNumber }}</div>
       <div class="track-title">{{ t.title }}</div>

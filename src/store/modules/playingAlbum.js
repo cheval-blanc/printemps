@@ -45,7 +45,7 @@ const mutations = {
 
 const actions = {
   fetchAlbumData({ state, commit, dispatch }, albumData) {
-    const { trackNumber, queue, albumTitle, albumArt, artist } = albumData;
+    const { queue, albumTitle, albumArt, artist } = albumData;
 
     if (state.albumTitle !== albumTitle || state.artist !== artist) {
       if (state.isShuffle) {
@@ -58,11 +58,14 @@ const actions = {
       commit('setAlbumArt', albumArt);
       commit('setArtist', artist);
     }
-
+  },
+  fetchPlayingIndex({ state, commit, dispatch }, trackNumber) {
     const playingIndex = state.queue.findIndex(e => {
       return e.trackNumber === trackNumber;
     });
+
     commit('setPlayingIndex', playingIndex);
+    dispatch('requestTrack');
   },
 
   requestNextTrack({ state, commit, dispatch }) {
