@@ -4,9 +4,7 @@ module.exports = {
     'json',
     // 'vue',
   ],
-  transformIgnorePatterns: [
-    '/node_modules/(?!lodash-es).+\\.js$',
-  ],
+  transformIgnorePatterns: ['/node_modules/(?!lodash-es).+\\.js$'],
   transform: {
     '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
     // '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest',

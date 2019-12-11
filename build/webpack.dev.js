@@ -11,7 +11,7 @@ module.exports = merge(common, {
   devServer: {
     contentBase: PROD_PATH,
     proxy: {
-      '**': 'http://localhost:3000'
+      '**': 'http://localhost:3000',
     },
   },
 });
