@@ -1,6 +1,6 @@
 <template>
   <icon-button
-    class="random-button"
+    class="shuffle-button"
     icon-name="random"
     icon-size="20px"
     :class="{ 'turn-on': isShuffle }"
@@ -33,18 +33,17 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../scss/variables';
-$toggle-color: #eee;
+.shuffle-button {
+  color: #dbdbdb;
 
-.random-button {
-  width: 26px;
-  height: 24px;
-  border-radius: 3px;
-  text-align: center;
+  &:hover,
+  &:active {
+    color: #c2c2c2;
+  }
 }
 
 .turn-on {
   color: $toggle-color;
-  background-color: $primary-color;
 
   &:hover,
   &:active {
