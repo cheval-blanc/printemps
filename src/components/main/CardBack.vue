@@ -86,10 +86,9 @@ export default {
     p {
       @include text-overflow-ellipsis();
       color: $bold-color;
-      font-size: 0.9em;
+      font-size: 1.3rem;
     }
     .album-title {
-      margin-bottom: 2px;
       font-weight: 600;
     }
   }

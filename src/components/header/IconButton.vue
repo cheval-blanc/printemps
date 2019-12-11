@@ -7,7 +7,7 @@ export default {
   props: {
     iconSize: {
       type: String,
-      default: '1em',
+      default: '1.2rem',
     },
     iconName: {
       type: String,

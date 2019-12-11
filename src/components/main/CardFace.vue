@@ -61,19 +61,18 @@ export default {
     }
 
     .album-title {
-      margin-bottom: 3px;
-      font-size: 1em;
+      font-size: 1.4rem;
       font-weight: 600;
     }
     .pub-year {
-      font-size: 0.8em;
+      font-size: 1.1rem;
       color: $primary-color;
     }
     .artist {
       position: absolute;
       left: 0;
       bottom: 0;
-      font-size: 0.9em;
+      font-size: 1.3rem;
     }
   }
 }

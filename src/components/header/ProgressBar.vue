@@ -84,9 +84,9 @@ export default {
 
   .play-time {
     position: absolute;
-    top: -16px;
+    top: -17px;
     color: $bold-color;
-    font-size: 0.9em;
+    font-size: 1.3rem;
     cursor: default;
 
     &.current {

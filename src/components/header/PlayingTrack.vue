@@ -40,7 +40,7 @@ export default {
     @include text-overflow-ellipsis();
     text-align: center;
     margin-bottom: 5px;
-    font-size: 1.2em;
+    font-size: 1.6rem;
   }
 
   .hashtag-wrapper {
@@ -49,14 +49,14 @@ export default {
     .hashtag {
       margin-right: 2px;
       color: $primary-color;
-      font-size: 0.8em;
+      font-size: 1.1rem;
       &.last {
         margin-left: $md-pad;
       }
     }
 
     .track-info {
-      font-size: 0.9em;
+      font-size: 1.3rem;
     }
   }
 }

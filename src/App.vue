@@ -29,6 +29,7 @@ export default {
 
 html {
   overflow: auto;
+  font-size: 10px;
 }
 
 .v-application {

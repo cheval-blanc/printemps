@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isFetched" class="throbber-container">
-    <v-icon size="2.5em">fa-hourglass-start fa-spin</v-icon>
+    <v-icon size="3.2rem">fa-hourglass-start fa-spin</v-icon>
   </div>
 </template>
 

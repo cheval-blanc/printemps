@@ -30,7 +30,7 @@ export default {
     IconButton,
   },
   data: () => ({
-    iconSize: '2.5em',
+    iconSize: '3.4rem',
   }),
   computed: mapState('audioCtx', ['audio', 'paused']),
   methods: {

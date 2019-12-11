@@ -2,7 +2,7 @@
   <icon-button
     class="random-button"
     icon-name="random"
-    icon-size="18px"
+    icon-size="20px"
     :class="{ 'turn-on': isShuffle }"
     @click.native="toggleShuffle"
   />
@@ -36,9 +36,8 @@ export default {
 $toggle-color: #eee;
 
 .random-button {
-  width: 25px;
-  height: 21px;
-  padding: 2px 0;
+  width: 26px;
+  height: 24px;
   border-radius: 3px;
   text-align: center;
 }

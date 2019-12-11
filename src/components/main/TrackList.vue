@@ -49,14 +49,14 @@ export default {
       width: 16px;
       margin-right: 4px;
       text-align: center;
-      font-size: 0.8em;
+      font-size: 1.1rem;
       color: $primary-color;
     }
 
     .track-title {
       @include text-overflow-ellipsis();
       flex: 1;
-      font-size: 1em;
+      font-size: 1.35rem;
       color: $bold-color;
     }
   }
