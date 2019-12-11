@@ -57,6 +57,7 @@ export default {
   @include flex-vertical-align();
 
   .volume-status {
+    justify-content: left;
     margin-right: $md-pad;
   }
 }
