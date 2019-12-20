@@ -1,5 +1,6 @@
 import path from 'path';
-import { promises as fs } from 'fs';
+import fs from 'fs';
+const fsPromises = fs.promises;
 
 import { AUDIO_PATH } from '../../path';
 import readMediaTags from './mediaTagsReader';
@@ -24,46 +25,77 @@ class Track {
   }
 }
 
+async function openDirectory(dirPath) {
+  try {
+    return await fsPromises.readdir(dirPath);
+  } catch (e) {
+    fs.mkdirSync(dirPath);
+    console.log(`Directory is created: "${dirPath}"`);
+    return null;
+  }
+}
+
 async function walkDirectory(dirPath) {
-  const dirs = await fs.readdir(dirPath);
+  try {
+    const dirs = await openDirectory(dirPath);
+    if (dirs === null) {
+      return [];
+    }
 
-  const files = await Promise.all(
-    dirs.map(async file => {
-      const filePath = path.join(dirPath, file);
-      const stats = await fs.stat(filePath);
+    const files = await Promise.all(
+      dirs.map(async file => {
+        const filePath = path.join(dirPath, file);
+        const stats = await fsPromises.stat(filePath);
 
-      if (stats.isDirectory()) {
-        return walkDirectory(filePath);
-      } else if (stats.isFile()) {
-        return filePath;
-      }
-    }),
-  );
+        if (stats.isDirectory()) {
+          return walkDirectory(filePath);
+        } else if (stats.isFile()) {
+          return filePath;
+        }
+      }),
+    );
 
-  return files.reduce((all, f) => all.concat(f), []);
+    return files.reduce((all, f) => all.concat(f), []);
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 async function makeAlbumMap(audioFiles) {
   return audioFiles.reduce(async (prevMap, file) => {
     const map = await prevMap;
-    const tags = await readMediaTags(file);
 
-    const key = `${tags.artist}@${tags.album}`;
-    map[key] = map[key] || new Album(tags);
-    map[key].tracks.push(new Track(tags, file));
+    try {
+      const tags = await readMediaTags(file);
 
-    return map;
+      const key = `${tags.artist}@${tags.album}`;
+      map[key] = map[key] || new Album(tags);
+      map[key].tracks.push(new Track(tags, file));
+    } catch (e) {
+      console.error(`file: ${file}`, e);
+    } finally {
+      return map;
+    }
   }, Promise.resolve({}));
 }
 
 export default async function() {
-  console.time('importAudioFiles()');
+  try {
+    console.time('importAudioFiles()');
 
-  const audioFiles = await walkDirectory(AUDIO_PATH);
-  const albumMap = await makeAlbumMap(audioFiles);
+    const audioFiles = await walkDirectory(AUDIO_PATH);
 
-  const { upsertedCount, modifiedCount } = await importAlbums(albumMap);
-  console.log(`upserted: ${upsertedCount}, modified: ${modifiedCount}`);
+    if (audioFiles.length === 0) {
+      console.warn(`No files in "${AUDIO_PATH}"`);
+    } else {
+      const albumMap = await makeAlbumMap(audioFiles);
 
-  console.timeEnd('importAudioFiles()');
+      const { upsertedCount, modifiedCount } = await importAlbums(albumMap);
+      console.log(`upserted: ${upsertedCount}, modified: ${modifiedCount}`);
+    }
+  } catch (e) {
+    console.error(e);
+  } finally {
+    console.timeEnd('importAudioFiles()');
+  }
 }
