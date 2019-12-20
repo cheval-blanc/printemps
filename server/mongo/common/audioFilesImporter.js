@@ -21,7 +21,7 @@ class Track {
   constructor({ track, title }, filePath) {
     this.trackNumber = track;
     this.title = title;
-    this.filePath = filePath.replace(`${AUDIO_PATH}\\`, '').replace(/\\/g, '/');
+    this.filePath = filePath.replace(`${AUDIO_PATH}${path.sep}`, '');
   }
 }
 
