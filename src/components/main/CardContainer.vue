@@ -1,5 +1,10 @@
 <template>
-  <main>
+  <main
+    ref="main"
+    v-infinite-scroll="loadMore"
+    infinite-scroll-disabled="isBusy"
+    infinite-scroll-distance="10"
+  >
     <album-card
       v-for="(album, i) in albums"
       :key="album._id"
@@ -13,7 +18,7 @@
 
 <script>
 import AlbumCard from './AlbumCard.vue';
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapGetters, mapMutations } from 'vuex';
 
 export default {
   components: {
@@ -22,14 +27,26 @@ export default {
   data: () => ({
     flippedIndex: -1,
   }),
-  computed: mapState({
-    albums: state => state.albums.all,
-  }),
-  beforeCreate() {
-    this.$store.dispatch('albums/fetchAlbums');
+  computed: {
+    ...mapState({
+      albums: state => state.albums.all,
+    }),
+    ...mapGetters('albums', ['isBusy']),
   },
   methods: {
     ...mapMutations('albums', ['toggleFlipped']),
+    loadMore() {
+      const itemCount = this.getItemCount();
+      this.$store.dispatch('albums/fetchAlbums', itemCount);
+    },
+    getItemCount() {
+      const mainStyle = window.getComputedStyle(this.$refs.main, null);
+      const columnCount = mainStyle
+        .getPropertyValue('grid-template-columns')
+        .split(' ').length;
+
+      return columnCount;
+    },
     flipOver(albumIndex) {
       if (this.flippedIndex !== -1) {
         this.toggleFlipped(this.flippedIndex);

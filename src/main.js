@@ -1,10 +1,12 @@
 import Vue from 'vue';
+import InfiniteScroll from 'vue-infinite-scroll';
 
 import vuetify from './plugins/vuetify';
 import store from './store';
 import App from './App.vue';
 
 Vue.config.productionTip = false;
+Vue.use(InfiniteScroll);
 
 new Vue({
   vuetify,
