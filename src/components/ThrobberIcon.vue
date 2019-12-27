@@ -17,6 +17,7 @@ export default {
 
 .throbber-container {
   display: flex;
+  margin-bottom: 20px;
   justify-content: center;
   color: $primary-color;
 }

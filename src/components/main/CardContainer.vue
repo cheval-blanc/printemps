@@ -71,7 +71,7 @@ main {
   @include responsive-grid-columns();
 
   width: 100%;
-  padding: ($lg-pad + $masthead-height) $lg-pad 30px;
+  padding: ($lg-pad + $masthead-height) $lg-pad 50px;
   box-sizing: border-box;
 
   display: grid;
