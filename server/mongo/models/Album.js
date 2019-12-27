@@ -24,4 +24,6 @@ const AlbumSchema = new Schema({
   tracks: [Track.schema],
 });
 
+AlbumSchema.index({ artist: 1, year: 1 });
+
 export default model('Album', AlbumSchema);
