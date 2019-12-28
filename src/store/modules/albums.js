@@ -4,7 +4,6 @@ import { bytesToImage } from '../../common/util';
 
 const state = {
   all: [],
-  pageNumber: 0,
   isFetched: true,
   isEnd: false,
   isError: false,
@@ -12,7 +11,7 @@ const state = {
 
 const getters = {
   isBusy(state) {
-    return !state.isFetched || state.isError;
+    return !state.isFetched || state.isEnd || state.isError;
   },
 };
 
@@ -22,9 +21,6 @@ const mutations = {
   },
   toggleFlipped(state, albumIndex) {
     state.all[albumIndex].isFlipped = !state.all[albumIndex].isFlipped;
-  },
-  increasePageNumber(state) {
-    state.pageNumber += 1;
   },
   setFetched(state, isFetched) {
     state.isFetched = isFetched;
@@ -38,23 +34,21 @@ const mutations = {
 };
 
 const actions = {
-  async fetchAlbums({ state, commit, dispatch }, itemCount) {
+  async fetchAlbums({ state, commit, dispatch }, reqCount) {
     try {
-      if (state.isEnd) {
-        return;
+      if (!state.isEnd) {
+        commit('setFetched', false);
+        await dispatch('requestAlbums', reqCount);
       }
-
-      commit('setFetched', false);
-      await dispatch('requestAlbums', itemCount);
     } catch (e) {
       console.error(e);
     } finally {
       commit('setFetched', true);
     }
   },
-  async requestAlbums({ state, commit }, itemCount) {
+  async requestAlbums({ state, commit }, reqCount) {
     const { data } = await axios.get(
-      `/albums/${state.pageNumber}/${itemCount}`,
+      `/albums/${state.all.length}/${reqCount}`,
     );
 
     if (!Array.isArray(data)) {
@@ -65,7 +59,6 @@ const actions = {
     if (data.length === 0) {
       commit('setEnd', true);
     } else {
-      commit('increasePageNumber');
       commit(
         'appendAlbums',
         data.map(({ albumArtFormat, albumArtBytes, ...rest }) => {

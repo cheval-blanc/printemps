@@ -1,15 +1,15 @@
 import Album from '../models/Album';
 
-export async function listAlbums(pageNumber, itemCount) {
+export async function listAlbums(albumCount, reqCount) {
   try {
-    if (pageNumber < 0 || itemCount < 1) {
-      throw `Invalid params; pageNumber: ${pageNumber}, itemCount: ${itemCount}`;
+    if (albumCount < 0 || reqCount < 1) {
+      throw `Invalid params; albumCount: ${albumCount}, reqCount: ${reqCount}`;
     }
 
     return await Album.find()
       .sort({ artist: 1, year: 1 })
-      .skip(pageNumber * itemCount)
-      .limit(itemCount);
+      .skip(albumCount)
+      .limit(reqCount);
   } catch (e) {
     console.error(e);
     return e;

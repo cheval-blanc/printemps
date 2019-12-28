@@ -7,10 +7,10 @@ export default function(app) {
     res.sendFile(path.resolve(__dirname, '../index.html'));
   });
 
-  app.get('/albums/:pageNumber/:itemCount', async ({ params }, res) => {
-    const { pageNumber, itemCount } = params;
+  app.get('/albums/:albumCount/:reqCount', async ({ params }, res) => {
+    const { albumCount, reqCount } = params;
 
-    const albums = await listAlbums(Number(pageNumber), Number(itemCount));
+    const albums = await listAlbums(Number(albumCount), Number(reqCount));
     res.json(albums);
   });
 }

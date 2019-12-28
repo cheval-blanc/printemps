@@ -36,10 +36,10 @@ export default {
   methods: {
     ...mapMutations('albums', ['toggleFlipped']),
     loadMore() {
-      const itemCount = this.getItemCount();
-      this.$store.dispatch('albums/fetchAlbums', itemCount);
+      const reqCount = this.getReqCount();
+      this.$store.dispatch('albums/fetchAlbums', reqCount);
     },
-    getItemCount() {
+    getReqCount() {
       const mainStyle = window.getComputedStyle(this.$refs.main, null);
       const columnCount = mainStyle
         .getPropertyValue('grid-template-columns')
