@@ -90,8 +90,11 @@ export default async function() {
     } else {
       const albumMap = await makeAlbumMap(audioFiles);
 
-      const { upsertedCount, modifiedCount } = await importAlbums(albumMap);
-      console.log(`upserted: ${upsertedCount}, modified: ${modifiedCount}`);
+      const res = await importAlbums(albumMap);
+      if (res !== undefined) {
+        const { upsertedCount, modifiedCount } = res;
+        console.log(`upserted: ${upsertedCount}, modified: ${modifiedCount}`);
+      }
     }
   } catch (e) {
     console.error(e);
