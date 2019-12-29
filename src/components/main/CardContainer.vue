@@ -3,7 +3,7 @@
     ref="main"
     v-infinite-scroll="loadMore"
     infinite-scroll-disabled="isBusy"
-    infinite-scroll-distance="10"
+    infinite-scroll-distance="40"
   >
     <album-card
       v-for="(album, i) in albums"
