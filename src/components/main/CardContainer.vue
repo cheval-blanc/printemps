@@ -26,12 +26,21 @@ export default {
   },
   data: () => ({
     flippedIndex: -1,
+    lastWidth: 0,
+    lastResizedTime: 0,
   }),
   computed: {
     ...mapState({
       albums: state => state.albums.all,
     }),
     ...mapGetters('albums', ['isBusy']),
+  },
+  mounted() {
+    this.lastWidth = document.body.clientWidth;
+    window.addEventListener('resize', this.handleResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize);
   },
   methods: {
     ...mapMutations('albums', ['toggleFlipped']),
@@ -58,6 +67,21 @@ export default {
     flipBack(albumIndex) {
       this.flippedIndex = -1;
       this.toggleFlipped(albumIndex);
+    },
+    handleResize() {
+      const currentTime = Date.now();
+      const currentWidth = document.body.clientWidth;
+
+      if (
+        currentTime - this.lastResizedTime > 500 &&
+        currentWidth > this.lastWidth &&
+        document.body.scrollTop === 0
+      ) {
+        this.lastResizedTime = currentTime;
+        this.lastWidth = currentWidth;
+
+        this.loadMore();
+      }
     },
   },
 };
