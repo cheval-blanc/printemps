@@ -35,11 +35,13 @@ const mutations = {
 
 const actions = {
   async fetchAlbums({ state, commit, dispatch }, reqCount) {
+    if (!state.isFetched || state.isEnd) {
+      return;
+    }
+
     try {
-      if (state.isFetched || !state.isEnd) {
-        commit('setFetched', false);
-        await dispatch('requestAlbums', reqCount);
-      }
+      commit('setFetched', false);
+      await dispatch('requestAlbums', reqCount);
     } catch (e) {
       console.error(e);
     } finally {
