@@ -36,7 +36,7 @@ const mutations = {
 const actions = {
   async fetchAlbums({ state, commit, dispatch }, reqCount) {
     try {
-      if (!state.isEnd) {
+      if (state.isFetched || !state.isEnd) {
         commit('setFetched', false);
         await dispatch('requestAlbums', reqCount);
       }
@@ -47,9 +47,7 @@ const actions = {
     }
   },
   async requestAlbums({ state, commit }, reqCount) {
-    const { data } = await axios.get(
-      `/albums/${state.all.length}/${reqCount}`,
-    );
+    const { data } = await axios.get(`/albums/${state.all.length}/${reqCount}`);
 
     if (!Array.isArray(data)) {
       commit('setError', true);
