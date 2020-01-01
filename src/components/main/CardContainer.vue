@@ -54,7 +54,7 @@ export default {
         .getPropertyValue('grid-template-columns')
         .split(' ').length;
 
-      return columnCount;
+      return columnCount * 2;
     },
     flipOver(albumIndex) {
       if (this.flippedIndex !== -1) {
@@ -70,18 +70,18 @@ export default {
     },
     handleResize() {
       const currentTime = Date.now();
-      const currentWidth = document.body.clientWidth;
+      const { clientWidth, scrollTop } = document.body;
 
       if (
         currentTime - this.lastResizedTime > 500 &&
-        currentWidth > this.lastWidth &&
-        document.body.scrollTop === 0
+        clientWidth > this.lastWidth &&
+        scrollTop === 0
       ) {
-        this.lastResizedTime = currentTime;
-        this.lastWidth = currentWidth;
-
         this.loadMore();
       }
+
+      this.lastResizedTime = currentTime;
+      this.lastWidth = clientWidth;
     },
   },
 };
