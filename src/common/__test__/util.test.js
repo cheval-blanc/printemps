@@ -1,24 +1,5 @@
 import * as util from '../util';
 
-describe('util:bytesToImage()', () => {
-  const { bytesToImage } = util;
-
-  it('format or bytes is empty', () => {
-    expect(bytesToImage()).toBe('');
-    expect(bytesToImage('', [])).toBe('');
-    expect(bytesToImage(null, null)).toBe('');
-  });
-
-  it('format and bytes are dummy data', () => {
-    const dummyFormat = 'image/png';
-    const dummyBytes = [137, 80, 78, 71, 13, 10, 26, 10];
-
-    expect(bytesToImage(dummyFormat, dummyBytes)).toBe(
-      'data:image/png;base64,iVBORw0KGgo=',
-    );
-  });
-});
-
 describe('util:formatSec()', () => {
   const { formatSec } = util;
   const defaultValue = '0:00';

@@ -1,7 +1,11 @@
 <template>
   <div class="card-back">
     <div class="album-desc">
-      <img class="sm-album-art" :src="albumArt" @click="$emit('flipBack')" />
+      <img
+        class="sm-album-art"
+        :src="`/images/${albumArt}`"
+        @click="$emit('flipBack')"
+      />
 
       <div class="album-summary">
         <p class="album-title">{{ albumTitle }}</p>

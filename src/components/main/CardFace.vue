@@ -1,6 +1,12 @@
 <template>
   <div class="card-face">
-    <img class="album-art" :src="albumArt" @click="$emit('flipOver')" />
+    <div class="placeholder">
+      <img
+        class="album-art"
+        :src="`/images/${albumArt}`"
+        @click="$emit('flipOver')"
+      />
+    </div>
 
     <div class="album-desc">
       <p class="album-title">{{ albumTitle }}</p>
@@ -43,11 +49,21 @@ export default {
   display: flex;
   flex-direction: column;
 
-  .album-art {
+  .placeholder {
     flex: none;
     width: 100%;
+    padding-top: 100%;
+    background-color: #eee;
     border-radius: $card-border-radius $card-border-radius 0 0;
-    cursor: pointer;
+
+    .album-art {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-radius: inherit;
+      cursor: pointer;
+    }
   }
 
   .album-desc {

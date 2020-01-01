@@ -1,18 +1,16 @@
 import path from 'path';
-import fs from 'fs';
-const fsPromises = fs.promises;
 
-import { AUDIO_PATH } from '../../path';
+import { AUDIO_PATH, IMAGE_PATH } from '../../path';
+import { openDirectory, getFileList, saveImageFile } from './fsUtil';
 import readMediaTags from './mediaTagsReader';
 import { importAlbums } from '../controllers/albumController';
 
 class Album {
-  constructor({ artist, album, year, picture }) {
+  constructor({ artist, album, year }, fileName) {
     this.artist = artist;
     this.title = album;
     this.year = new Date(year).getFullYear();
-    this.albumArtFormat = picture.format;
-    this.albumArtBytes = picture.data;
+    this.albumArt = fileName;
     this.tracks = [];
   }
 }
@@ -25,42 +23,6 @@ class Track {
   }
 }
 
-async function openDirectory(dirPath) {
-  try {
-    return await fsPromises.readdir(dirPath);
-  } catch (e) {
-    fs.mkdirSync(dirPath);
-    console.log(`Directory is created: "${dirPath}"`);
-    return null;
-  }
-}
-
-async function walkDirectory(dirPath) {
-  try {
-    const dirs = await openDirectory(dirPath);
-    if (dirs === null) {
-      return [];
-    }
-
-    const files = await Promise.all(
-      dirs.map(async file => {
-        const filePath = path.join(dirPath, file);
-        const stats = await fsPromises.stat(filePath);
-
-        if (stats.isDirectory()) {
-          return walkDirectory(filePath);
-        } else if (stats.isFile()) {
-          return filePath;
-        }
-      }),
-    );
-
-    return files.reduce((all, f) => all.concat(f), []);
-  } catch (e) {
-    console.error(e);
-  }
-}
-
 async function makeAlbumMap(audioFiles) {
   return audioFiles.reduce(async (prevMap, file) => {
     const map = await prevMap;
@@ -69,10 +31,14 @@ async function makeAlbumMap(audioFiles) {
       const tags = await readMediaTags(file);
 
       const key = `${tags.artist}@${tags.album}`;
-      map[key] = map[key] || new Album(tags);
+      if (map[key] === undefined) {
+        const fileName = await saveImageFile(tags.picture, key, IMAGE_PATH);
+        map[key] = new Album(tags, fileName);
+      }
+
       map[key].tracks.push(new Track(tags, file));
     } catch (e) {
-      console.error(`file: ${file}`, e);
+      console.error(`filePath: ${file}`, e);
     } finally {
       return map;
     }
@@ -83,7 +49,8 @@ export default async function() {
   try {
     console.time('importAudioFiles()');
 
-    const audioFiles = await walkDirectory(AUDIO_PATH);
+    const audioFiles = await getFileList(AUDIO_PATH);
+    await openDirectory(IMAGE_PATH);
 
     if (audioFiles.length === 0) {
       console.warn(`No files in "${AUDIO_PATH}"`);

@@ -1,7 +1,7 @@
 <template>
   <div class="info-container">
     <div v-if="albumArt === null" class="thumbnail"></div>
-    <img v-else class="thumbnail" :src="albumArt" />
+    <img v-else class="thumbnail" :src="`/images/${albumArt}`" />
 
     <playing-track />
     <autoplay-controller />

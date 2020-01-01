@@ -1,18 +1,6 @@
 import { addHours, addSeconds, format, getHours } from 'date-fns';
 import * as _ from 'lodash-es';
 
-export function bytesToImage(format, bytes) {
-  if (_.isEmpty(format) || _.isEmpty(bytes)) {
-    return '';
-  }
-
-  const base64String = bytes.reduce((str, b) => {
-    return str + String.fromCharCode(b);
-  }, '');
-
-  return `data:${format};base64,${window.btoa(base64String)}`;
-}
-
 export function formatSec(sec = 0) {
   sec = Number(sec);
   if (isNaN(sec) || sec < 1) {

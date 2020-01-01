@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import { bytesToImage } from '../../common/util';
-
 const state = {
   all: [],
   isFetched: true,
@@ -61,8 +59,7 @@ const actions = {
     } else {
       commit(
         'appendAlbums',
-        data.map(({ albumArtFormat, albumArtBytes, ...rest }) => {
-          rest.albumArt = bytesToImage(albumArtFormat, albumArtBytes);
+        data.map(({ ...rest }) => {
           rest.isFlipped = false;
           return rest;
         }),
