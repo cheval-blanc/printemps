@@ -1,0 +1,23 @@
+language: node_js
+
+node_js:
+  - lts/*
+
+script:
+  - npm run lint
+  - npm test
+  - npm run build
+
+cache: npm
+
+branches:
+  only:
+    - master
+    - develop
+
+notifications:
+  email:
+    recipients:
+      - hyuuuntae@gmail.com
+    on_success: change # options: [always|never|change] default: change
+    on_failure: always # options: [always|never|change] default: always
