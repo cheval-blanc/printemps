@@ -27,8 +27,7 @@ mongoose.connection.on('error', error => {
 
 export default async function() {
   try {
-    const DB_NAME = 'printemps';
-    const DB_URI = `mongodb://localhost/${DB_NAME}`;
+    const DB_URI = process.env.MONGOLAB_URI || 'mongodb://localhost/printemps';
 
     await mongoose.connect(DB_URI, {
       useNewUrlParser: true,
