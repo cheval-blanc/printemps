@@ -1,7 +1,10 @@
 import { BinaryClient } from 'binaryjs-client';
 import store from '../store';
 
-const binaryClient = new BinaryClient(`ws://${window.location.hostname}:9000`);
+const { protocol, hostname } = window.location;
+const binaryClient = new BinaryClient(
+  `${protocol === 'https:' ? 'wss' : 'ws'}://${hostname}:9000`,
+);
 
 binaryClient.on('stream', (stream, meta) => {
   const parts = [];
