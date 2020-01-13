@@ -1,8 +1,5 @@
 <template>
-  <v-app
-    @mousemove.native="$root.$emit('mMoveVolume', $event)"
-    @mouseup.native="$root.$emit('mUpVolume')"
-  >
+  <v-app>
     <masthead />
     <card-container />
     <throbber-icon />

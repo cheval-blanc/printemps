@@ -1,5 +1,7 @@
 <template>
   <div ref="volumeBar" class="volume-bar" @click="updateVolume($event)">
+    <global-events @mousemove="mMoveVolume($event)" @mouseup="mUpVolume" />
+
     <icon-button
       class="volume-handle"
       icon-name="circle"
@@ -32,9 +34,6 @@ export default {
   },
   mounted() {
     this.handlePos = this.audio.volume * this.$refs.volumeBar.clientWidth;
-
-    this.$root.$on('mMoveVolume', this.mMoveVolume);
-    this.$root.$on('mUpVolume', this.mUpVolume);
   },
   methods: {
     mDownVolume() {
