@@ -1,5 +1,13 @@
 <template>
   <div class="play-controller">
+    <global-events
+      @keyup.k="pauseOrPlay"
+      @keyup.l="seekForward"
+      @keyup.39="seekForward"
+      @keyup.j="seekBackward"
+      @keyup.37="seekBackward"
+    />
+
     <icon-button
       class="play-icon"
       icon-name="backward"
@@ -23,7 +31,9 @@
 
 <script>
 import IconButton from './IconButton.vue';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
+
+const seekingSec = 10;
 
 export default {
   components: {
@@ -34,6 +44,8 @@ export default {
   }),
   computed: mapState('audioCtx', ['audio', 'paused']),
   methods: {
+    ...mapMutations('audioCtx', ['setCurrentTime']),
+
     pauseOrPlay() {
       if (this.paused) {
         this.$store.dispatch('audioCtx/playAudio');
@@ -45,10 +57,27 @@ export default {
       this.$store.dispatch('playingAlbum/requestNextTrack');
     },
     playPrevious() {
-      if (this.audio.currentTime > 10) {
-        this.$store.commit('audioCtx/setCurrentTime', 0);
+      if (this.audio.currentTime > seekingSec) {
+        this.setCurrentTime(0);
       } else {
         this.$store.dispatch('playingAlbum/requestPreviousTrack');
+      }
+    },
+    seekForward() {
+      if (this.audio.src.length > 0) {
+        this.setCurrentTime(this.audio.currentTime + seekingSec);
+        this.emitChangeCurrentTime();
+      }
+    },
+    seekBackward() {
+      if (this.audio.src.length > 0) {
+        this.setCurrentTime(this.audio.currentTime - seekingSec);
+        this.emitChangeCurrentTime();
+      }
+    },
+    emitChangeCurrentTime() {
+      if (this.paused) {
+        this.$root.$emit('changeCurrentTime');
       }
     },
   },

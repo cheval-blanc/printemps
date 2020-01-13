@@ -40,6 +40,9 @@ export default {
       }, 30);
     },
   },
+  created() {
+    this.$root.$on('changeCurrentTime', this.updateProgress);
+  },
   methods: {
     updateProgress() {
       const { currentTime, duration } = this.audio;

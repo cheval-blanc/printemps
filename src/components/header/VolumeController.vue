@@ -1,5 +1,7 @@
 <template>
   <div class="volume-controller">
+    <global-events @keyup.m="muteVolume" />
+
     <icon-button
       class="volume-status"
       :icon-name="`volume-${volumeStatus}`"
