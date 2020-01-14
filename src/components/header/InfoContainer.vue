@@ -11,19 +11,19 @@
 <script>
 import PlayingTrack from './PlayingTrack.vue';
 import AutoplayController from './AutoplayController.vue';
-import { mapState } from 'vuex';
+import * as playingAlbum from '@/store/modules/playingAlbum';
 
 export default {
   components: {
     PlayingTrack,
     AutoplayController,
   },
-  computed: mapState('playingAlbum', ['albumArt']),
+  computed: playingAlbum.mapState(['albumArt']),
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/mixins';
+@import '@/scss/mixins';
 
 .info-container {
   @include flex-vertical-align();

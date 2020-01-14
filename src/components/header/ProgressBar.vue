@@ -1,6 +1,6 @@
 <template>
   <div ref="progressBar" class="progress-bar" @click="movePlayTime($event)">
-    <div class="scrubber" :style="{ width: `${scrubberRatio}%` }"></div>
+    <div class="scrubber" :style="{ width: `${scrubberPercent}%` }"></div>
 
     <span class="play-time current">{{ currentTime }}</span>
     <span class="play-time remain">{{ remainTime }}</span>
@@ -8,18 +8,19 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import { formatSec } from '../../common/util';
+import { formatSec } from '@/common/util';
+import * as audioCtx from '@/store/modules/audioCtx';
+import * as playingAlbum from '@/store/modules/playingAlbum';
 
 let progressUpdater = null;
 
 export default {
   data: () => ({
-    scrubberRatio: 0,
+    scrubberPercent: 0,
     currentTime: formatSec(),
     remainTime: formatSec(),
   }),
-  computed: mapState('audioCtx', ['audio', 'paused']),
+  computed: audioCtx.mapState(['audio', 'paused']),
   watch: {
     paused() {
       if (this.paused) {
@@ -30,10 +31,10 @@ export default {
       progressUpdater = setInterval(() => {
         if (this.audio.ended) {
           clearInterval(progressUpdater);
-          this.scrubberRatio = 0;
+          this.scrubberPercent = 0;
 
-          this.$store.commit('audioCtx/setPaused', true);
-          this.$store.dispatch('playingAlbum/requestNextTrack');
+          this.setPaused(true);
+          this.requestNextTrack();
         } else {
           this.updateProgress();
         }
@@ -44,30 +45,30 @@ export default {
     this.$root.$on('changeCurrentTime', this.updateProgress);
   },
   methods: {
+    ...audioCtx.mapMutations(['setPaused', 'setCurrentTime']),
+    ...playingAlbum.mapActions(['requestNextTrack']),
+
     updateProgress() {
       const { currentTime, duration } = this.audio;
 
-      this.scrubberRatio = (currentTime / duration) * 100;
+      this.scrubberPercent = (currentTime / duration) * 100;
       this.currentTime = formatSec(currentTime);
       this.remainTime = formatSec(duration - currentTime);
     },
     movePlayTime({ pageX }) {
-      if (this.audio.src.length === 0) {
-        return;
-      }
+      if (this.audio.src.length > 0) {
+        const ratio = pageX / this.$refs.progressBar.clientWidth;
+        this.setCurrentTime(this.audio.duration * ratio);
 
-      this.$store.commit(
-        'audioCtx/setCurrentTime',
-        this.audio.duration * (pageX / this.$refs.progressBar.clientWidth),
-      );
-      this.updateProgress();
+        this.updateProgress();
+      }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/variables';
+@import '@/scss/variables';
 
 .progress-bar {
   position: relative;

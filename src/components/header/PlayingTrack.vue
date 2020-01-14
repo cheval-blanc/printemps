@@ -13,16 +13,16 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import * as playingAlbum from '@/store/modules/playingAlbum';
 
 export default {
-  computed: mapState('playingAlbum', ['trackTitle', 'albumTitle', 'artist']),
+  computed: playingAlbum.mapState(['trackTitle', 'albumTitle', 'artist']),
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/variables';
-@import '../../scss/mixins';
+@import '@/scss/variables';
+@import '@/scss/mixins';
 
 .playing-track {
   @include flex-vertical-align();

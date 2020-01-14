@@ -5,15 +5,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import * as albums from '@/store/modules/albums';
 
 export default {
-  computed: mapState('albums', ['isFetched']),
+  computed: albums.mapState(['isFetched']),
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/variables';
+@import '@/scss/variables';
 
 .throbber-container {
   display: flex;

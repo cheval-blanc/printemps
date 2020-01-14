@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import './variables.scss';
+@import './variables';
 
 @mixin flex-vertical-align() {
   display: flex;

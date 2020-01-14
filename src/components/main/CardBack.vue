@@ -19,7 +19,8 @@
 
 <script>
 import TrackList from './TrackList.vue';
-import { mapState } from 'vuex';
+import * as audioCtx from '@/store/modules/audioCtx';
+import * as playingAlbum from '@/store/modules/playingAlbum';
 
 export default {
   components: {
@@ -45,23 +46,26 @@ export default {
       },
     },
   },
-  computed: mapState('playingAlbum', {
+  computed: playingAlbum.mapState({
     __albumTitle: state => state.albumTitle,
     __trackTitle: state => state.trackTitle,
   }),
   methods: {
+    ...audioCtx.mapMutations(['setCurrentTime']),
+    ...playingAlbum.mapActions(['fetchAlbumData', 'fetchPlayingIndex']),
+
     fetchQueue(trackTitle, trackNumber) {
       if (this.isSameTrack(trackTitle)) {
-        this.$store.commit('audioCtx/setCurrentTime', 0);
+        this.setCurrentTime(0);
       } else {
-        this.$store.dispatch('playingAlbum/fetchAlbumData', {
+        this.fetchAlbumData({
           queue: this.tracks,
           albumTitle: this.albumTitle,
           albumArt: this.albumArt,
           artist: this.artist,
         });
 
-        this.$store.dispatch('playingAlbum/fetchPlayingIndex', trackNumber);
+        this.fetchPlayingIndex(trackNumber);
       }
     },
     isSameTrack(trackTitle) {
@@ -75,8 +79,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/variables';
-@import '../../scss/mixins';
+@import '@/scss/variables';
+@import '@/scss/mixins';
 
 .card-back {
   @include card-style();

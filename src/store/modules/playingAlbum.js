@@ -1,5 +1,6 @@
-import { emit } from '../../common/binaryClient';
-import { shuffleQueue, sortQueue } from '../../common/util';
+import { createNamespacedHelpers } from 'vuex';
+import { emit } from '@/common/binaryClient';
+import { shuffleQueue, sortQueue } from '@/common/util';
 
 const state = {
   queue: [],
@@ -106,6 +107,11 @@ const actions = {
   },
 };
 
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers(
+  'playingAlbum',
+);
+
+export { mapState, mapMutations, mapActions };
 export default {
   namespaced: true,
   state,

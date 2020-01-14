@@ -1,3 +1,5 @@
+import { createNamespacedHelpers } from 'vuex';
+
 const state = {
   audio: new Audio(),
   paused: true,
@@ -6,9 +8,8 @@ const state = {
 
 const mutations = {
   setAudioSrc(state, arrayBuffer) {
-    state.audio.src = (window.URL || window.webkitURL).createObjectURL(
-      new Blob(arrayBuffer),
-    );
+    const blob = new Blob(arrayBuffer);
+    state.audio.src = (window.URL || window.webkitURL).createObjectURL(blob);
   },
   setCurrentTime(state, currentTime) {
     state.audio.currentTime = currentTime;
@@ -46,6 +47,11 @@ const actions = {
   },
 };
 
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers(
+  'audioCtx',
+);
+
+export { mapState, mapMutations, mapActions };
 export default {
   namespaced: true,
   state,

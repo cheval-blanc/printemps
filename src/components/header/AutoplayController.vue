@@ -4,27 +4,30 @@
     icon-name="random"
     icon-size="20px"
     :class="{ 'turn-on': isShuffle }"
-    @click.native="toggleShuffle"
+    @click.native="clickShuffleButton"
   />
 </template>
 
 <script>
 import IconButton from './IconButton.vue';
-import { mapState } from 'vuex';
+import * as playingAlbum from '@/store/modules/playingAlbum';
 
 export default {
   components: {
     IconButton,
   },
-  computed: mapState('playingAlbum', ['isShuffle']),
+  computed: playingAlbum.mapState(['isShuffle']),
   methods: {
-    toggleShuffle() {
-      this.$store.commit('playingAlbum/toggleShuffle');
+    ...playingAlbum.mapMutations(['toggleShuffle']),
+    ...playingAlbum.mapActions(['shuffleQueue', 'sortQueue']),
+
+    clickShuffleButton() {
+      this.toggleShuffle();
 
       if (this.isShuffle) {
-        this.$store.dispatch('playingAlbum/shuffleQueue');
+        this.shuffleQueue();
       } else {
-        this.$store.dispatch('playingAlbum/sortQueue');
+        this.sortQueue();
       }
     },
   },
@@ -32,7 +35,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/variables';
+@import '@/scss/variables';
+
 .shuffle-button {
   color: #dbdbdb;
 

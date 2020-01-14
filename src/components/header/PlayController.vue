@@ -31,7 +31,8 @@
 
 <script>
 import IconButton from './IconButton.vue';
-import { mapState, mapMutations } from 'vuex';
+import * as audioCtx from '@/store/modules/audioCtx';
+import * as playingAlbum from '@/store/modules/playingAlbum';
 
 const seekingSec = 10;
 
@@ -42,25 +43,27 @@ export default {
   data: () => ({
     iconSize: '3.4rem',
   }),
-  computed: mapState('audioCtx', ['audio', 'paused']),
+  computed: audioCtx.mapState(['audio', 'paused']),
   methods: {
-    ...mapMutations('audioCtx', ['setCurrentTime']),
+    ...audioCtx.mapMutations(['setCurrentTime', 'pauseAudio']),
+    ...audioCtx.mapActions(['playAudio']),
+    ...playingAlbum.mapActions(['requestNextTrack', 'requestPreviousTrack']),
 
     pauseOrPlay() {
       if (this.paused) {
-        this.$store.dispatch('audioCtx/playAudio');
+        this.playAudio();
       } else {
-        this.$store.commit('audioCtx/pauseAudio');
+        this.pauseAudio();
       }
     },
     playNext() {
-      this.$store.dispatch('playingAlbum/requestNextTrack');
+      this.requestNextTrack();
     },
     playPrevious() {
       if (this.audio.currentTime > seekingSec) {
         this.setCurrentTime(0);
       } else {
-        this.$store.dispatch('playingAlbum/requestPreviousTrack');
+        this.requestPreviousTrack();
       }
     },
     seekForward() {
@@ -85,7 +88,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/variables';
+@import '@/scss/variables';
 
 .play-controller {
   margin-right: 30px;

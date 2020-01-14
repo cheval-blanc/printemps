@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/mixins';
+@import '@/scss/mixins';
 
 .control-container {
   @include flex-vertical-align();

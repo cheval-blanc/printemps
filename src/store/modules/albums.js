@@ -1,3 +1,4 @@
+import { createNamespacedHelpers } from 'vuex';
 import axios from 'axios';
 
 const state = {
@@ -8,9 +9,8 @@ const state = {
 };
 
 const getters = {
-  isBusy(state) {
-    return !state.isFetched || state.isEnd || state.isError;
-  },
+  albums: state => state.all,
+  isBusy: state => !state.isFetched || state.isEnd || state.isError,
 };
 
 const mutations = {
@@ -68,6 +68,14 @@ const actions = {
   },
 };
 
+const {
+  mapState,
+  mapGetters,
+  mapMutations,
+  mapActions,
+} = createNamespacedHelpers('albums');
+
+export { mapState, mapGetters, mapMutations, mapActions };
 export default {
   namespaced: true,
   state,

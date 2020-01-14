@@ -17,7 +17,7 @@
 <script>
 import IconButton from './IconButton.vue';
 import VolumeSlider from './VolumeSlider.vue';
-import { mapState } from 'vuex';
+import * as audioCtx from '@/store/modules/audioCtx';
 
 export default {
   components: {
@@ -28,13 +28,15 @@ export default {
     volumeStatus: null,
     volumeSize: 20,
   }),
-  computed: mapState('audioCtx', ['audio', 'muted']),
+  computed: audioCtx.mapState(['audio', 'muted']),
   mounted() {
     this.updateVolumeStatus();
   },
   methods: {
+    ...audioCtx.mapMutations(['toggleMuted']),
+
     muteVolume() {
-      this.$store.commit('audioCtx/toggleMuted');
+      this.toggleMuted();
 
       if (this.muted) {
         this.volumeStatus = 'mute';
@@ -52,8 +54,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/variables';
-@import '../../scss/mixins';
+@import '@/scss/variables';
+@import '@/scss/mixins';
 
 .volume-controller {
   @include flex-vertical-align();

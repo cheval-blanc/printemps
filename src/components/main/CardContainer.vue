@@ -18,7 +18,7 @@
 
 <script>
 import AlbumCard from './AlbumCard.vue';
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import * as albums from '@/store/modules/albums';
 
 export default {
   components: {
@@ -29,12 +29,7 @@ export default {
     lastWidth: 0,
     lastResizedTime: 0,
   }),
-  computed: {
-    ...mapState({
-      albums: state => state.albums.all,
-    }),
-    ...mapGetters('albums', ['isBusy']),
-  },
+  computed: albums.mapGetters(['albums', 'isBusy']),
   mounted() {
     this.lastWidth = document.body.clientWidth;
     window.addEventListener('resize', this.handleResize);
@@ -43,10 +38,12 @@ export default {
     window.removeEventListener('resize', this.handleResize);
   },
   methods: {
-    ...mapMutations('albums', ['toggleFlipped']),
+    ...albums.mapMutations(['toggleFlipped']),
+    ...albums.mapActions(['fetchAlbums']),
+
     loadMore() {
       const reqCount = this.getReqCount();
-      this.$store.dispatch('albums/fetchAlbums', reqCount);
+      this.fetchAlbums(reqCount);
     },
     getReqCount() {
       const mainStyle = window.getComputedStyle(this.$refs.main, null);
@@ -88,8 +85,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/variables';
-@import '../../scss/mixins';
+@import '@/scss/variables';
+@import '@/scss/mixins';
 
 main {
   @include responsive-grid-columns();

@@ -14,7 +14,7 @@
 
 <script>
 import IconButton from './IconButton.vue';
-import { mapState } from 'vuex';
+import * as audioCtx from '@/store/modules/audioCtx';
 
 let volumeDragging = false;
 
@@ -27,7 +27,7 @@ export default {
     handlePos: 0,
   }),
   computed: {
-    ...mapState('audioCtx', ['audio']),
+    ...audioCtx.mapState(['audio']),
     halfIconSize() {
       return (this.iconSize / 2) * -1;
     },
@@ -36,6 +36,8 @@ export default {
     this.handlePos = this.audio.volume * this.$refs.volumeBar.clientWidth;
   },
   methods: {
+    ...audioCtx.mapMutations(['setVolume']),
+
     mDownVolume() {
       volumeDragging = true;
     },
@@ -56,7 +58,8 @@ export default {
       const clamped = ratio > 1 ? 1 : ratio < 0 ? 0 : ratio;
 
       this.handlePos = clamped * clientWidth;
-      this.$store.commit('audioCtx/setVolume', clamped);
+      this.setVolume(clamped);
+
       this.$emit('changeVolume', clamped);
     },
   },
