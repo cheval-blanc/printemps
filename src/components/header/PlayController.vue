@@ -51,7 +51,11 @@ export default {
 
     pauseOrPlay() {
       if (this.paused) {
-        this.playAudio();
+        if (this.audio.ended) {
+          this.requestNextTrack();
+        } else {
+          this.playAudio();
+        }
       } else {
         this.pauseAudio();
       }
