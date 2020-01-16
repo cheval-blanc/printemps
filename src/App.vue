@@ -22,6 +22,7 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Lora');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap');
 @import url('http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css');
 
 html {
@@ -42,7 +43,7 @@ html {
 }
 
 #app {
-  font-family: 'Lora', 'Jeju Myeongjo', serif;
+  font-family: 'Lora', 'Noto Serif TC', 'Jeju Myeongjo', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
