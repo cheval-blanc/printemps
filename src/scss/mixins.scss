@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+@import './variables';
+
+@mixin flex-vertical-align() {
+  display: flex;
+  align-items: center;
+}
+
+@mixin text-overflow-ellipsis($max-width: 100%) {
+  min-width: 0;
+  width: $max-width;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@mixin card-style() {
+  width: 100%;
+  height: 100%;
+  background-color: #FFF;
+  border-radius: $card-border-radius;
+  box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.2);
+}
+
+@mixin custom-scroll() {
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: #E5E5E5;
+    border: 2px solid transparent;
+    border-radius: 5px;
+  }
+}
+
+@mixin responsive-grid-columns() {
+  $breakpoints: (480px, 768px, 1024px, 1280px, 1440px, 1680px, 1920px);
+
+  $ni: length($breakpoints);
+  @for $i from 1 to $ni {
+    $current: nth($breakpoints, $i);
+    $next: nth($breakpoints, $i + 1);
+
+    @media screen and (min-width: $current) and (max-width: $next - 1) {
+      grid-template-columns: repeat($i + 1, 1fr);
+    }
+  }
+
+  @media screen and (min-width: nth($breakpoints, $ni)) {
+    grid-template-columns: repeat($ni + 1, 1fr);
+  }
+}

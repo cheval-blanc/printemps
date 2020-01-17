@@ -1,5 +1,14 @@
-node_modules
-dist
-.vscode
-audio_files
+### VisualStudioCode ###
+.vscode/
+.history
+
+### Node.js & Vue.js ###
+node_modules/
+dist/
+coverage/
+npm-debug.log
+
+### Printemps ###
+audio_files/
+images/
 TODOs.md
