@@ -23,7 +23,7 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Lora');
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap');
-@import url('http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css');
+@import url('https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css');
 
 html {
   overflow: auto;
