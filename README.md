@@ -26,7 +26,7 @@ $ npm start
 
 
 ## Screenshots
-![](./screenshots/example.png)
+![example](https://user-images.githubusercontent.com/26314307/73606861-4f1e2800-45f2-11ea-8cb6-b3c6413fab3b.png)
 
 
 ## Development
