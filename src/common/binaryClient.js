@@ -1,9 +1,10 @@
 import { BinaryClient } from 'binaryjs-client';
 import store from '../store';
 
-const { protocol, hostname } = window.location;
 const binaryClient = new BinaryClient(
-  `${protocol.replace(/^http/, 'ws')}//${hostname}:433`,
+  process.env.NODE_ENV === 'development'
+    ? 'ws://localhost:9000'
+    : window.location.origin.replace(/^http/, 'ws'),
 );
 
 binaryClient.on('stream', (stream, meta) => {

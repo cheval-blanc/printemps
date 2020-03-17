@@ -9,10 +9,11 @@ import errorHandler from 'errorhandler';
 import favicon from 'serve-favicon';
 
 import connectMongo from './mongo';
-import createBinaryServer from './binaryJs';
 import route from './router';
+import * as binaryJs from './binaryJs';
 
 const app = express();
+const NODE_ENV = app.get('env');
 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'html');
@@ -30,14 +31,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
-if (app.get('env') === 'development') {
+if (NODE_ENV === 'development') {
   app.use(errorHandler());
 }
 
 connectMongo();
-createBinaryServer();
 route(app);
 
-http.createServer(app).listen(app.get('port'), () => {
+const server = http.createServer(app);
+server.listen(app.get('port'), () => {
   console.log(`Server is listening on port ${app.get('port')}`);
 });
+
+if (NODE_ENV === 'development') {
+  binaryJs.createBinaryServerForDev();
+} else if (NODE_ENV === 'production') {
+  binaryJs.createBinaryServerForProd(server);
+}

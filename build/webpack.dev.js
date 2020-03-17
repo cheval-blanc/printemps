@@ -1,5 +1,6 @@
 'use strict';
 
+const { DefinePlugin } = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
 
@@ -14,4 +15,9 @@ module.exports = merge(common, {
       '**': 'http://localhost:3000',
     },
   },
+  plugins: [
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    }),
+  ],
 });

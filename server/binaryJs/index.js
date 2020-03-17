@@ -4,9 +4,15 @@ import { BinaryServer } from 'binaryjs';
 
 import { AUDIO_PATH } from '../path';
 
-export default function() {
-  const binaryServer = new BinaryServer({ port: 433 });
+export function createBinaryServerForDev() {
+  initBinaryServer(new BinaryServer({ port: 9000 }));
+}
 
+export function createBinaryServerForProd(server) {
+  initBinaryServer(new BinaryServer({ server }));
+}
+
+function initBinaryServer(binaryServer) {
   binaryServer.on('connection', client => {
     console.log('BinaryJS Connection Established');
 
