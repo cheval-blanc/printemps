@@ -3,7 +3,7 @@ import store from '../store';
 
 const { protocol, hostname } = window.location;
 const binaryClient = new BinaryClient(
-  `${protocol === 'https:' ? 'wss' : 'ws'}://${hostname}:9000`,
+  `${protocol.replace(/^http/, 'ws')}//${hostname}:433`,
 );
 
 binaryClient.on('stream', (stream, meta) => {
