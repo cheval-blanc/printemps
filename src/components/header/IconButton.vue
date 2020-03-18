@@ -1,5 +1,5 @@
 <template>
-  <v-icon :size="iconSize">fa-{{ iconName }}</v-icon>
+  <v-icon class="icon-button" :size="iconSize">fa-{{ iconName }}</v-icon>
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/scss/variables';
 
-.v-icon {
+.icon-button.v-icon {
   color: $primary-color;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;

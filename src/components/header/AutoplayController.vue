@@ -37,7 +37,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/scss/variables';
 
-.shuffle-button {
+.shuffle-button.v-icon {
   color: #dbdbdb;
 
   &:hover,
@@ -46,7 +46,7 @@ export default {
   }
 }
 
-.turn-on {
+.turn-on.v-icon {
   color: $toggle-color;
 
   &:hover,
