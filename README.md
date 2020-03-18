@@ -4,16 +4,16 @@
 
 
 ## Getting Started
-Prerequisites: [Node.js](https://nodejs.org/) (`>=10.17.0`, or `>=12.0.0`)
+Prerequisites: [Node.js](https://nodejs.org/) (`>=10.17.0`, or `>=12.0.0`) and [Yarn](https://github.com/yarnpkg/yarn)
 
 Project setup
 ```sh
-$ npm install
+$ yarn install
 ```
 
 Compile and minify for production
 ```sh
-$ npm run build
+$ yarn build
 ```
 
 ### Usage
@@ -21,7 +21,7 @@ Locate your audio files (`.mp3`, `.mp4`, or `.m4a`) in `$PROJECT_HOME/audio_file
 
 After that, you can start up a Printemps server and enjoy your music!:headphones:
 ```sh
-$ npm start
+$ yarn start
 ```
 
 
@@ -32,10 +32,10 @@ $ npm start
 ## Development
 Compile and hot reload for development
 ```sh
-$ npm run dev
+$ yarn dev
 ```
 
 Lint `.js` and `.vue` files
 ```sh
-$ npm run lint
+$ yarn lint
 ```
