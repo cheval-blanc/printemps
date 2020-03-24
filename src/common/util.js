@@ -1,5 +1,5 @@
 import { addHours, addSeconds, format, getHours } from 'date-fns';
-import * as _ from 'lodash-es';
+import { isEmpty, cloneDeep, shuffle, orderBy } from 'lodash-es';
 
 export function formatSec(sec = 0) {
   sec = Number(sec);
@@ -15,21 +15,21 @@ export function formatSec(sec = 0) {
 }
 
 export function shuffleQueue(queue, playingIndex) {
-  if (_.isEmpty(queue) || queue.length < 3) {
+  if (isEmpty(queue) || queue.length < 3) {
     return queue;
   }
 
-  const cloned = _.cloneDeep(queue);
+  const cloned = cloneDeep(queue);
   const current = cloned.splice(playingIndex, 1);
 
-  return current.concat(_.shuffle(cloned));
+  return current.concat(shuffle(cloned));
 }
 
 export function sortQueue(queue) {
-  if (_.isEmpty(queue) || queue.length < 3) {
+  if (isEmpty(queue) || queue.length < 3) {
     return queue;
   }
 
-  const cloned = _.cloneDeep(queue);
-  return _.orderBy(cloned, ['trackNumber']);
+  const cloned = cloneDeep(queue);
+  return orderBy(cloned, ['trackNumber']);
 }
